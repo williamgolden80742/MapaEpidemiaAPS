@@ -33,6 +33,10 @@ public class Home extends javax.swing.JFrame {
 
         jToggleButton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacienteAdd.png"))); // NOI18N
+        jToggleButton2.setToolTipText("");
+        jToggleButton2.setBorder(null);
+        jToggleButton2.setBorderPainted(false);
+        jToggleButton2.setFocusPainted(false);
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
@@ -51,7 +55,7 @@ public class Home extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(215, Short.MAX_VALUE)
+                .addContainerGap(224, Short.MAX_VALUE)
                 .addComponent(jToggleButton2)
                 .addContainerGap())
         );
@@ -76,7 +80,7 @@ public class Home extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Dark".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
