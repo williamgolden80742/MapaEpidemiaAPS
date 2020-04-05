@@ -49,8 +49,8 @@ public class PacienteDAO {
         }
 
     }
-
-    public List<Paciente> read() {
+    
+    public List<Paciente> read (String tel,String cpf) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -60,11 +60,12 @@ public class PacienteDAO {
         List<Paciente> pacientes = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Pacientes");
+            stmt = con.prepareStatement("SELECT * FROM Pacientes WHERE telefone Like '%"+tel+"%' AND cpf like '%"+cpf+"%'");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Paciente paciente = new Paciente();                
+                Paciente paciente = new Paciente();         
+                paciente.setId(rs.getInt("Idpaciente"));                
                 paciente.setNome(rs.getString("nomecompleto"));
                 paciente.setTel(rs.getString("telefone"));      
                 paciente.setObs(rs.getString("observacao"));                  
