@@ -66,6 +66,7 @@ public class PacienteView extends javax.swing.JFrame {
         cpfS = new javax.swing.JFormattedTextField();
         buscar = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
+        Apagar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -93,6 +94,14 @@ public class PacienteView extends javax.swing.JFrame {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
@@ -100,7 +109,7 @@ public class PacienteView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,6 +130,9 @@ public class PacienteView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(pacienteTable);
         pacienteTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (pacienteTable.getColumnModel().getColumnCount() > 0) {
+            pacienteTable.getColumnModel().getColumn(4).setResizable(false);
+        }
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel1.setText("CPF :");
@@ -205,13 +217,21 @@ public class PacienteView extends javax.swing.JFrame {
 
         jButton1.setText("ATUALIZAR DADOS");
 
+        Apagar.setText("APAGAR");
+        Apagar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        Apagar.setName(""); // NOI18N
+        Apagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApagarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(jScrollPane1)
-            .addComponent(criar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,6 +296,10 @@ public class PacienteView extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(142, 142, 142))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(criar, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,7 +331,7 @@ public class PacienteView extends javax.swing.JFrame {
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -338,7 +362,9 @@ public class PacienteView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(criar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(criar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Apagar)))
         );
 
         pack();
@@ -386,6 +412,10 @@ public class PacienteView extends javax.swing.JFrame {
     private void pacienteTableMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pacienteTableMouseDragged
         // TODO add your handling code here:
     }//GEN-LAST:event_pacienteTableMouseDragged
+
+    private void ApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarActionPerformed
+        delete();
+    }//GEN-LAST:event_ApagarActionPerformed
 
 
     Paciente p = new Paciente();
@@ -466,12 +496,31 @@ public class PacienteView extends javax.swing.JFrame {
         readJTable();  
     }
     
+    public void delete () {
+        String id = "";
+        String nomeLinha = "";
+        try {
+            id = String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0));
+            nomeLinha = String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),1));
+            int question = 0;
+            if (!id.equals("")) {
+                question = JOptionPane.showConfirmDialog(null,"Deseja realmente apagar paciente  \n     de id : "+id+"\n nome : "+nomeLinha+" ?");
+            }
+            if (question == 0) {
+                dao.delete(id);
+                readJTable();                  
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Selecione um paciente!");
+        }
+    }    
     /**
      * @param args the command line arguments
      */
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Apagar;
     private javax.swing.JToggleButton buscar;
     private javax.swing.JFormattedTextField cpf;
     private javax.swing.JFormattedTextField cpfS;

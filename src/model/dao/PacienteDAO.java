@@ -82,5 +82,21 @@ public class PacienteDAO {
         return pacientes;
     }
 
+     public void delete (String id) {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("delete FROM Pacientes WHERE Idpaciente = "+id+"");
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Deletado com sucesso!");            
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
   
 }
