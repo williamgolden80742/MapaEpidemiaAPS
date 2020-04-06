@@ -114,13 +114,14 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     PacienteView paciente = new PacienteView();
+    Cidades cidades = new Cidades(); 
     
     private void PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacienteActionPerformed
     paciente.setVisible(true);    
     }//GEN-LAST:event_PacienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+    cidades.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
