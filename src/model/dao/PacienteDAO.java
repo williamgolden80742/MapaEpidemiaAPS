@@ -83,7 +83,7 @@ public class PacienteDAO {
         return pacientes;
     }
 
-    public List<Paciente> readByNameAndCPF (String tel,String cpf) {    
+    public List<Paciente> read (String tel,String cpf) {    
         return read("SELECT * FROM Pacientes WHERE telefone Like '"+tel+"%' AND cpf like '"+cpf+"%'");
     }
     

@@ -22,16 +22,21 @@ import model.bean.Cidade;
  */
 public class CidadeDAO {
         
-    public List<Cidade> readCidade (int uf) {
+    public List<Cidade> readCidade (int uf, String nome) {
         
 
        // SELECT nome FROM cidade ;
                        
-        String request = "INNER JOIN estado ON cidade.estado = '"+uf+"'";
+        String request = "";
         
-        if (uf == 0) { 
+        if (uf != 0) { 
 
-            request = ""; 
+            request = "INNER JOIN estado ON cidade.estado = '"+uf+"'"; 
+        }
+        if (!nome.equals("")){
+            
+            request += "WHERE nomeCidade LIKE '"+nome+"%'";
+            
         }
 
         Connection con = ConnectionFactory.getConnection();
@@ -59,8 +64,9 @@ public class CidadeDAO {
 
         return cidades;
     }     
-   
-
-
+    
+    public List<Cidade> readCidade (int uf) {
+        return readCidade(uf,"") ;
+    }
     
 }

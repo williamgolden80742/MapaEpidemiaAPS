@@ -482,7 +482,7 @@ public class PacienteView extends javax.swing.JFrame {
         PacienteDAO pdao = new PacienteDAO();
         if(telPequisa.contains("(   )")) { telPequisa=""; }
         if (cpfPesquisa.contains("   .")) { cpfPesquisa=""; }
-        for (Paciente p : pdao.readByNameAndCPF(telPequisa,cpfPesquisa)) {
+        for (Paciente p : pdao.read(telPequisa,cpfPesquisa)) {
             modelo.addRow(new Object[]{ 
                 p.getId(),                
                 p.getNome(),
