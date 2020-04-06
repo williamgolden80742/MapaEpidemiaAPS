@@ -62,7 +62,6 @@ public class EstadoDAO {
         Estado estado = new Estado(); 
 
         try {
-                            System.out.println("Sucesso! 2");
             stmt = con.prepareStatement("SELECT * FROM estado where uf like '"+uf+"'");
             rs = stmt.executeQuery();
 

@@ -33,9 +33,7 @@ public class CidadeDAO {
 
             request = ""; 
         }
-        
-        System.out.println("Valor uf :"+ uf);
-        
+
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
