@@ -10,7 +10,7 @@ package model.bean;
  *
  * @author William
  */
-public class Paciente {
+public class Paciente extends Cidade {
     private int id;
     private String nome;
     private String tel;
@@ -22,6 +22,7 @@ public class Paciente {
     private String obs;
     private String email;
 
+    
     public String getEmail() {
         return email;
     }

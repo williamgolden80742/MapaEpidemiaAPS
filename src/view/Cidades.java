@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 package view;
-
 import javax.swing.table.DefaultTableModel;
 import model.bean.Cidade;
+import model.bean.CurrentCidade;
 import model.bean.Estado;
-import model.bean.Paciente;
 import model.dao.EstadoDAO;
 import model.dao.CidadeDAO;
 
@@ -23,8 +22,9 @@ public class Cidades extends javax.swing.JFrame {
      */
     public Cidades() {
         initComponents();
-        readUF();
+        readUF() ;
         readJTable();
+        selecionar.setEnabled(false);
     }
 
     /**
@@ -38,12 +38,13 @@ public class Cidades extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        cidadesTable = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         uf = new javax.swing.JComboBox<>();
         cidadeS = new javax.swing.JTextField();
         city = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        cidadesTable = new javax.swing.JTable();
+        selecionar = new javax.swing.JToggleButton();
 
         jLabel1.setText("jLabel1");
 
@@ -52,27 +53,6 @@ public class Cidades extends javax.swing.JFrame {
         jLabel2.setDisplayedMnemonic('C');
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cityBackground.png"))); // NOI18N
         jLabel2.setToolTipText("");
-
-        cidadesTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Cidades"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(cidadesTable);
-        if (cidadesTable.getColumnModel().getColumnCount() > 0) {
-            cidadesTable.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("ESTADOS : ");
@@ -98,39 +78,74 @@ public class Cidades extends javax.swing.JFrame {
         city.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         city.setText("CIDADE :");
 
+        cidadesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "UF", "Cidades"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        cidadesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                cidadesTableMousePressed(evt);
+            }
+        });
+        jScrollPane2.setViewportView(cidadesTable);
+        if (cidadesTable.getColumnModel().getColumnCount() > 0) {
+            cidadesTable.getColumnModel().getColumn(0).setResizable(false);
+            cidadesTable.getColumnModel().getColumn(0).setPreferredWidth(10);
+            cidadesTable.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        selecionar.setText("SELECIONAR");
+        selecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selecionarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cidadeS)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(cidadeS, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(1, 1, 1)
+                .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane2)
+            .addComponent(selecionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cidadeS))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(cidadeS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selecionar))
         );
 
         pack();
@@ -142,17 +157,31 @@ public class Cidades extends javax.swing.JFrame {
 
     private void ufActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufActionPerformed
         readJTable();
+        selecionar.setEnabled(true);
     }//GEN-LAST:event_ufActionPerformed
 
     private void cidadeSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadeSKeyTyped
-        readJTable();
+        readJTable();          
     }//GEN-LAST:event_cidadeSKeyTyped
-    
+
+    private void cidadesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cidadesTableMousePressed
+
+    }//GEN-LAST:event_cidadesTableMousePressed
+
+    private void selecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarActionPerformed
+       c = cdao.readCurrentCidade(idByUF(),cidadeS.getText());
+       cCidade.setCidade(c.getCidadeNome(),c.getCidadeId());   
+        setVisible(false);
+    }//GEN-LAST:event_selecionarActionPerformed
+  
+    Cidade c = new Cidade();
     Estado e = new Estado();
-    EstadoDAO edao = new EstadoDAO();
+    EstadoDAO edao = new EstadoDAO(); 
+    CidadeDAO cdao = new CidadeDAO();
+    CurrentCidade cCidade = new CurrentCidade();
     
-    
-    public int idById() {
+
+    public int idByUF() {
         int id = 0;
         if (!uf.getSelectedItem().equals("Selecione")) { 
             try {
@@ -165,28 +194,35 @@ public class Cidades extends javax.swing.JFrame {
         }      
         return  id;
     }
-    /**
-     * @param args the command line arguments
-     */
 
-    private void readUF() {
+    
+    
+    public void readUF() {   
 
         for (Estado e : edao.readUF()) {
             uf.addItem(e.getUF());
-        }      
+        } 
     }
-
-
-    
-    private void readJTable() {
+ 
+    public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) cidadesTable.getModel();
         modelo.setNumRows(0);
-        CidadeDAO cdao = new CidadeDAO();
-        for (Cidade c : cdao.readCidade( idById(), cidadeS.getText() )) {
-            modelo.addRow(new Object[]{ 
-                c.getCidadeNome()
-            });
-        }      
+        String ufS = (String) uf.getSelectedItem();
+        if (idByUF() == 0 ) {
+            for (Cidade c : cdao.readCidade(cidadeS.getText())) {
+                modelo.addRow(new Object[]{ 
+                    c.getUF(),                
+                    c.getCidadeNome(),                                
+                });
+            }
+        } else {
+            for (Cidade c : cdao.readCidade(idByUF(),cidadeS.getText())) {
+                modelo.addRow(new Object[]{ 
+                    ufS,                
+                    c.getCidadeNome(),                                
+                });
+            }            
+        }
     }
     
     
@@ -197,7 +233,8 @@ public class Cidades extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton selecionar;
     private javax.swing.JComboBox<String> uf;
     // End of variables declaration//GEN-END:variables
 }

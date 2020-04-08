@@ -11,7 +11,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import model.bean.Paciente;
 import java.util.List;
 import java.util.logging.Level;
@@ -22,7 +21,20 @@ import java.util.logging.Logger;
  */
 public class PacienteDAO {
     
+    private static String status;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void clearStatus() {
+        this.status = "";
+    }    
+    
     public void create(Paciente p) {
         
         Connection con = ConnectionFactory.getConnection();
@@ -31,7 +43,7 @@ public class PacienteDAO {
         
         try {
  
-            stmt = con.prepareStatement("INSERT INTO Pacientes (nomecompleto,cpf,email,dataNascimento,documento,sexo,telefone,observacao)VALUES(?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO Pacientes (nomecompleto,cpf,email,dataNascimento,documento,sexo,telefone,observacao,idCidade)VALUES(?,?,?,?,?,?,?,?,?)");
             stmt.setString(1,p.getNome());
             stmt.setString(2,p.getCpf());
             stmt.setString(3,p.getEmail());            
@@ -39,9 +51,10 @@ public class PacienteDAO {
             stmt.setString(5,p.getDoc());
             stmt.setString(6,String.valueOf(p.getSexo()));
             stmt.setString(7,p.getTel());
-            stmt.setString(8,p.getObs());   
+            stmt.setString(8,p.getObs()); 
+            stmt.setInt(9,p.getCidadeId());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            setStatus("Criado com sucesso!");
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {
@@ -96,7 +109,7 @@ public class PacienteDAO {
         Paciente paciente = new Paciente();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Pacientes WHERE Idpaciente like '%"+id+"%'");
+            stmt = con.prepareStatement("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '%"+id+"%'");
             rs = stmt.executeQuery();
 
             while (rs.next()) {                  
@@ -104,6 +117,7 @@ public class PacienteDAO {
                 paciente.setTel(rs.getString("telefone"));      
                 paciente.setObs(rs.getString("observacao"));   
                 paciente.setCpf(rs.getString("cpf"));
+                paciente.setCidadeNome(rs.getString("nomeCidade"));                
                 paciente.setEmail(rs.getString("email"));           
                 paciente.setNasc(rs.getString("dataNascimento"));
                 paciente.setDoc(rs.getString("documento"));
@@ -129,7 +143,7 @@ public class PacienteDAO {
             stmt = con.prepareStatement("delete FROM Pacientes WHERE Idpaciente = ?");
             stmt.setInt(1,p.getId());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Deletado com sucesso!");            
+            setStatus("Deletado com sucesso!");            
         } catch (SQLException ex) {
             Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -145,7 +159,7 @@ public class PacienteDAO {
         PreparedStatement stmt = null;      
         
         try {
-            stmt = con.prepareStatement("UPDATE Pacientes SET nomecompleto = ?, cpf = ?, email = ?, dataNascimento = ?, documento = ?, sexo = ?, telefone = ?, observacao = ? WHERE Idpaciente = ?");
+            stmt = con.prepareStatement("UPDATE Pacientes SET nomecompleto = ?, cpf = ?, email = ?, dataNascimento = ?, documento = ?, sexo = ?, telefone = ?, observacao = ?, idCidade = ? WHERE Idpaciente = ?");
             stmt.setString(1,p.getNome());
             stmt.setString(2,p.getCpf());
             stmt.setString(3,p.getEmail());            
@@ -153,10 +167,11 @@ public class PacienteDAO {
             stmt.setString(5,p.getDoc());
             stmt.setString(6,String.valueOf(p.getSexo()));
             stmt.setString(7,p.getTel());
-            stmt.setString(8,p.getObs());   
-            stmt.setInt(9,p.getId());              
+            stmt.setString(8,p.getObs()); 
+            stmt.setInt(9,p.getCidadeId());             
+            stmt.setInt(10,p.getId());              
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
+            setStatus("Atualizado com sucesso!");
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {

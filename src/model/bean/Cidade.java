@@ -9,8 +9,7 @@ package model.bean;
  *
  * @author William
  */
-public class Cidade {
-
+public class Cidade extends Estado {
 
     private String cidadeNome;
     private int cidadeId;       

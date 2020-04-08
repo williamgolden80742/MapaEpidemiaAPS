@@ -20,23 +20,21 @@ import model.bean.Cidade;
  *
  * @author William
  */
-public class CidadeDAO {
+public class CidadeDAO extends EstadoDAO {
         
     public List<Cidade> readCidade (int uf, String nome) {
         
 
-       // SELECT nome FROM cidade ;
-                       
+       // SELECT nome FROM cidade ;                 
         String request = "";
         
         if (uf != 0) { 
-
-            request = "INNER JOIN estado ON cidade.estado = '"+uf+"'"; 
+            request = "= '"+uf+"'"; 
+        } else {
+            request = "= estado.idEstado"; 
         }
-        if (!nome.equals("")){
-            
-            request += "WHERE nomeCidade LIKE '"+nome+"%'";
-            
+        if (!nome.equals("")) { 
+            request += " WHERE nomeCidade LIKE '"+nome+"%'";  
         }
 
         Connection con = ConnectionFactory.getConnection();
@@ -47,12 +45,13 @@ public class CidadeDAO {
         List<Cidade> cidades = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT nomeCidade FROM Cidade "+request);
-            rs = stmt.executeQuery();
-
+            stmt = con.prepareStatement("SELECT idCidade, uf, nomeCidade FROM Cidade INNER JOIN estado ON cidade.estado "+request);
+            rs = stmt.executeQuery();            
             while (rs.next()) {
-                Cidade cidade = new Cidade();         
-                cidade.setCidadeNome(rs.getString("nomeCidade"));                          
+                Cidade cidade = new Cidade(); 
+                cidade.setCidadeId(rs.getInt("idCidade"));     
+                cidade.setUF(rs.getString("uf"));       
+                cidade.setCidadeNome(rs.getString("nomeCidade"));    
                 cidades.add(cidade);
             }
 
@@ -68,5 +67,37 @@ public class CidadeDAO {
     public List<Cidade> readCidade (int uf) {
         return readCidade(uf,"") ;
     }
+    
+    public List<Cidade> readCidade (String nome) {
+        return readCidade(0,nome) ;
+    } 
+    
+   public Cidade readCurrentCidade (int uf, String nome) {
+                      
+        
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        Cidade cidade = new Cidade();
+
+        try {
+            stmt = con.prepareStatement("SELECT idCidade, uf, nomeCidade FROM Cidade INNER JOIN estado ON cidade.estado = '"+uf+"' WHERE nomeCidade LIKE '"+nome+"%'");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                cidade.setCidadeId(rs.getInt("idCidade"));         
+                cidade.setCidadeNome(rs.getString("nomeCidade"));                          
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return cidade;
+    }     
     
 }

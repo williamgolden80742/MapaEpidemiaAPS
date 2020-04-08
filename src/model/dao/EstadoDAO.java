@@ -15,8 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.bean.Estado;
-import model.bean.Paciente;
-
 /**
  *
  * @author William
@@ -33,12 +31,11 @@ public class EstadoDAO {
         List<Estado> estados = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM estado");
+            stmt = con.prepareStatement("SELECT idCidade, uf, nomeCidade FROM Cidade INNER JOIN estado ON cidade.estado = estado.idEstado");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                Estado estado = new Estado();         
-                estado.setEstadoNome(rs.getString("nomeEstado"));                
+                Estado estado = new Estado();                      
                 estado.setUF(rs.getString("uf"));             
                 estados.add(estado);
             }
@@ -66,7 +63,7 @@ public class EstadoDAO {
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                estado.setEstadoId(rs.getInt("id"));                      
+                estado.setEstadoId(rs.getInt("idEstado"));                      
             }
 
         } catch (SQLException ex) {
