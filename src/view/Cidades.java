@@ -49,6 +49,7 @@ public class Cidades extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setTitle("Cidades");
+        setResizable(false);
 
         jLabel2.setDisplayedMnemonic('C');
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cityBackground.png"))); // NOI18N

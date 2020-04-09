@@ -31,7 +31,7 @@ public class EstadoDAO {
         List<Estado> estados = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT idCidade, uf, nomeCidade FROM Cidade INNER JOIN estado ON cidade.estado = estado.idEstado");
+            stmt = con.prepareStatement("SELECT uf FROM Estado");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -28,7 +28,7 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         Paciente = new javax.swing.JToggleButton();
-        jButton1 = new javax.swing.JButton();
+        hospitaisManager = new javax.swing.JButton();
         citySelect = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
@@ -54,8 +54,13 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hospital.png"))); // NOI18N
-        jButton1.setBorder(null);
+        hospitaisManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hospital.png"))); // NOI18N
+        hospitaisManager.setBorder(null);
+        hospitaisManager.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hospitaisManagerActionPerformed(evt);
+            }
+        });
 
         citySelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/city.png"))); // NOI18N
         citySelect.setBorder(null);
@@ -88,7 +93,7 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(citySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(hospitaisManager, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -102,7 +107,7 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(hospitaisManager, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(citySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Paciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -115,6 +120,7 @@ public class Home extends javax.swing.JFrame {
 
     PacienteView paciente = new PacienteView();
     Cidades cidades = new Cidades(); 
+    Hospitais hospitais = new Hospitais();
     
     private void PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacienteActionPerformed
         paciente.setVisible(true);    
@@ -125,8 +131,12 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_citySelectActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void hospitaisManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospitaisManagerActionPerformed
+        hospitais.setVisible(true);
+    }//GEN-LAST:event_hospitaisManagerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,7 +170,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Paciente;
     private javax.swing.JButton citySelect;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton hospitaisManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
