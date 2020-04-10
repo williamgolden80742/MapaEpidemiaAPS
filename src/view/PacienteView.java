@@ -145,6 +145,8 @@ public class PacienteView extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("CADASTRO DE PACIENTE ");
 
+        cpf.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("E-mail :");
@@ -503,6 +505,7 @@ public class PacienteView extends javax.swing.JFrame {
             cCidade.setIdCidade(p.getCidadeId());
             System.out.println("id cidade "+p.getCidadeId());
             nasc.setText(p.getNasc());
+            System.out.println("Nasc :" + p.getNasc());
             doc.setText(p.getDoc());
             sexo.setSelectedItem(p.getSexo());
             email.setText(p.getEmail());
@@ -516,7 +519,6 @@ public class PacienteView extends javax.swing.JFrame {
         tel.setText("");
         cpf.setText("");
         nasc.setText("");
-        formaterNasc.install(nasc);
         buscarCidade.setText("SELECIONE CIDADE");
         cCidade.setCidade("",0);
         doc.setText("");
@@ -544,13 +546,11 @@ public class PacienteView extends javax.swing.JFrame {
     
     public void create () {
         setPaciente ();     
-        if (getValidation () == true ) {
             dao.create(p);
             status.setText(dao.getStatus());
             readJTable(); 
             clear ();     
             System.out.println("in create");
-        }
     }
     
     public void update () {
@@ -595,6 +595,7 @@ public class PacienteView extends javax.swing.JFrame {
     }        
     
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+         if (getValidation () == true ) {
             if (salvarStatus == 1) {
                 create ();  
                 System.out.println("create");
@@ -603,6 +604,7 @@ public class PacienteView extends javax.swing.JFrame {
                 System.out.println("update");                
             } 
             this.salvarStatus = 0;
+         }    
     }//GEN-LAST:event_salvarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
@@ -660,6 +662,7 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         clear();
+        formaterNasc.install(nasc);
         pacienteTable.clearSelection();
         novo.setEnabled(false);
         atualizar.setEnabled(false);

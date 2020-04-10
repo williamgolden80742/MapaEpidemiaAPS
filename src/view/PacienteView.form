@@ -360,6 +360,9 @@
     <Component class="javax.swing.JFormattedTextField" name="tel">
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="cpf">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="2"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>

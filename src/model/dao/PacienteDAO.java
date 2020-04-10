@@ -109,7 +109,7 @@ public class PacienteDAO {
         Paciente paciente = new Paciente();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '%"+id+"%'");
+                stmt = con.prepareStatement("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '%"+id+"%'");
             rs = stmt.executeQuery();
 
             while (rs.next()) {                  
@@ -121,6 +121,7 @@ public class PacienteDAO {
                 paciente.setCidadeId(rs.getInt("idCidade"));
                 paciente.setEmail(rs.getString("email"));           
                 paciente.setNasc(rs.getString("dataNascimento"));
+                System.out.println("BD nasc :  " + rs.getString("dataNascimento") );
                 paciente.setDoc(rs.getString("documento"));
                 paciente.setSexo(rs.getString("sexo").charAt(0));    
             }
