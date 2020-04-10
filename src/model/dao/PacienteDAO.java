@@ -83,7 +83,7 @@ public class PacienteDAO {
                 paciente.setNome(rs.getString("nomecompleto"));
                 paciente.setTel(rs.getString("telefone"));      
                 paciente.setObs(rs.getString("observacao"));                  
-                paciente.setData(rs.getString("datadeCriacao"));                 
+                paciente.setData(rs.getString("datadeCriacaoP"));                 
                 pacientes.add(paciente);
             }
 
