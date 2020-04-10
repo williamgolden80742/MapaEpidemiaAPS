@@ -18,6 +18,14 @@ public class CurrentCidade {
        this.nomeCidade = nome;
     }
 
+    public static void setIdCidade(int idCidade) {
+        CurrentCidade.idCidade = idCidade;
+    }
+
+    public static void setNomeCidade(String nomeCidade) {
+        CurrentCidade.nomeCidade = nomeCidade;
+    }
+
     public int getIdCidade() {
         return idCidade;
     }

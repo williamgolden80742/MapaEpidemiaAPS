@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 import model.bean.CurrentCidade;
 import model.bean.Paciente;
@@ -27,12 +26,10 @@ public class PacienteView extends javax.swing.JFrame {
     
     public PacienteView() {
         initComponents();    
-        nome.requestFocus();
         DefaultTableModel modelo = (DefaultTableModel) pacienteTable.getModel();
-        pacienteTable.setRowSorter(new TableRowSorter(modelo));
         readJTable();        
         InstallFormat(); 
-        criar.setEnabled(false);
+        elementsEnabled(false,false);        
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,7 +41,7 @@ public class PacienteView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        criar = new javax.swing.JButton();
+        salvar = new javax.swing.JButton();
         nome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         nasc = new javax.swing.JFormattedTextField();
@@ -66,7 +63,7 @@ public class PacienteView extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         telS = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
-        cpfS = new javax.swing.JFormattedTextField();
+        nomeS = new javax.swing.JFormattedTextField();
         buscar = new javax.swing.JToggleButton();
         atualizar = new javax.swing.JButton();
         apagar = new javax.swing.JButton();
@@ -91,12 +88,12 @@ public class PacienteView extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setText("Nome :");
 
-        criar.setText("CRIAR");
-        criar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        criar.setName(""); // NOI18N
-        criar.addActionListener(new java.awt.event.ActionListener() {
+        salvar.setText("SALVAR");
+        salvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        salvar.setName(""); // NOI18N
+        salvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                criarActionPerformed(evt);
+                salvarActionPerformed(evt);
             }
         });
 
@@ -170,11 +167,11 @@ public class PacienteView extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("CPF : ");
+        jLabel12.setText("Nome : ");
 
-        cpfS.addKeyListener(new java.awt.event.KeyAdapter() {
+        nomeS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                TypingCPF(evt);
+                TypingNome(evt);
             }
         });
 
@@ -253,12 +250,8 @@ public class PacienteView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(criar, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -313,10 +306,10 @@ public class PacienteView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpfS, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addGap(4, 4, 4)
                         .addComponent(telS, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buscar)
@@ -331,24 +324,28 @@ public class PacienteView extends javax.swing.JFrame {
                         .addComponent(atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(4, 4, 4)
                 .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
+                        .addGap(4, 4, 4)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nome)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tel)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tel)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -372,7 +369,7 @@ public class PacienteView extends javax.swing.JFrame {
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(status, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(atualizar)
@@ -381,72 +378,95 @@ public class PacienteView extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(telS, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
+                    .addComponent(buscar)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nomeS)
+                            .addComponent(jLabel12)))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel11)
-                        .addComponent(cpfS))
-                    .addComponent(buscar))
+                        .addComponent(telS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(criar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(apagar)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    MaskFormatter formaterNasc = new MaskFormatter();
+    MaskFormatter formaterTel = new MaskFormatter(); 
+    MaskFormatter formaterTelS = new MaskFormatter();         
+    MaskFormatter formaterCPF = new MaskFormatter();    
     Cidades cidades = new Cidades();
     EstadoDAO edao = new EstadoDAO();
     CidadeDAO cdao = new CidadeDAO();  
     CurrentCidade cCidade = new CurrentCidade();
     Paciente p = new Paciente();
     PacienteDAO dao = new PacienteDAO(); 
+    private int salvarStatus = 0; 
     
     private void InstallFormat (){
-        MaskFormatter formaterNasc = new MaskFormatter();
-        MaskFormatter formaterTel = new MaskFormatter(); 
-        MaskFormatter formaterTelS = new MaskFormatter();         
-        MaskFormatter formaterCPF = new MaskFormatter();
-        MaskFormatter formaterCPFS = new MaskFormatter();          
+      
         try {
             formaterNasc.setMask("##/##/####");
             formaterTel.setMask("(###) #####-####");  
             formaterTelS.setMask("(###) #####-####");             
-            formaterCPF.setMask("###.###.###-##");
-            formaterCPFS.setMask("###.###.###-##");            
+            formaterCPF.setMask("###.###.###-##");            
         } catch (ParseException ex) {
             Logger.getLogger(PacienteView.class.getName()).log(Level.SEVERE, null, ex);
         }
         formaterNasc.install(nasc);
         formaterTel.install(tel);
         formaterTelS.install(telS); 
-        formaterCPFS.install(cpfS);
         formaterCPF.install(cpf);                
     }   
     
 
     
     public int currentId (){
+        novo.setEnabled(true);
+        elementsEnabled(false);
         int id = 0;
-        criar.setEnabled(false);
         try {
-            id = Integer.parseInt(String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));  
-            atualizar.setEnabled(true);
-            apagar.setEnabled(true);    
+            id = Integer.parseInt(String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));     
+            nome.setEnabled(true);
+            tel.setEnabled(true);
         } catch (Exception ex) {
             System.out.println("Id nulo");
-            atualizar.setEnabled(false);
-            apagar.setEnabled(false);
+            elementsEnabled (false,false);
         }
         System.out.println("Row :"+String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));
         return id;  
     }
     
+    private void elementsEnabled (boolean b, boolean c) {
+        nome.setEditable(b);
+        nome.setEnabled(c);
+        cpf.setEnabled(b);
+        email.setEnabled(b);
+        tel.setEditable(b);
+        tel.setEnabled(c);
+        doc.setEnabled(b);
+        nasc.setEnabled(b);
+        sexo.setEnabled(b);
+        buscarCidade.setEnabled(b);
+        apagar.setEnabled(!b & c);
+        salvar.setEnabled(b);
+        obs.setEditable(b);
+        atualizar.setEnabled(!b & c);
+    } 
+    
+    private void elementsEnabled (boolean b) {
+        elementsEnabled (b,true);
+    } 
+    
     private void readJTable() {
-        String telPequisa = telS.getText(), cpfPesquisa = cpfS.getText();
+        String telPequisa = telS.getText(), cpfPesquisa = nomeS.getText();
         DefaultTableModel modelo = (DefaultTableModel) pacienteTable.getModel();
         modelo.setNumRows(0);
         PacienteDAO pdao = new PacienteDAO();
@@ -472,7 +492,6 @@ public class PacienteView extends javax.swing.JFrame {
       }
     }     
     public void setValue () {
-            
         PacienteDAO pdao = new PacienteDAO();
         if (currentId() != 0){ 
             p = pdao.readById(currentId());
@@ -480,7 +499,9 @@ public class PacienteView extends javax.swing.JFrame {
             tel.setText(p.getTel());  
             obs.setText(p.getObs());    
             cpf.setText(p.getCpf());
-            buscarCidade.setText(String.valueOf(p.getCidadeNome()));            
+            buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
+            cCidade.setIdCidade(p.getCidadeId());
+            System.out.println("id cidade "+p.getCidadeId());
             nasc.setText(p.getNasc());
             doc.setText(p.getDoc());
             sexo.setSelectedItem(p.getSexo());
@@ -495,6 +516,7 @@ public class PacienteView extends javax.swing.JFrame {
         tel.setText("");
         cpf.setText("");
         nasc.setText("");
+        formaterNasc.install(nasc);
         buscarCidade.setText("SELECIONE CIDADE");
         cCidade.setCidade("",0);
         doc.setText("");
@@ -504,6 +526,10 @@ public class PacienteView extends javax.swing.JFrame {
     }
     
     public void setPaciente ()  {
+        try {
+            p.setId(currentId ());
+        } catch (Exception ex) { 
+        }
         p.setNome(nome.getText());
         p.setTel(tel.getText());
         p.setCpf(cpf.getText());
@@ -513,6 +539,7 @@ public class PacienteView extends javax.swing.JFrame {
         p.setSexo(String.valueOf(sexo.getSelectedItem()).charAt(0));
         p.setEmail(email.getText());
         p.setObs(obs.getText());   
+        System.out.println("Set paciente");
     }
     
     public void create () {
@@ -521,12 +548,10 @@ public class PacienteView extends javax.swing.JFrame {
             dao.create(p);
             status.setText(dao.getStatus());
             readJTable(); 
-            clear ();
-            criar.setEnabled(false);
-            apagar.setEnabled(true);                
+            clear ();     
+            System.out.println("in create");
         }
     }
-    
     
     public void update () {
         setPaciente ();    
@@ -535,6 +560,7 @@ public class PacienteView extends javax.swing.JFrame {
             status.setText(dao.getStatus());
             readJTable(); 
             clear (); 
+            System.out.println("in update");
         } 
     }    
     
@@ -543,7 +569,9 @@ public class PacienteView extends javax.swing.JFrame {
         if (cCidade.getIdCidade() == 0) {
             JOptionPane.showMessageDialog(null,"Selecione uma cidade!");
             verdade = false;
-        }    
+        } else {
+            verdade = true;        
+        }   
         return verdade;
     }
     
@@ -566,9 +594,16 @@ public class PacienteView extends javax.swing.JFrame {
         }
     }        
     
-    private void criarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_criarActionPerformed
-        create ();  
-    }//GEN-LAST:event_criarActionPerformed
+    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+            if (salvarStatus == 1) {
+                create ();  
+                System.out.println("create");
+            } else if (salvarStatus == 2) {
+                update();
+                System.out.println("update");                
+            } 
+            this.salvarStatus = 0;
+    }//GEN-LAST:event_salvarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
         // TODO add your handling code here:
@@ -586,9 +621,9 @@ public class PacienteView extends javax.swing.JFrame {
         readJTable();
     }//GEN-LAST:event_typingTel
 
-    private void TypingCPF(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingCPF
+    private void TypingNome(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingNome
         readJTable();
-    }//GEN-LAST:event_TypingCPF
+    }//GEN-LAST:event_TypingNome
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         readJTable();
@@ -596,10 +631,14 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
         delete();
+        elementsEnabled(false,false);
     }//GEN-LAST:event_apagarActionPerformed
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
-        update();
+        elementsEnabled(true);
+        this.salvarStatus = 2;
+        novo.setEnabled(false);
+        atualizar.setEnabled(false);        
     }//GEN-LAST:event_atualizarActionPerformed
 
     private void pacienteTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pacienteTableMousePressed
@@ -621,10 +660,11 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         clear();
-        criar.setEnabled(true);
         pacienteTable.clearSelection();
+        novo.setEnabled(false);
         atualizar.setEnabled(false);
-        apagar.setEnabled(false);       
+        elementsEnabled(true);
+        this.salvarStatus = 1;
     }//GEN-LAST:event_novoActionPerformed
  
     /**
@@ -638,8 +678,6 @@ public class PacienteView extends javax.swing.JFrame {
     private javax.swing.JToggleButton buscar;
     private javax.swing.JButton buscarCidade;
     private javax.swing.JFormattedTextField cpf;
-    private javax.swing.JFormattedTextField cpfS;
-    private javax.swing.JButton criar;
     private javax.swing.JTextField doc;
     private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
@@ -658,9 +696,11 @@ public class PacienteView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JFormattedTextField nasc;
     private javax.swing.JTextField nome;
+    private javax.swing.JFormattedTextField nomeS;
     private javax.swing.JButton novo;
     private javax.swing.JTextArea obs;
     private javax.swing.JTable pacienteTable;
+    private javax.swing.JButton salvar;
     private javax.swing.JComboBox<String> sexo;
     private javax.swing.JLabel status;
     private javax.swing.JFormattedTextField tel;

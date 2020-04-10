@@ -100,6 +100,14 @@ public class Cidades extends javax.swing.JFrame {
                 cidadesTableMousePressed(evt);
             }
         });
+        cidadesTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cidadesTableKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                cidadesTableKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(cidadesTable);
         if (cidadesTable.getColumnModel().getColumnCount() > 0) {
             cidadesTable.getColumnModel().getColumn(0).setResizable(false);
@@ -158,7 +166,6 @@ public class Cidades extends javax.swing.JFrame {
 
     private void ufActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufActionPerformed
         readJTable();
-        selecionar.setEnabled(true);
     }//GEN-LAST:event_ufActionPerformed
 
     private void cidadeSKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadeSKeyTyped
@@ -166,14 +173,22 @@ public class Cidades extends javax.swing.JFrame {
     }//GEN-LAST:event_cidadeSKeyTyped
 
     private void cidadesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cidadesTableMousePressed
-
+        c = cdao.readCurrentCidade(edao.readIdByUF((String) cidadesTable.getModel().getValueAt(cidadesTable.getSelectedRow(),0)).getEstadoId(), (String) cidadesTable.getModel().getValueAt(cidadesTable.getSelectedRow(),1));
+        cCidade.setCidade(c.getCidadeNome(),c.getCidadeId());  
+        selecionar.setEnabled(true);
     }//GEN-LAST:event_cidadesTableMousePressed
 
     private void selecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecionarActionPerformed
-       c = cdao.readCurrentCidade(idByUF(),cidadeS.getText());
-       cCidade.setCidade(c.getCidadeNome(),c.getCidadeId());   
-        setVisible(false);
+         setVisible(false);
     }//GEN-LAST:event_selecionarActionPerformed
+
+    private void cidadesTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadesTableKeyReleased
+
+    }//GEN-LAST:event_cidadesTableKeyReleased
+
+    private void cidadesTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadesTableKeyPressed
+
+    }//GEN-LAST:event_cidadesTableKeyPressed
   
     Cidade c = new Cidade();
     Estado e = new Estado();
@@ -191,7 +206,7 @@ public class Cidades extends javax.swing.JFrame {
                 System.out.println(ex);
             }
         } else {
-           id = 0;     
+           id = 0;    
         }      
         return  id;
     }

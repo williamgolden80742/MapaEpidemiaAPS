@@ -96,8 +96,8 @@ public class PacienteDAO {
         return pacientes;
     }
 
-    public List<Paciente> read (String tel,String cpf) {    
-        return read("SELECT * FROM Pacientes WHERE telefone Like '"+tel+"%' AND cpf like '"+cpf+"%'");
+    public List<Paciente> read (String tel,String nome) {    
+        return read("SELECT * FROM Pacientes WHERE telefone Like '"+tel+"%' AND nomecompleto like '"+nome+"%'");
     }
     
     public Paciente readById(int id) {  
@@ -117,7 +117,8 @@ public class PacienteDAO {
                 paciente.setTel(rs.getString("telefone"));      
                 paciente.setObs(rs.getString("observacao"));   
                 paciente.setCpf(rs.getString("cpf"));
-                paciente.setCidadeNome(rs.getString("nomeCidade"));                
+                paciente.setCidadeNome(rs.getString("nomeCidade"));  
+                paciente.setCidadeId(rs.getInt("idCidade"));
                 paciente.setEmail(rs.getString("email"));           
                 paciente.setNasc(rs.getString("dataNascimento"));
                 paciente.setDoc(rs.getString("documento"));

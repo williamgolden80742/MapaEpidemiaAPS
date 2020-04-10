@@ -3,16 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/CidadeDAO.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Hospitais.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Hospital.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/images/pacienteAdd.png</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Cidades.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/CidadeDAO.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/CurrentCidade.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Home.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/images/pacienteAdd256.png</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/images/pacienteAdd.png</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Cidade.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/PacienteDAO.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Paciente.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/PacienteView.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/images/paciente.png</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Cidades.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/EstadoDAO.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/images/paciente256.png</file>
         </group>
