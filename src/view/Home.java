@@ -28,7 +28,7 @@ public class Home extends javax.swing.JFrame {
     private void initComponents() {
 
         Paciente = new javax.swing.JToggleButton();
-        hospitaisManager = new javax.swing.JButton();
+        relatorios = new javax.swing.JButton();
         citySelect = new javax.swing.JButton();
         jToggleButton1 = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
@@ -54,11 +54,11 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        hospitaisManager.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hospital.png"))); // NOI18N
-        hospitaisManager.setBorder(null);
-        hospitaisManager.addActionListener(new java.awt.event.ActionListener() {
+        relatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/relatorio_Small.png"))); // NOI18N
+        relatorios.setBorder(null);
+        relatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                hospitaisManagerActionPerformed(evt);
+                relatoriosActionPerformed(evt);
             }
         });
 
@@ -90,14 +90,14 @@ public class Home extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Paciente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addComponent(citySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(hospitaisManager, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +107,7 @@ public class Home extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(hospitaisManager, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(citySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Paciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -119,24 +119,24 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     PacienteView paciente = new PacienteView();
-    Cidades cidades = new Cidades(); 
-    Hospitais hospitais = new Hospitais();
+    Relatorios relatorio = new Relatorios(); 
+    Cidades cidades = new Cidades();
     
     private void PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacienteActionPerformed
         paciente.setVisible(true);    
     }//GEN-LAST:event_PacienteActionPerformed
 
-    private void citySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citySelectActionPerformed
-       cidades.setVisible(true);
-    }//GEN-LAST:event_citySelectActionPerformed
-
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    private void hospitaisManagerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hospitaisManagerActionPerformed
-        hospitais.setVisible(true);
-    }//GEN-LAST:event_hospitaisManagerActionPerformed
+    private void citySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citySelectActionPerformed
+        cidades.setVisible(true);
+    }//GEN-LAST:event_citySelectActionPerformed
+
+    private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
+        relatorio.setVisible(true);
+    }//GEN-LAST:event_relatoriosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,8 +170,8 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Paciente;
     private javax.swing.JButton citySelect;
-    private javax.swing.JButton hospitaisManager;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JButton relatorios;
     // End of variables declaration//GEN-END:variables
 }
