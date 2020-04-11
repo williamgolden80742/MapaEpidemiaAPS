@@ -86,7 +86,6 @@ public class PacienteDAO {
                 paciente.setData(rs.getString("datadeCriacaoP"));                 
                 pacientes.add(paciente);
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
