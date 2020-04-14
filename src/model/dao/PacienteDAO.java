@@ -74,7 +74,14 @@ public class PacienteDAO {
 
             while (rs.next()) {
                 Paciente paciente = new Paciente();         
-                paciente.setId(rs.getInt("Idpaciente"));                
+                paciente.setId(rs.getInt("Idpaciente"));  
+                try  {
+                    paciente.setCidadeNome(rs.getString("nomeCidade")); 
+                    paciente.setCidadeId(rs.getInt("idCidade")); 
+                } catch (Exception ex) {
+                
+                }
+                paciente.setNasc(rs.getString("dataNascimento"));  
                 paciente.setNome(rs.getString("nomecompleto"));                    
                 paciente.setData(rs.getString("datadeCriacaoP"));                 
                 pacientes.add(paciente);
@@ -93,32 +100,15 @@ public class PacienteDAO {
     }
     
     public Paciente readById(int id) {  
-
-        Connection con = ConnectionFactory.getConnection();   
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
         Paciente paciente = new Paciente();
 
-        try {
-                stmt = con.prepareStatement("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '%"+id+"%'");
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {                  
-                paciente.setNome(rs.getString("nomecompleto"));
-                paciente.setCidadeNome(rs.getString("nomeCidade"));  
-                paciente.setCidadeId(rs.getInt("idCidade"));   
-                paciente.setNasc(rs.getString("dataNascimento"));
-                System.out.println("BD nasc :  " + rs.getString("dataNascimento") );
-                paciente.setSexo(rs.getString("sexo").charAt(0));    
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
+        for(Paciente p : read("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '%"+id+"%'")){
+                paciente.setNome(p.getNome());
+                paciente.setCidadeNome(p.getCidadeNome());  
+                paciente.setCidadeId(p.getCidadeId());   
+                paciente.setNasc(p.getNasc());
+                paciente.setSexo(p.getSexo());      
         }
-
         return paciente;        
     }
     
