@@ -22,19 +22,19 @@ import model.bean.Cidade;
  */
 public class CidadeDAO extends EstadoDAO {
         
-    public List<Cidade> readCidade (int uf, String nome) {
+    public List<Cidade> readCidade (String uf, String nome) {
         
 
        // SELECT nome FROM cidade ;                 
         String request = "";
         
-        if (uf != 0) { 
-            request = "= '"+uf+"'"; 
+        if (uf.equals("--")) { 
+            request = " "; 
         } else {
-            request = "= estado.idEstado"; 
+            request = " WHERE uf LIKE '"+uf+"'"; 
         }
         if (!nome.equals("")) { 
-            request += " WHERE nomeCidade LIKE '"+nome+"%'";  
+            request += " AND nomeCidade LIKE '"+nome+"%'";  
         }
 
         Connection con = ConnectionFactory.getConnection();
@@ -45,7 +45,7 @@ public class CidadeDAO extends EstadoDAO {
         List<Cidade> cidades = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT idCidade, uf, nomeCidade FROM Cidade INNER JOIN estado ON cidade.estado "+request);
+            stmt = con.prepareStatement("SELECT idCidade, uf, nomeCidade FROM Cidade INNER JOIN estado ON cidade.estado = estado.idEstado "+request);
             rs = stmt.executeQuery();            
             while (rs.next()) {
                 Cidade cidade = new Cidade(); 
@@ -64,12 +64,12 @@ public class CidadeDAO extends EstadoDAO {
         return cidades;
     }     
     
-    public List<Cidade> readCidade (int uf) {
+    public List<Cidade> readCidade (String uf) {
         return readCidade(uf,"") ;
     }
     
-    public List<Cidade> readCidade (String nome) {
-        return readCidade(0,nome) ;
+    public List<Cidade> readCidadeNome (String nome) {
+        return readCidade("--",nome);
     } 
     
    public Cidade readCurrentCidade (int uf, String nome) {

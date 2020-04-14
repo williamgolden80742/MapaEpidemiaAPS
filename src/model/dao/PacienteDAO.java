@@ -43,16 +43,11 @@ public class PacienteDAO {
         
         try {
  
-            stmt = con.prepareStatement("INSERT INTO Pacientes (nomecompleto,cpf,email,dataNascimento,documento,sexo,telefone,observacao,idCidade)VALUES(?,?,?,?,?,?,?,?,?)");
-            stmt.setString(1,p.getNome());
-            stmt.setString(2,p.getCpf());
-            stmt.setString(3,p.getEmail());            
-            stmt.setString(4,p.getNasc());
-            stmt.setString(5,p.getDoc());
-            stmt.setString(6,String.valueOf(p.getSexo()));
-            stmt.setString(7,p.getTel());
-            stmt.setString(8,p.getObs()); 
-            stmt.setInt(9,p.getCidadeId());
+            stmt = con.prepareStatement("INSERT INTO Pacientes (nomecompleto,dataNascimento,sexo,idCidade)VALUES(?,?,?,?)");
+            stmt.setString(1,p.getNome());            
+            stmt.setString(2,p.getNasc());
+            stmt.setString(3,String.valueOf(p.getSexo()));
+            stmt.setInt(4,p.getCidadeId());
             stmt.executeUpdate();
             setStatus("Criado com sucesso!");
         } catch (SQLException ex) {
@@ -80,9 +75,7 @@ public class PacienteDAO {
             while (rs.next()) {
                 Paciente paciente = new Paciente();         
                 paciente.setId(rs.getInt("Idpaciente"));                
-                paciente.setNome(rs.getString("nomecompleto"));
-                paciente.setTel(rs.getString("telefone"));      
-                paciente.setObs(rs.getString("observacao"));                  
+                paciente.setNome(rs.getString("nomecompleto"));                    
                 paciente.setData(rs.getString("datadeCriacaoP"));                 
                 pacientes.add(paciente);
             }
@@ -95,8 +88,8 @@ public class PacienteDAO {
         return pacientes;
     }
 
-    public List<Paciente> read (String tel,String nome) {    
-        return read("SELECT * FROM Pacientes WHERE telefone Like '"+tel+"%' AND nomecompleto like '"+nome+"%'");
+    public List<Paciente> read (String nome,boolean b) {    
+        return read("SELECT * FROM Pacientes WHERE nomecompleto like '"+nome+"%'");
     }
     
     public Paciente readById(int id) {  
@@ -113,15 +106,10 @@ public class PacienteDAO {
 
             while (rs.next()) {                  
                 paciente.setNome(rs.getString("nomecompleto"));
-                paciente.setTel(rs.getString("telefone"));      
-                paciente.setObs(rs.getString("observacao"));   
-                paciente.setCpf(rs.getString("cpf"));
                 paciente.setCidadeNome(rs.getString("nomeCidade"));  
-                paciente.setCidadeId(rs.getInt("idCidade"));
-                paciente.setEmail(rs.getString("email"));           
+                paciente.setCidadeId(rs.getInt("idCidade"));   
                 paciente.setNasc(rs.getString("dataNascimento"));
                 System.out.println("BD nasc :  " + rs.getString("dataNascimento") );
-                paciente.setDoc(rs.getString("documento"));
                 paciente.setSexo(rs.getString("sexo").charAt(0));    
             }
 
@@ -160,17 +148,12 @@ public class PacienteDAO {
         PreparedStatement stmt = null;      
         
         try {
-            stmt = con.prepareStatement("UPDATE Pacientes SET nomecompleto = ?, cpf = ?, email = ?, dataNascimento = ?, documento = ?, sexo = ?, telefone = ?, observacao = ?, idCidade = ? WHERE Idpaciente = ?");
-            stmt.setString(1,p.getNome());
-            stmt.setString(2,p.getCpf());
-            stmt.setString(3,p.getEmail());            
-            stmt.setString(4,p.getNasc());
-            stmt.setString(5,p.getDoc());
-            stmt.setString(6,String.valueOf(p.getSexo()));
-            stmt.setString(7,p.getTel());
-            stmt.setString(8,p.getObs()); 
-            stmt.setInt(9,p.getCidadeId());             
-            stmt.setInt(10,p.getId());              
+            stmt = con.prepareStatement("UPDATE Pacientes SET nomecompleto = ?, dataNascimento = ?, sexo = ?, idCidade = ? WHERE Idpaciente = ?");
+            stmt.setString(1,p.getNome());        
+            stmt.setString(2,p.getNasc());
+            stmt.setString(3,String.valueOf(p.getSexo()));
+            stmt.setInt(4,p.getCidadeId());             
+            stmt.setInt(5,p.getId());              
             stmt.executeUpdate();
             setStatus("Atualizado com sucesso!");
         } catch (SQLException ex) {

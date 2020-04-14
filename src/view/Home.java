@@ -30,7 +30,7 @@ public class Home extends javax.swing.JFrame {
         Paciente = new javax.swing.JToggleButton();
         relatorios = new javax.swing.JButton();
         citySelect = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        exames = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,6 +39,7 @@ public class Home extends javax.swing.JFrame {
         setBackground(new java.awt.Color(51, 51, 51));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
+        setResizable(false);
 
         Paciente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Paciente.setForeground(new java.awt.Color(0, 0, 0));
@@ -72,11 +73,11 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exame.png"))); // NOI18N
-        jToggleButton1.setBorder(null);
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        exames.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exame.png"))); // NOI18N
+        exames.setBorder(null);
+        exames.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                examesActionPerformed(evt);
             }
         });
 
@@ -93,11 +94,11 @@ public class Home extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(citySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(exames, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +110,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(relatorios, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(Paciente, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(citySelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(exames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -121,14 +122,15 @@ public class Home extends javax.swing.JFrame {
     PacienteView paciente = new PacienteView();
     Relatorios relatorio = new Relatorios(); 
     Cidades cidades = new Cidades();
+    Exames exame = new Exames();
     
     private void PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacienteActionPerformed
         paciente.setVisible(true);    
     }//GEN-LAST:event_PacienteActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void examesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_examesActionPerformed
+        exame.setVisible(true);
+    }//GEN-LAST:event_examesActionPerformed
 
     private void citySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citySelectActionPerformed
         cidades.setVisible(true);
@@ -170,8 +172,8 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Paciente;
     private javax.swing.JButton citySelect;
+    private javax.swing.JToggleButton exames;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JButton relatorios;
     // End of variables declaration//GEN-END:variables
 }
