@@ -62,7 +62,8 @@ public class ResultadoDAO {
             request = " Positivos.IdExame = "+E;
         } 
         return read("SELECT * FROM Positivos inner join doencas on doencas.IdDoenca = Positivos.IdDoenca where "+request);
-    }    
+    }   
+       
     
     public List<Resultado> read () {
         return read ("SELECT * FROM doencas");  
