@@ -5,6 +5,8 @@
  */
 package view;
 
+import model.dao.RandonCasos;
+
 /**
  *
  * @author William
@@ -14,8 +16,10 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    RandonCasos rand = new RandonCasos();
     public Home() {        
         initComponents();
+
     }
 
     /**

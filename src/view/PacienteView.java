@@ -73,6 +73,9 @@ public class PacienteView extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
+            public void windowDeactivated(java.awt.event.WindowEvent evt) {
+                formWindowDeactivated(evt);
+            }
         });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -159,7 +162,7 @@ public class PacienteView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -202,6 +205,8 @@ public class PacienteView extends javax.swing.JFrame {
             }
         });
 
+        lastId.setForeground(new java.awt.Color(255, 102, 51));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -238,22 +243,20 @@ public class PacienteView extends javax.swing.JFrame {
                             .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(buscarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(novoExame, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(11, 11, 11)
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(novoExame, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lastId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
@@ -314,7 +317,6 @@ public class PacienteView extends javax.swing.JFrame {
     private int salvarStatus = 0; 
     
     private void InstallFormat (){
-      
         try {
             formaterNasc.setMask("##/##/####");                      
         } catch (ParseException ex) {
@@ -329,6 +331,7 @@ public class PacienteView extends javax.swing.JFrame {
         novo.setEnabled(true);
         elementsEnabled(false);
         int id = 0;
+        InstallFormat ();      
         try {
             id = Integer.parseInt(String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));     
             nome.setEnabled(true);
@@ -337,7 +340,6 @@ public class PacienteView extends javax.swing.JFrame {
             elementsEnabled (false,false);
             lastId.setText("");
         }
-        System.out.println("Row :"+String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));
         return id;  
     }
     
@@ -366,20 +368,21 @@ public class PacienteView extends javax.swing.JFrame {
                 p.getNome(),              
                 p.getData(),    
             });
-        }
-        modelo.setNumRows(11);        
+        }      
     }
     
     private void setCidade () {
       if (cCidade.getIdCidade() != 0 ) {
         buscarCidade.setText(cCidade.getNomeCidade());
       } else {
-         buscarCidade.setText("SELECIONE CIDADE");
+        buscarCidade.setText("SELECIONE CIDADE"); 
       }
-    }     
+    }   
+    
     private void setValue () {
         PacienteDAO pdao = new PacienteDAO();
-        if (currentId() != 0){ 
+        if (currentId() != 0){
+            System.out.println("Olá mundo " + currentId() + "" +p.getNome() );
             p = pdao.readById(currentId());
             nome.setText(p.getNome());   
             buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
@@ -389,8 +392,13 @@ public class PacienteView extends javax.swing.JFrame {
                 lastId.setText("Saiu resultado do exame!");
                 novoExame.setEnabled(true);
             } catch (Exception ex) {
-                lastId.setText("Aguardando resultado do exame!");                
-                novoExame.setEnabled(false);
+                if ( exdao.lastExame(currentId()) != 0 ) {
+                    lastId.setText("Aguardando resultado do exame!");  
+                    novoExame.setEnabled(false);                    
+                } else {
+                    lastId.setText("");  
+                    novoExame.setEnabled(true);    
+                }
             }
             System.out.println("id cidade "+p.getCidadeId());
             nasc.setText(p.getNasc());
@@ -411,7 +419,7 @@ public class PacienteView extends javax.swing.JFrame {
     
     private void setPaciente ()  {
         try {
-            p.setId(currentId ());
+            this.p.setId(currentId ());
         } catch (Exception ex) { 
         }
         p.setNome(nome.getText());
@@ -506,10 +514,11 @@ public class PacienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_apagarActionPerformed
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
+        setValue();
         elementsEnabled(true);
         this.salvarStatus = 2;
         novo.setEnabled(false);
-        atualizar.setEnabled(false);        
+        atualizar.setEnabled(false);
     }//GEN-LAST:event_atualizarActionPerformed
 
     private void pacienteTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pacienteTableMousePressed
@@ -531,9 +540,9 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         clear();
-        nasc.setEnabled(true);
+        nasc.setEnabled(true);        
         elementsEnabled(true);
-        formaterNasc.install(nasc);
+        InstallFormat ();     
         pacienteTable.clearSelection();
         novo.setEnabled(false);
         atualizar.setEnabled(false);
@@ -543,8 +552,13 @@ public class PacienteView extends javax.swing.JFrame {
     private void novoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoExameActionPerformed
         exdao.create(currentId());
         novoExame.setEnabled(false);
+        lastId.setText("Aguardando resultado do exame!");
         status.setText(exdao.getStatus());
     }//GEN-LAST:event_novoExameActionPerformed
+
+    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
+        cCidade.setCidade("",0);
+    }//GEN-LAST:event_formWindowDeactivated
  
     /**
      * @param args the command line arguments

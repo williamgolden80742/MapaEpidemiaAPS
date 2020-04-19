@@ -50,6 +50,11 @@ public class Cidades extends javax.swing.JFrame {
 
         setTitle("Cidades");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel2.setDisplayedMnemonic('C');
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cityBackground.png"))); // NOI18N
@@ -190,6 +195,13 @@ public class Cidades extends javax.swing.JFrame {
     private void cidadesTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadesTableKeyPressed
 
     }//GEN-LAST:event_cidadesTableKeyPressed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        cCidade.setCidade("",0);  
+        cidadeS.setText("");
+        uf.setSelectedItem("Selecione");
+        selecionar.setEnabled(false);         
+    }//GEN-LAST:event_formWindowActivated
   
     Cidade c = new Cidade();
     Estado e = new Estado();

@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.bean.Exame;
-import model.bean.Paciente;
 
 /**
  *
@@ -65,7 +64,7 @@ public class ExameDAO {
         return exames;
     } 
     
-        public List<Exame> readResultado (int idP) {
+    public List<Exame> readResultado (int idP) {
 
         Connection con = ConnectionFactory.getConnection();
         
@@ -103,11 +102,40 @@ public class ExameDAO {
         return exames;
     }  
     
+    public int lastExame (int id) {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        Exame exame = new Exame();  
+        
+        try {
+            try {
+                stmt = con.prepareStatement("SELECT * FROM Exames where Idpaciente = "+id);
+                rs = stmt.executeQuery();
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            while (rs.next()) {      
+                exame.setIdExame(rs.getInt("IdExame"));    
+                exame.setId(rs.getInt("Idpaciente"));       
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return exame.getIdExame();
+    }  
+    
+    
     public int readLastID (int idP) {
         Exame exame = new Exame();
         for (Exame e : readResultado (idP)) {
             exame.setIdExame(e.getIdExame());
-            System.out.println(e.getIdExame());
         }
         return (exame.getIdExame() == 0)?null:exame.getIdExame();
     } 
@@ -129,6 +157,25 @@ public class ExameDAO {
         }
 
     }
+     
+
+    public void delete (int idEx) {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement("delete FROM POSITIVOS WHERE IdExame = '"+idEx+"'");
+            stmt.executeUpdate(); 
+            stmt = con.prepareStatement("delete FROM EXAMES WHERE IdExame = '"+idEx+"'");
+            stmt.executeUpdate();            
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }      
        
     
 }

@@ -5,6 +5,11 @@
  */
 package view;
 
+import java.text.DecimalFormat;
+import javax.swing.table.DefaultTableModel;
+import model.bean.Relatorio;
+import model.dao.RelatorioDAO;
+
 /**
  *
  * @author William
@@ -16,6 +21,7 @@ public class Relatorios extends javax.swing.JFrame {
      */
     public Relatorios() {
         initComponents();
+        readJTable();
     }
 
     /**
@@ -27,26 +33,84 @@ public class Relatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        relatorioTable = new javax.swing.JTable();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
+
+        relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cidade", "População", "Casos", "Porcentagem"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(relatorioTable);
+        if (relatorioTable.getColumnModel().getColumnCount() > 0) {
+            relatorioTable.getColumnModel().getColumn(0).setResizable(false);
+            relatorioTable.getColumnModel().getColumn(1).setResizable(false);
+            relatorioTable.getColumnModel().getColumn(2).setResizable(false);
+            relatorioTable.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        readJTable();
+    }//GEN-LAST:event_formWindowActivated
+
+    RelatorioDAO rdao = new RelatorioDAO();
+    
+    public void readJTable() {
+        DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
+        modelo.setNumRows(0);
+        String percent = "";
+        DecimalFormat df =  new DecimalFormat();
+        df.setMaximumFractionDigits(7);
+        for (Relatorio r : rdao.read()) {
+          
+            modelo.addRow(new Object[]{    
+                r.getCidadeNome(),      
+                r.getPopulacao(),
+                r.getCasos(),
+                df.format(r.getPercent())+"%",
+            });
+        }
+    }    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable relatorioTable;
     // End of variables declaration//GEN-END:variables
 }

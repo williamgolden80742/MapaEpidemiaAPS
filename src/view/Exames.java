@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Resultado;
 import model.bean.Exame;
@@ -53,6 +54,7 @@ public class Exames extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         resultadoTable = new javax.swing.JTable();
         salvar = new javax.swing.JToggleButton();
+        apagar = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -97,17 +99,17 @@ public class Exames extends javax.swing.JFrame {
 
         examesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Exame ID", "Nome"
+                "Exame ID", "Paciente ID", "Nome"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -122,7 +124,7 @@ public class Exames extends javax.swing.JFrame {
         jScrollPane2.setViewportView(examesTable);
         if (examesTable.getColumnModel().getColumnCount() > 0) {
             examesTable.getColumnModel().getColumn(0).setResizable(false);
-            examesTable.getColumnModel().getColumn(1).setResizable(false);
+            examesTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
         doencasTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -135,7 +137,15 @@ public class Exames extends javax.swing.JFrame {
             new String [] {
                 "Doencas"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         doencasTable.setToolTipText("");
         doencasTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -159,7 +169,7 @@ public class Exames extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,6 +185,7 @@ public class Exames extends javax.swing.JFrame {
         jScrollPane4.setViewportView(resultadoTable);
         if (resultadoTable.getColumnModel().getColumnCount() > 0) {
             resultadoTable.getColumnModel().getColumn(0).setResizable(false);
+            resultadoTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         salvar.setText("SALVAR");
@@ -184,35 +195,45 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        apagar.setText("APAGAR");
+        apagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apagarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(negativo, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(positivo, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(positivo, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+            .addComponent(apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(negativo)
-                    .addComponent(positivo))
+                    .addComponent(negativo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(positivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(salvar)
+                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(apagar))
         );
 
         pack();
@@ -242,6 +263,7 @@ public class Exames extends javax.swing.JFrame {
         for (Exame d : exdao.read()) {
             modelo.addRow(new Object[]{ 
                 d.getIdExame(),
+                d.getId(),
                 d.getNome()
             });
         }    
@@ -336,7 +358,8 @@ public class Exames extends javax.swing.JFrame {
         doencasTable.clearSelection();        
         salvar.setEnabled(b);
         positivo.setEnabled(b);
-        negativo.setEnabled(b);        
+        negativo.setEnabled(b); 
+        apagar.setEnabled(b);
     } 
 
     private void addDoenca () { 
@@ -350,6 +373,24 @@ public class Exames extends javax.swing.JFrame {
             System.out.println(ex);
         }       
     }  
+    
+    private void delete () {
+        String nomeLinha = "";
+        try {
+            nomeLinha = String.valueOf(examesTable.getModel().getValueAt(examesTable.getSelectedRow(),2));
+            int question = 0;
+            if (!(String.valueOf( currentIdExame() )).equals("")) {
+                question = JOptionPane.showConfirmDialog(null,"Deseja realmente apagar o exame \n     de id : "+currentIdExame()+"\n do paciente : "+nomeLinha+" ?");
+            }
+            if (question == 0) { 
+                 exdao.delete(currentIdExame());
+                 readJTableE();
+                 System.out.println("Wololo");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Selecione um exame!");
+        }
+    }           
     
     private void positivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_positivoActionPerformed
         try {
@@ -396,11 +437,16 @@ public class Exames extends javax.swing.JFrame {
         readJTableE();
     }//GEN-LAST:event_formWindowActivated
 
+    private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
+        delete ();
+    }//GEN-LAST:event_apagarActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton apagar;
     private javax.swing.JTable doencasTable;
     private javax.swing.JTable examesTable;
     private javax.swing.JFrame jFrame1;

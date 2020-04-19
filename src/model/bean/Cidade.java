@@ -12,7 +12,16 @@ package model.bean;
 public class Cidade extends Estado {
 
     private String cidadeNome;
-    private int cidadeId;       
+    private int cidadeId;    
+    private int populacao;
+
+    public int getPopulacao() {
+        return populacao;
+    }
+
+    public void setPopulacao(int populacao) {
+        this.populacao = populacao;
+    }
     
     public String getCidadeNome() {
         return cidadeNome;

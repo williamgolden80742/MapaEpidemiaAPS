@@ -102,7 +102,7 @@ public class PacienteDAO {
     public Paciente readById(int id) {  
         Paciente paciente = new Paciente();
 
-        for(Paciente p : read("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '%"+id+"%'")){
+        for(Paciente p : read("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '"+id+"'")){
                 paciente.setNome(p.getNome());
                 paciente.setCidadeNome(p.getCidadeNome());  
                 paciente.setCidadeId(p.getCidadeId());   
