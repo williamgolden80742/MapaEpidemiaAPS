@@ -28,11 +28,11 @@ public class RandonCasos {
             int cidade[] = {5270,4920,5252,5095,5038};
             Random gerador = new Random();
             for (int i = 0; i < 10000; i++) {
-                stmt = con.prepareStatement("INSERT INTO Pacientes (Idpaciente,nomecompleto,idCidade)VALUES("+(i+20220)+",'"+nomes[gerador.nextInt(100)]+"',"+cidade[gerador.nextInt(5)]+");");  
+                stmt = con.prepareStatement("INSERT INTO Pacientes (Idpaciente,nomecompleto,idCidade)VALUES("+(i+22668)+",'"+nomes[gerador.nextInt(100)]+"',"+cidade[gerador.nextInt(5)]+");");  
                 stmt.executeUpdate();
-                stmt = con.prepareStatement("INSERT INTO Exames (IdExame,Idpaciente)VALUES("+(i+20220)+","+(i+20220)+");"); 
+                stmt = con.prepareStatement("INSERT INTO Exames (IdExame,Idpaciente)VALUES("+(i+22668)+","+(i+22668)+");"); 
                 stmt.executeUpdate();
-                stmt = con.prepareStatement("INSERT INTO Positivos (IdExame,IdDoenca,resultado)VALUES("+(i+20220)+","+(2+gerador.nextInt(4))+",1);");           
+                stmt = con.prepareStatement("INSERT INTO Positivos (IdExame,IdDoenca,resultado)VALUES("+(i+22668)+","+(2+gerador.nextInt(4))+",1);");           
                 stmt.executeUpdate();
             }   
         } catch (SQLException ex) {

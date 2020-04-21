@@ -22,18 +22,23 @@ import model.bean.Relatorio;
  */
 public class RelatorioDAO {
     
-   public List<Relatorio> read () {
+   public List<Relatorio> read (String request) {
 
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
+        
+        String date = "";
+        
+        if (!request.equals("")) {
+            date = "and positivos.datadeCriacaoPS like '"+request+"%'";
+        }
 
         List<Relatorio> relatorios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT cidade.nomeCidade, cidade.populacao, COUNT(DISTINCT positivos.IdPositivos), DATE_FORMAT(pacientes.datadeCriacaoP, '%d/%m/%Y') FROM exames INNER JOIN positivos ON positivos.IdExame = exames.IdExame inner join pacientes on pacientes.Idpaciente = exames.Idpaciente inner join cidade on cidade.idCidade = pacientes.idCidade WHERE positivos.resultado = 1 GROUP by date(pacientes.datadeCriacaoP), cidade.idCidade ORDER by pacientes.idCidade, pacientes.datadeCriacaoP");
+            stmt = con.prepareStatement("SELECT cidade.nomeCidade, cidade.populacao, COUNT(DISTINCT positivos.IdPositivos), DATE_FORMAT(positivos.datadeCriacaoPS, '%d/%m/%Y') FROM exames INNER JOIN positivos ON positivos.IdExame = exames.IdExame inner join pacientes on pacientes.Idpaciente = exames.Idpaciente inner join cidade on cidade.idCidade = pacientes.idCidade WHERE positivos.resultado = 1 "+date+" GROUP by date(positivos.datadeCriacaoPS), cidade.idCidade ORDER by pacientes.idCidade, positivos.datadeCriacaoPS");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -44,9 +49,10 @@ public class RelatorioDAO {
 //                relatorio.setNomeDoenca(rs.getString("nomeDoenca"));               
                 relatorio.setCasos(rs.getInt("COUNT(DISTINCT positivos.IdPositivos)"));    
                 relatorio.setPercent(rs.getInt("COUNT(DISTINCT positivos.IdPositivos)"),rs.getInt("populacao"));
-                relatorio.setDataCasos(rs.getString("DATE_FORMAT(pacientes.datadeCriacaoP, '%d/%m/%Y')"));
+                relatorio.setDataCasos(rs.getString("DATE_FORMAT(positivos.datadeCriacaoPS, '%d/%m/%Y')"));
                 relatorios.add(relatorio);
             }
+
         } catch (SQLException ex) {
             Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -54,7 +60,11 @@ public class RelatorioDAO {
         }
 
         return relatorios;
-    } 
+   }
+   
+   public List<Relatorio> read () {
+       return read ("");
+   }
 
    public List<Relatorio> readDate() {
 

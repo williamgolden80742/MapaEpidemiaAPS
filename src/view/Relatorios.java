@@ -7,6 +7,7 @@ package view;
 
 import java.text.DecimalFormat;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.bean.Relatorio;
 import model.dao.RelatorioDAO;
 
@@ -22,7 +23,9 @@ public class Relatorios extends javax.swing.JFrame {
     public Relatorios() {
         initComponents();
         readJTable();
-//        setDate();
+        setDate();
+        DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
+        relatorioTable.setRowSorter(new TableRowSorter(modelo));
     }
 
     /**
@@ -36,6 +39,7 @@ public class Relatorios extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         relatorioTable = new javax.swing.JTable();
+        data = new javax.swing.JComboBox<>();
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -43,6 +47,7 @@ public class Relatorios extends javax.swing.JFrame {
             }
         });
 
+        relatorioTable.setAutoCreateRowSorter(true);
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -51,7 +56,7 @@ public class Relatorios extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cidade", "População", "Casos", "Porcentagem", "Data"
+                "Cidade", "População", "Evolução", "Porcentagem", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -68,22 +73,28 @@ public class Relatorios extends javax.swing.JFrame {
             relatorioTable.getColumnModel().getColumn(1).setResizable(false);
             relatorioTable.getColumnModel().getColumn(2).setResizable(false);
             relatorioTable.getColumnModel().getColumn(3).setResizable(false);
-            relatorioTable.getColumnModel().getColumn(4).setResizable(false);
         }
+
+        data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE DATA" }));
+        data.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dataActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+            .addComponent(data, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
+                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,37 +104,60 @@ public class Relatorios extends javax.swing.JFrame {
         readJTable();
     }//GEN-LAST:event_formWindowActivated
 
+    private void dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataActionPerformed
+        readJTable();
+    }//GEN-LAST:event_dataActionPerformed
+
     RelatorioDAO rdao = new RelatorioDAO();
     
     public void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         modelo.setNumRows(0);
-        String percent = "";
         DecimalFormat df =  new DecimalFormat();
         df.setMaximumFractionDigits(6);
-        for (Relatorio r : rdao.read()) {
-          
+        int soma = 0;
+        double somaPercent = 0;
+        String cidadeAnterior = "", cidadeAtual = "";
+        for (Relatorio r : rdao.read(currentDate())) {
+            cidadeAtual = r.getCidadeNome();
+            if (cidadeAtual.equals(cidadeAnterior)) {
+                soma += r.getCasos();
+                somaPercent += r.getPercent();
+            } else {
+                soma = r.getCasos();
+                somaPercent = r.getPercent();
+            }
             modelo.addRow(new Object[]{    
                 r.getCidadeNome(),      
                 r.getPopulacao(),
-                r.getCasos(),
-                df.format(r.getPercent())+"%",
+                soma,
+                df.format(somaPercent)+"%",
                 r.getDataCasos()
             });
+            cidadeAnterior = cidadeAtual; 
         }
     }    
- 
-//    public void setDate() {   
-//        for (Relatorio e : rdao.readDate()) {
-//            dataI.addItem(e.getDataCasos());
-//            dataF.addItem(e.getDataCasos());            
-//        } 
-//    }     
+    
+    public String currentDate() {
+        String value = "";
+        if (!data.getSelectedItem().equals("SELECIONE DATA")) {
+            value = (String) data.getSelectedItem();
+            System.out.println(data.getSelectedItem());
+        }
+        return value;
+    }
+    
+    public void setDate() {   
+        for (Relatorio e : rdao.readDate()) {
+            data.addItem(e.getDataCasos());          
+        } 
+    }     
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> data;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable relatorioTable;
     // End of variables declaration//GEN-END:variables

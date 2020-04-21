@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.MaskFormatter;
 import model.bean.CurrentCidade;
 import model.bean.Paciente;
 import model.dao.CidadeDAO;
