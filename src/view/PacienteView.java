@@ -29,7 +29,6 @@ public class PacienteView extends javax.swing.JFrame {
         initComponents();    
         DefaultTableModel modelo = (DefaultTableModel) pacienteTable.getModel();
         readJTable();        
-        InstallFormat(); 
         novoExame.setEnabled(false);
         elementsEnabled(false,false);
     }    
@@ -73,9 +72,6 @@ public class PacienteView extends javax.swing.JFrame {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
-            public void windowDeactivated(java.awt.event.WindowEvent evt) {
-                formWindowDeactivated(evt);
-            }
         });
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -97,10 +93,19 @@ public class PacienteView extends javax.swing.JFrame {
             }
         });
 
-        nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("dd/mm/yyyy"))));
+        try {
+            nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         nasc.setToolTipText("");
         nasc.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         nasc.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        nasc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                nascKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         jLabel3.setText("nasc :");
@@ -302,11 +307,7 @@ public class PacienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    MaskFormatter formaterNasc = new MaskFormatter();
-    MaskFormatter formaterTel = new MaskFormatter(); 
-    MaskFormatter formaterTelS = new MaskFormatter();         
-    MaskFormatter formaterCPF = new MaskFormatter();    
+       
     Cidades cidades = new Cidades();
     EstadoDAO edao = new EstadoDAO();
     CidadeDAO cdao = new CidadeDAO();  
@@ -316,27 +317,16 @@ public class PacienteView extends javax.swing.JFrame {
     PacienteDAO dao = new PacienteDAO(); 
     private int salvarStatus = 0; 
     
-    private void InstallFormat (){
-        try {
-            formaterNasc.setMask("##/##/####");                      
-        } catch (ParseException ex) {
-            Logger.getLogger(PacienteView.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        formaterNasc.install(nasc);          
-    }   
-    
 
     
     private int currentId (){
         novo.setEnabled(true);
         elementsEnabled(false);
-        int id = 0;
-        InstallFormat ();      
+        int id = 0;   
         try {
             id = Integer.parseInt(String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));     
             nome.setEnabled(true);
         } catch (Exception ex) {
-            System.out.println("Id nulo");
             elementsEnabled (false,false);
             lastId.setText("");
         }
@@ -371,8 +361,8 @@ public class PacienteView extends javax.swing.JFrame {
         }      
     }
     
-    private void setCidade () {
-      if (cCidade.getIdCidade() != 0 ) {
+    private void setCidade () {  
+      if (cCidade.getNomeCidade() != null && cCidade.getIdCidade()!= 0) {
         buscarCidade.setText(cCidade.getNomeCidade());
       } else {
         buscarCidade.setText("SELECIONE CIDADE"); 
@@ -382,11 +372,11 @@ public class PacienteView extends javax.swing.JFrame {
     private void setValue () {
         PacienteDAO pdao = new PacienteDAO();
         if (currentId() != 0){
-            System.out.println("Olá mundo " + currentId() + "" +p.getNome() );
             p = pdao.readById(currentId());
             nome.setText(p.getNome());   
             buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
             cCidade.setIdCidade(p.getCidadeId());
+            nasc.setText(p.getNasc());             
             try {
                 exdao.readLastID(currentId());
                 lastId.setText("Saiu resultado do exame!");
@@ -399,10 +389,7 @@ public class PacienteView extends javax.swing.JFrame {
                     lastId.setText("");  
                     novoExame.setEnabled(true);    
                 }
-            }
-            System.out.println("id cidade "+p.getCidadeId());
-            nasc.setText(p.getNasc());
-            System.out.println("Nasc :" + p.getNasc());
+            }                         
             sexo.setSelectedItem(p.getSexo());
         } else {
             clear ();
@@ -419,14 +406,13 @@ public class PacienteView extends javax.swing.JFrame {
     
     private void setPaciente ()  {
         try {
-            this.p.setId(currentId ());
+            p.setId(currentId ());
         } catch (Exception ex) { 
         }
         p.setNome(nome.getText());
         p.setNasc(nasc.getText());
         p.setCidadeId(cCidade.getIdCidade());
         p.setSexo(String.valueOf(sexo.getSelectedItem()).charAt(0));  
-        System.out.println("Set paciente");
     }
     
     private void create () {
@@ -445,7 +431,7 @@ public class PacienteView extends javax.swing.JFrame {
             status.setText(dao.getStatus());
             readJTable(); 
             clear (); 
-            System.out.println("in update");
+            System.out.println("in update ");
         } 
     }    
     
@@ -480,16 +466,19 @@ public class PacienteView extends javax.swing.JFrame {
     }        
     
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-         if (getValidation () == true ) {
+        novo.setEnabled(false);
+        atualizar.setEnabled(false);
+        if (getValidation () == true ) {
             if (salvarStatus == 1) {
                 create ();  
                 System.out.println("create");
             } else if (salvarStatus == 2) {
                 update();
-                System.out.println("update");                
+                System.out.println("update");  
+                System.out.println("in update : "+nasc.getText());
             } 
             this.salvarStatus = 0;
-         }    
+        }    
     }//GEN-LAST:event_salvarActionPerformed
 
     private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
@@ -515,10 +504,8 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
         setValue();
-        elementsEnabled(true);
+        elementsEnabled(true);    
         this.salvarStatus = 2;
-        novo.setEnabled(false);
-        atualizar.setEnabled(false);
     }//GEN-LAST:event_atualizarActionPerformed
 
     private void pacienteTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pacienteTableMousePressed
@@ -535,17 +522,13 @@ public class PacienteView extends javax.swing.JFrame {
     }//GEN-LAST:event_formMousePressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        setCidade();
+        setCidade(); 
     }//GEN-LAST:event_formWindowActivated
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
-        clear();
-        nasc.setEnabled(true);        
-        elementsEnabled(true);
-        InstallFormat ();     
+        clear();        
+        elementsEnabled(true);  
         pacienteTable.clearSelection();
-        novo.setEnabled(false);
-        atualizar.setEnabled(false);
         this.salvarStatus = 1;
     }//GEN-LAST:event_novoActionPerformed
 
@@ -556,9 +539,9 @@ public class PacienteView extends javax.swing.JFrame {
         status.setText(exdao.getStatus());
     }//GEN-LAST:event_novoExameActionPerformed
 
-    private void formWindowDeactivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowDeactivated
-        cCidade.setCidade("",0);
-    }//GEN-LAST:event_formWindowDeactivated
+    private void nascKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nascKeyTyped
+
+    }//GEN-LAST:event_nascKeyTyped
  
     /**
      * @param args the command line arguments

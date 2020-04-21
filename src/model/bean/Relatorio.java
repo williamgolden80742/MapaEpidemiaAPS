@@ -12,7 +12,17 @@ package model.bean;
 public class Relatorio extends Resultado {
     private int casos;
     private double percent;
+    private String dataCasos;
 
+    public String getDataCasos() {
+        return dataCasos;
+    }
+
+    public void setDataCasos(String dataCasos) {
+        this.dataCasos = dataCasos;
+    }
+    
+    
     public double getPercent() {
         return percent;
     }

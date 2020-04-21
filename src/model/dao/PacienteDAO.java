@@ -49,7 +49,6 @@ public class PacienteDAO {
             stmt.setString(3,String.valueOf(p.getSexo()));
             stmt.setInt(4,p.getCidadeId());
             stmt.executeUpdate();
-            setStatus("Criado com sucesso!");
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {

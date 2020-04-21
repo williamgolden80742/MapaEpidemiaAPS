@@ -22,6 +22,7 @@ public class Relatorios extends javax.swing.JFrame {
     public Relatorios() {
         initComponents();
         readJTable();
+//        setDate();
     }
 
     /**
@@ -44,17 +45,17 @@ public class Relatorios extends javax.swing.JFrame {
 
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Cidade", "População", "Casos", "Porcentagem"
+                "Cidade", "População", "Casos", "Porcentagem", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -67,17 +68,22 @@ public class Relatorios extends javax.swing.JFrame {
             relatorioTable.getColumnModel().getColumn(1).setResizable(false);
             relatorioTable.getColumnModel().getColumn(2).setResizable(false);
             relatorioTable.getColumnModel().getColumn(3).setResizable(false);
+            relatorioTable.getColumnModel().getColumn(4).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE))
         );
 
         pack();
@@ -94,7 +100,7 @@ public class Relatorios extends javax.swing.JFrame {
         modelo.setNumRows(0);
         String percent = "";
         DecimalFormat df =  new DecimalFormat();
-        df.setMaximumFractionDigits(7);
+        df.setMaximumFractionDigits(6);
         for (Relatorio r : rdao.read()) {
           
             modelo.addRow(new Object[]{    
@@ -102,9 +108,17 @@ public class Relatorios extends javax.swing.JFrame {
                 r.getPopulacao(),
                 r.getCasos(),
                 df.format(r.getPercent())+"%",
+                r.getDataCasos()
             });
         }
     }    
+ 
+//    public void setDate() {   
+//        for (Relatorio e : rdao.readDate()) {
+//            dataI.addItem(e.getDataCasos());
+//            dataF.addItem(e.getDataCasos());            
+//        } 
+//    }     
     /**
      * @param args the command line arguments
      */

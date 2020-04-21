@@ -19,7 +19,6 @@ public class Home extends javax.swing.JFrame {
     RandonCasos rand = new RandonCasos();
     public Home() {        
         initComponents();
-
     }
 
     /**
