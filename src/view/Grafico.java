@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.util.Iterator;
 import model.bean.Relatorio;
 import model.dao.RelatorioDAO;
 import org.jfree.chart.ChartFactory;
@@ -17,7 +18,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
  *
  * @author William
  */
-public class Grafico extends javax.swing.JFrame {
+public final class Grafico extends javax.swing.JFrame {
 
     /**
      * Creates new form Grafico
@@ -26,23 +27,26 @@ public class Grafico extends javax.swing.JFrame {
     RelatorioDAO rdao = new RelatorioDAO();
     
     public Grafico() {
+        iniGrafic ();
+    }
+    
+    public void iniGrafic () {
         setTitle("Gráfico Casos");
         setSize(512,400);
         setLocationRelativeTo(null);
         criarGrafico();
-        setVisible(false);
-    }
+        setVisible(false);    
     
+    }
     
     public void criarGrafico() {
         DefaultCategoryDataset linha = new DefaultCategoryDataset();
         
 
        
-        for (Relatorio r : rdao.read()) {
-           
-            linha.addValue(r.getPercent(),r.getCidadeNome()+" ("+r.getPopulacao()+")",r.getDataCasos()); 
-        }        
+        rdao.read().forEach((r) -> {
+            linha.addValue(r.getPercent(),r.getCidadeNome()+" ("+r.getPopulacao()+")",r.getDataCasos());
+        });        
         
         JFreeChart grafico = ChartFactory.createLineChart("Evolução do Casos","Dias","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);
         ChartPanel painel = new ChartPanel(grafico);

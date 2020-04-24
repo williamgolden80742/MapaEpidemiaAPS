@@ -142,7 +142,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_citySelectActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
-        relatorio.setVisible(true);
+        grafic.setVisible(true);
     }//GEN-LAST:event_relatoriosActionPerformed
 
     /**
