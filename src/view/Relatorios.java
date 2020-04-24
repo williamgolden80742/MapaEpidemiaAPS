@@ -37,15 +37,27 @@ public class Relatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jToggleButton1 = new javax.swing.JToggleButton();
+        relatorio = new javax.swing.JTabbedPane();
+        graficos = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         relatorioTable = new javax.swing.JTable();
         data = new javax.swing.JComboBox<>();
+
+        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
+
+        relatorio.addTab("Gráfico", graficos);
 
         relatorioTable.setAutoCreateRowSorter(true);
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -75,6 +87,8 @@ public class Relatorios extends javax.swing.JFrame {
             relatorioTable.getColumnModel().getColumn(3).setResizable(false);
         }
 
+        relatorio.addTab("Evolução", jScrollPane1);
+
         data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE DATA" }));
         data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,15 +100,15 @@ public class Relatorios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
-            .addComponent(data, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(relatorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,6 +121,10 @@ public class Relatorios extends javax.swing.JFrame {
     private void dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataActionPerformed
         readJTable();
     }//GEN-LAST:event_dataActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     RelatorioDAO rdao = new RelatorioDAO();
     
@@ -142,7 +160,6 @@ public class Relatorios extends javax.swing.JFrame {
         String value = "";
         if (!data.getSelectedItem().equals("SELECIONE DATA")) {
             value = (String) data.getSelectedItem();
-            System.out.println(data.getSelectedItem());
         }
         return value;
     }
@@ -158,7 +175,10 @@ public class Relatorios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> data;
+    private javax.swing.JTabbedPane graficos;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JTabbedPane relatorio;
     private javax.swing.JTable relatorioTable;
     // End of variables declaration//GEN-END:variables
 }
