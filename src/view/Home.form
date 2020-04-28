@@ -140,7 +140,7 @@
       <Properties>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/Virus-coronavirus-blue-style_2560x1440.png"/>
+          <Image iconType="3" name="/images/Virus-coronavirus-blue-style_2560x1440_vectorized.png"/>
         </Property>
       </Properties>
     </Component>

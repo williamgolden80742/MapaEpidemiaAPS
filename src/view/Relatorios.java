@@ -4,8 +4,11 @@
  * and open the template in the editor.
  */
 package view;
-
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import model.bean.Relatorio;
@@ -22,12 +25,13 @@ public class Relatorios extends javax.swing.JFrame {
      */
     public Relatorios() {
         initComponents();
+        createGrafico();  
         readJTable();
         setDate();
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         relatorioTable.setRowSorter(new TableRowSorter(modelo));
     }
-
+     ;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,27 +41,24 @@ public class Relatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
         relatorio = new javax.swing.JTabbedPane();
-        graficos = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         relatorioTable = new javax.swing.JTable();
+        graficoPicture = new javax.swing.JLabel();
         data = new javax.swing.JComboBox<>();
 
-        jToggleButton1.setText("jToggleButton1");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+        setResizable(false);
+        setType(java.awt.Window.Type.POPUP);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
             }
         });
-
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
-
-        relatorio.addTab("Gráfico", graficos);
 
         relatorioTable.setAutoCreateRowSorter(true);
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -89,7 +90,11 @@ public class Relatorios extends javax.swing.JFrame {
 
         relatorio.addTab("Evolução", jScrollPane1);
 
-        data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE DATA" }));
+        graficoPicture.setBackground(new java.awt.Color(255, 255, 255));
+        graficoPicture.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        relatorio.addTab("Gráficos", graficoPicture);
+
+        data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODAS DATAS" }));
         data.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dataActionPerformed(evt);
@@ -101,34 +106,45 @@ public class Relatorios extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(relatorio)
+            .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE))
+                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         readJTable();
+        createGrafico();  
     }//GEN-LAST:event_formWindowActivated
 
     private void dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataActionPerformed
         readJTable();
+        createGrafico();
     }//GEN-LAST:event_dataActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        createGrafico();  
+    }//GEN-LAST:event_formMousePressed
 
     RelatorioDAO rdao = new RelatorioDAO();
+    Grafico grafic = new Grafico();
+
+    private void createGrafico () {
+        try {
+              graficoPicture.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGrafico( currentDate() , graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+        } catch (IOException ex) {
+            Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+    }
     
-    public void readJTable() {
+    public void readJTable() { 
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         modelo.setNumRows(0);
         DecimalFormat df =  new DecimalFormat();
@@ -158,7 +174,7 @@ public class Relatorios extends javax.swing.JFrame {
     
     public String currentDate() {
         String value = "";
-        if (!data.getSelectedItem().equals("SELECIONE DATA")) {
+        if (!data.getSelectedItem().equals("TODAS DATAS")) {
             value = (String) data.getSelectedItem();
         }
         return value;
@@ -175,9 +191,8 @@ public class Relatorios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> data;
-    private javax.swing.JTabbedPane graficos;
+    private javax.swing.JLabel graficoPicture;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTabbedPane relatorio;
     private javax.swing.JTable relatorioTable;
     // End of variables declaration//GEN-END:variables

@@ -62,6 +62,7 @@ public class RelatorioDAO {
         return relatorios;
    }
    
+
    public List<Relatorio> read () {
        return read ("");
    }

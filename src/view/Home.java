@@ -18,6 +18,7 @@ public class Home extends javax.swing.JFrame {
      */
     RandonCasos rand = new RandonCasos();
     public Home() {        
+
         initComponents();
 //        rand.create();
     }
@@ -86,7 +87,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Virus-coronavirus-blue-style_2560x1440.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/Virus-coronavirus-blue-style_2560x1440_vectorized.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,7 +128,6 @@ public class Home extends javax.swing.JFrame {
     Relatorios relatorio = new Relatorios(); 
     Cidades cidades = new Cidades();
     Exames exame = new Exames();
-    Grafico grafic = new Grafico();
     
     private void PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacienteActionPerformed
         paciente.setVisible(true);    
@@ -142,7 +142,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_citySelectActionPerformed
 
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
-        grafic.setVisible(true);
+        relatorio.setVisible(true);
     }//GEN-LAST:event_relatoriosActionPerformed
 
     /**

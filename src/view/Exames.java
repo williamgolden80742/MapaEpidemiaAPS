@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Resultado;
@@ -375,7 +376,7 @@ public class Exames extends javax.swing.JFrame {
     }  
     
     private void delete () {
-        String nomeLinha = "";
+        String nomeLinha;
         try {
             nomeLinha = String.valueOf(examesTable.getModel().getValueAt(examesTable.getSelectedRow(),2));
             int question = 0;
@@ -387,7 +388,7 @@ public class Exames extends javax.swing.JFrame {
                  readJTableE();
                  System.out.println("Wololo");
             }
-        } catch (Exception ex) {
+        } catch (HeadlessException ex) {
             JOptionPane.showMessageDialog(null,"Selecione um exame!");
         }
     }           
