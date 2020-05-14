@@ -5,12 +5,11 @@
  */
 package view;
 
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.bean.CurrentCidade;
+import model.bean.Cidade;
 import model.bean.Paciente;
-import model.dao.CidadeDAO;
-import model.dao.EstadoDAO;
 import model.dao.ExameDAO;
 import model.dao.PacienteDAO;
 
@@ -20,13 +19,20 @@ import model.dao.PacienteDAO;
  */
 public class PacienteView extends javax.swing.JFrame {
 
+    private Cidades cidades = new Cidades();
+    private Cidade cidade = new Cidade();
+    private ExameDAO exdao = new ExameDAO();
+    private Paciente p = new Paciente();
+    private PacienteDAO dao = new PacienteDAO(); 
+    private int salvarStatus = 0; 
     
     public PacienteView() {
         initComponents();    
-        DefaultTableModel modelo = (DefaultTableModel) pacienteTable.getModel();
         readJTable();        
         novoExame.setEnabled(false);
         elementsEnabled(false,false);
+        setIconTop ();
+                    sexo.setSelectedIndex(2);
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -57,7 +63,9 @@ public class PacienteView extends javax.swing.JFrame {
         status = new javax.swing.JLabel();
         novoExame = new javax.swing.JButton();
         lastId = new javax.swing.JLabel();
+        falecido = new javax.swing.JCheckBox();
 
+        setTitle("Pacientes");
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -83,11 +91,6 @@ public class PacienteView extends javax.swing.JFrame {
         });
 
         nome.setMaximumSize(new java.awt.Dimension(4, 19));
-        nome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeActionPerformed(evt);
-            }
-        });
 
         try {
             nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -111,15 +114,10 @@ public class PacienteView extends javax.swing.JFrame {
         jLabel5.setText("Sexo : ");
 
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino", "Outro" }));
-        sexo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sexoActionPerformed(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel9.setText("CADASTRO DE PACIENTE ");
+        jLabel9.setText("PACIENTES");
 
         jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -208,6 +206,13 @@ public class PacienteView extends javax.swing.JFrame {
 
         lastId.setForeground(new java.awt.Color(255, 102, 51));
 
+        falecido.setText("Falecido?");
+        falecido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                falecidoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -222,7 +227,6 @@ public class PacienteView extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -252,19 +256,27 @@ public class PacienteView extends javax.swing.JFrame {
                                     .addComponent(sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buscar)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(falecido))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buscar)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jLabel9)
-                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(falecido))
+                .addGap(2, 2, 2)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -299,17 +311,7 @@ public class PacienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-       
-    Cidades cidades = new Cidades();
-    EstadoDAO edao = new EstadoDAO();
-    CidadeDAO cdao = new CidadeDAO();  
-    ExameDAO exdao = new ExameDAO();
-    CurrentCidade cCidade = new CurrentCidade();
-    Paciente p = new Paciente();
-    PacienteDAO dao = new PacienteDAO(); 
-    private int salvarStatus = 0; 
-    
-
+      
     
     private int currentId (){
         novo.setEnabled(true);
@@ -330,6 +332,7 @@ public class PacienteView extends javax.swing.JFrame {
         nome.setEnabled(c);
         nasc.setEnabled(b);
         sexo.setEnabled(b);
+        falecido.setEnabled(b);
         buscarCidade.setEnabled(b);
         apagar.setEnabled(!b & c);
         salvar.setEnabled(b);
@@ -354,10 +357,8 @@ public class PacienteView extends javax.swing.JFrame {
     }
     
     private void setCidade () {  
-      if (cCidade.getNomeCidade() != null && cCidade.getIdCidade()!= 0) {
-        buscarCidade.setText(cCidade.getNomeCidade());
-      } else {
-        buscarCidade.setText("SELECIONE CIDADE"); 
+      if (buscarCidade.equals("SELECIONE CIDADE") && currentId() !=0) {
+        buscarCidade.setText(cidade.getCurrentCidadeNome());
       }
     }   
     
@@ -365,9 +366,27 @@ public class PacienteView extends javax.swing.JFrame {
         PacienteDAO pdao = new PacienteDAO();
         if (currentId() != 0){
             p = pdao.readById(currentId());
-            nome.setText(p.getNome());   
+            nome.setText(p.getNome());  
+            status.setText("");
+            falecido.setSelected((p.getFalecido() == 1)?true:false);
+            int selecioneSexo;
+            switch(p.getSexo()) {
+                case 'F':
+                   selecioneSexo = 2;
+                   break;
+                case 'M':   
+                    selecioneSexo = 1;
+                    break;
+                case 'O':
+                    selecioneSexo = 3;
+                    break;
+                default:
+                    selecioneSexo = 0;
+            }
+            sexo.setSelectedIndex(selecioneSexo);
+            selecioneSexo=0;
             buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
-            cCidade.setIdCidade(p.getCidadeId());
+            cidade.setCurrentCidadeId(p.getCidadeId());
             nasc.setText(p.getNasc());             
             try {
                 exdao.readLastID(currentId());
@@ -392,7 +411,7 @@ public class PacienteView extends javax.swing.JFrame {
         nome.setText("");
         nasc.setText("");
         buscarCidade.setText("SELECIONE CIDADE");
-        cCidade.setCidade("",0);
+        cidade.setCurrentCidade("",0);
         sexo.setSelectedItem("Selecione");
     }
     
@@ -401,10 +420,12 @@ public class PacienteView extends javax.swing.JFrame {
             p.setId(currentId ());
         } catch (Exception ex) { 
         }
+        p.setFalecido((falecido.isSelected() == true)?1:0);        
         p.setNome(nome.getText());
         p.setNasc(nasc.getText());
-        p.setCidadeId(cCidade.getIdCidade());
+        p.setCidadeId(cidade.getCurrentCidadeId());
         p.setSexo(String.valueOf(sexo.getSelectedItem()).charAt(0));  
+        System.out.println("Sexo : "+String.valueOf(sexo.getSelectedItem()).charAt(0) );
     }
     
     private void create () {
@@ -417,7 +438,7 @@ public class PacienteView extends javax.swing.JFrame {
     }
     
     private void update () {
-        setPaciente ();    
+        setPaciente ();
         if (getValidation () == true) {
             dao.update(p);  
             status.setText(dao.getStatus());
@@ -429,12 +450,15 @@ public class PacienteView extends javax.swing.JFrame {
     
     private boolean getValidation () {
         boolean verdade = false;
-        if (cCidade.getIdCidade() == 0) {
-            JOptionPane.showMessageDialog(null,"Selecione uma cidade!");
+        if (cidade.getCurrentCidadeId() == 0) {
+            JOptionPane.showMessageDialog(null,"Selecione a cidade!");
             verdade = false;
+        } else if ( sexo.getSelectedItem().equals("Selecione")) {
+            JOptionPane.showMessageDialog(null,"Selecione o sexo do paciente!");            
+            verdade = false;        
         } else {
             verdade = true;        
-        }   
+        }      
         return verdade;
     }
     
@@ -473,14 +497,6 @@ public class PacienteView extends javax.swing.JFrame {
         }    
     }//GEN-LAST:event_salvarActionPerformed
 
-    private void nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeActionPerformed
-
-    private void sexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sexoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sexoActionPerformed
-
     private void TypingNome(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingNome
         readJTable();
     }//GEN-LAST:event_TypingNome
@@ -515,6 +531,10 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         setCidade(); 
+        try { 
+            setValue ();
+        } catch (Exception ex) {
+        }
     }//GEN-LAST:event_formWindowActivated
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
@@ -534,7 +554,14 @@ public class PacienteView extends javax.swing.JFrame {
     private void nascKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nascKeyTyped
 
     }//GEN-LAST:event_nascKeyTyped
- 
+
+    private void falecidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_falecidoActionPerformed
+        System.out.println("Falecido :"+falecido.isSelected());
+    }//GEN-LAST:event_falecidoActionPerformed
+
+    private void setIconTop () {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/paciente.png")));
+    }
     /**
      * @param args the command line arguments
      */
@@ -545,6 +572,7 @@ public class PacienteView extends javax.swing.JFrame {
     private javax.swing.JButton atualizar;
     private javax.swing.JToggleButton buscar;
     private javax.swing.JButton buscarCidade;
+    private javax.swing.JCheckBox falecido;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

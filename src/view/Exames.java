@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Resultado;
@@ -20,15 +21,19 @@ import model.dao.ExameDAO;
  */
 public class Exames extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Exames
-     */
+    private ResultadoDAO rdao = new ResultadoDAO();  
+    private DoencaDAO ddao = new DoencaDAO();      
+    private ExameDAO exdao = new ExameDAO(); 
+    private int doencaCont = 0;
+    private String resultados[][] = null;       
+    
     public Exames() {
         initComponents();
-        readJTableE();
+        readJTableE();     
         readJTableD();     
         readJTableP(); 
         elementsEnabled(false);
+        setIconTop ();
     }
 
     /**
@@ -46,6 +51,7 @@ public class Exames extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jTextField1 = new javax.swing.JTextField();
         positivo = new javax.swing.JButton();
         negativo = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -56,6 +62,8 @@ public class Exames extends javax.swing.JFrame {
         resultadoTable = new javax.swing.JTable();
         salvar = new javax.swing.JToggleButton();
         apagar = new javax.swing.JToggleButton();
+        jLabel1 = new javax.swing.JLabel();
+        PacienteId = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -78,6 +86,9 @@ public class Exames extends javax.swing.JFrame {
 
         jMenu2.setText("jMenu2");
 
+        jTextField1.setText("jTextField1");
+
+        setTitle("Exames");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -110,7 +121,7 @@ public class Exames extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -125,6 +136,7 @@ public class Exames extends javax.swing.JFrame {
         jScrollPane2.setViewportView(examesTable);
         if (examesTable.getColumnModel().getColumnCount() > 0) {
             examesTable.getColumnModel().getColumn(0).setResizable(false);
+            examesTable.getColumnModel().getColumn(1).setResizable(false);
             examesTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
@@ -147,7 +159,7 @@ public class Exames extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        doencasTable.setToolTipText("");
+        doencasTable.setToolTipText("Exames");
         doencasTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 doencasTableMousePressed(evt);
@@ -203,6 +215,14 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Paciente ID :");
+
+        PacienteId.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                PacienteIdKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -213,26 +233,35 @@ public class Exames extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(negativo, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                .addComponent(negativo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(positivo, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
+                .addComponent(positivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PacienteId))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(negativo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(positivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(PacienteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apagar))
         );
@@ -240,13 +269,6 @@ public class Exames extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    ResultadoDAO rdao = new ResultadoDAO();  
-    DoencaDAO ddao = new DoencaDAO();      
-    ExameDAO exdao = new ExameDAO(); 
-    private int doencaCont = 0;
-    private String resultados[][] = null;       
-    String doencaoCurrent = null;
-    
     public int currentIdExame () { 
         int id = 0;
          try {
@@ -260,8 +282,14 @@ public class Exames extends javax.swing.JFrame {
     
     private void readJTableE() {
         DefaultTableModel modelo = (DefaultTableModel) examesTable.getModel();
-        modelo.setNumRows(0);          
-        for (Exame d : exdao.read()) {
+        modelo.setNumRows(0);    
+        int id = 0; 
+        try {
+            id = Integer.parseInt(PacienteId.getText());
+        } catch (Exception nEx) {
+            PacienteId.setText("");
+        }   
+        for (Exame d : exdao.read(id)) {
             modelo.addRow(new Object[]{ 
                 d.getIdExame(),
                 d.getId(),
@@ -277,8 +305,6 @@ public class Exames extends javax.swing.JFrame {
         int i =0;
         int next =0;
         i=0;        
-        String doenca = "";
-        boolean equalDoenca = false;
         String resultadosExames[][] = new String[doencaCont][2];
         for (Resultado d : rdao.read(currentIdExame())) {    
             resultadosExames[i][0] = d.getNomeDoenca(); 
@@ -414,6 +440,28 @@ public class Exames extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_negativoActionPerformed
 
+    private void initResultadoTable () {
+        resultadoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Negativo", "Positivo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+    }
+    
     private void examesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examesTableMousePressed
         readJTableD();
         readJTableP();     
@@ -435,6 +483,10 @@ public class Exames extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        resultadoTable.removeAll(); 
+        elementsEnabled(false);
+        PacienteId.setText("");
+        initResultadoTable();
         readJTableE();
     }//GEN-LAST:event_formWindowActivated
 
@@ -442,15 +494,24 @@ public class Exames extends javax.swing.JFrame {
         delete ();
     }//GEN-LAST:event_apagarActionPerformed
 
+    private void PacienteIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PacienteIdKeyTyped
+        readJTableE();
+    }//GEN-LAST:event_PacienteIdKeyTyped
+
+    private void setIconTop () {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/exame.png")));
+    }
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField PacienteId;
     private javax.swing.JToggleButton apagar;
     private javax.swing.JTable doencasTable;
     private javax.swing.JTable examesTable;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
@@ -459,6 +520,7 @@ public class Exames extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton negativo;
     private javax.swing.JButton positivo;
     private javax.swing.JTable resultadoTable;

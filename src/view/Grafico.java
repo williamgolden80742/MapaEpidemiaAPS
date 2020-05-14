@@ -20,8 +20,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
  * @author William
  */
 public final class Grafico {
-    RelatorioDAO rdao = new RelatorioDAO();
     
+    RelatorioDAO rdao = new RelatorioDAO();
     
     public Image criarGrafico(String request, int Width , int Height) throws IOException {
         DefaultCategoryDataset linha = new DefaultCategoryDataset();

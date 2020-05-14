@@ -15,7 +15,16 @@ public class Paciente extends Cidade {
     private String nome;
     private String data;
     private String nasc;
+    private int falecido;
     private char sexo;
+
+    public int getFalecido() {
+        return falecido;
+    }
+
+    public void setFalecido(int falecido) {
+        this.falecido = falecido;
+    }
     
     public int getId() {
         return id;

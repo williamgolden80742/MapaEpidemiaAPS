@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
@@ -28,6 +29,7 @@ public class Relatorios extends javax.swing.JFrame {
         createGrafico();  
         readJTable();
         setDate();
+        setIconTop ();
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         relatorioTable.setRowSorter(new TableRowSorter(modelo));
     }
@@ -46,7 +48,9 @@ public class Relatorios extends javax.swing.JFrame {
         relatorioTable = new javax.swing.JTable();
         graficoPicture = new javax.swing.JLabel();
         data = new javax.swing.JComboBox<>();
+        analise = new javax.swing.JComboBox<>();
 
+        setTitle("Relatórios");
         setResizable(false);
         setType(java.awt.Window.Type.POPUP);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,17 +105,24 @@ public class Relatorios extends javax.swing.JFrame {
             }
         });
 
+        analise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casos", "Mortes", "Vacinados" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(analise, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(analise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
         );
@@ -184,12 +195,17 @@ public class Relatorios extends javax.swing.JFrame {
         for (Relatorio e : rdao.readDate()) {
             data.addItem(e.getDataCasos());          
         } 
-    }     
+    }  
+    
+    private void setIconTop () {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/relatorio.png")));
+    }    
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> analise;
     private javax.swing.JComboBox<String> data;
     private javax.swing.JLabel graficoPicture;
     private javax.swing.JScrollPane jScrollPane1;

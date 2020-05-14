@@ -3,27 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Resultado.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/ResultadoDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/RandonCasos.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Home.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/Connection/ConnectionFactory.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Cidade.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Relatorios.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Exames.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Grafico.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Cidades.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/DoencaDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/CidadeDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/CurrentCidade.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Home.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Relatorio.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/Connection/ConnectionFactory.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/ExameDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Relatorios.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/PacienteDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/RelatorioDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Paciente.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/PacienteView.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Doenca.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/EstadoDAO.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Exame.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Cidades.java</file>
         </group>
     </open-files>
 </project-private>

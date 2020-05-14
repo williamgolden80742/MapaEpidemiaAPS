@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Cidade;
-import model.bean.CurrentCidade;
 import model.bean.Estado;
 import model.dao.EstadoDAO;
 import model.dao.CidadeDAO;
@@ -16,15 +16,17 @@ import model.dao.CidadeDAO;
  * @author William
  */
 public class Cidades extends javax.swing.JFrame {
+  
+    private Cidade c = new Cidade();
+    private EstadoDAO edao = new EstadoDAO(); 
+    private CidadeDAO cdao = new CidadeDAO();
 
-    /**
-     * Creates new form Cidades
-     */
     public Cidades() {
         initComponents();
         readUF() ;
         readJTable();
         selecionar.setEnabled(false);
+        setIconTop ();
     }
 
     /**
@@ -180,7 +182,7 @@ public class Cidades extends javax.swing.JFrame {
 
     private void cidadesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cidadesTableMousePressed
         c = cdao.readCurrentCidade(edao.readIdByUF((String) cidadesTable.getModel().getValueAt(cidadesTable.getSelectedRow(),0)).getEstadoId(), (String) cidadesTable.getModel().getValueAt(cidadesTable.getSelectedRow(),1));
-        cCidade.setCidade(c.getCidadeNome(),c.getCidadeId());  
+        c.setCurrentCidade(c.getCidadeNome(),c.getCidadeId());  
         selecionar.setEnabled(true);
     }//GEN-LAST:event_cidadesTableMousePressed
 
@@ -197,18 +199,11 @@ public class Cidades extends javax.swing.JFrame {
     }//GEN-LAST:event_cidadesTableKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        cCidade.setCidade("",0);  
+        c.setCurrentCidade("",0);  
         cidadeS.setText("");
         uf.setSelectedItem("Selecione");
         selecionar.setEnabled(false);         
     }//GEN-LAST:event_formWindowActivated
-  
-    Cidade c = new Cidade();
-    Estado e = new Estado();
-    EstadoDAO edao = new EstadoDAO(); 
-    CidadeDAO cdao = new CidadeDAO();
-    CurrentCidade cCidade = new CurrentCidade();
-    
 
     public int idByUF() {
         int id = 0;
@@ -254,6 +249,11 @@ public class Cidades extends javax.swing.JFrame {
         }
     }
     
+
+    private void setIconTop () {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/city.png")));
+    }
+          
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cidadeS;

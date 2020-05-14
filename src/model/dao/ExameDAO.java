@@ -32,10 +32,12 @@ public class ExameDAO {
         this.status = status;
     }    
     
-    public List<Exame> read () {
-
+    public List<Exame> read (int id) {
+        String request = "";
         Connection con = ConnectionFactory.getConnection();
-        
+        if (id != 0) {
+             request="Where pacientes.Idpaciente = '"+id+"'";
+        }
         PreparedStatement stmt = null;
         ResultSet rs = null;
         
@@ -43,7 +45,7 @@ public class ExameDAO {
 
         try {
             try {
-                stmt = con.prepareStatement("SELECT * FROM Exames inner join pacientes on pacientes.Idpaciente = Exames.Idpaciente ");
+                stmt = con.prepareStatement("SELECT * FROM Exames inner join pacientes on pacientes.Idpaciente = Exames.Idpaciente "+request);
                 rs = stmt.executeQuery();
             } catch (Exception ex) {
                 System.out.println(ex);
@@ -63,6 +65,9 @@ public class ExameDAO {
 
         return exames;
     } 
+    public List<Exame> read () {
+        return read(0);
+    }
     
     public List<Exame> readResultado (int idP) {
 

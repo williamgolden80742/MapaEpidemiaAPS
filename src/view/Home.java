@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Toolkit;
 import model.dao.RandonCasos;
 
 /**
@@ -16,10 +17,16 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    RandonCasos rand = new RandonCasos();
+    private PacienteView paciente = new PacienteView();
+    private Relatorios relatorio = new Relatorios(); 
+    private Cidades cidades = new Cidades();
+    private Exames exame = new Exames();    
+    private RandonCasos rand = new RandonCasos();
+
     public Home() {        
 
         initComponents();
+        setIconTop ();
 //        rand.create();
     }
 
@@ -34,7 +41,6 @@ public class Home extends javax.swing.JFrame {
 
         Paciente = new javax.swing.JToggleButton();
         relatorios = new javax.swing.JButton();
-        citySelect = new javax.swing.JButton();
         exames = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -49,7 +55,7 @@ public class Home extends javax.swing.JFrame {
         Paciente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Paciente.setForeground(new java.awt.Color(0, 0, 0));
         Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacienteAdd.png"))); // NOI18N
-        Paciente.setToolTipText("");
+        Paciente.setToolTipText("Pacientes");
         Paciente.setBorder(null);
         Paciente.setBorderPainted(false);
         Paciente.setFocusPainted(false);
@@ -61,6 +67,7 @@ public class Home extends javax.swing.JFrame {
         });
 
         relatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/relatorio_Small.png"))); // NOI18N
+        relatorios.setToolTipText("Relatorios");
         relatorios.setBorder(null);
         relatorios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,17 +75,8 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
-        citySelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/city.png"))); // NOI18N
-        citySelect.setBorder(null);
-        citySelect.setIconTextGap(0);
-        citySelect.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/images/city.png"))); // NOI18N
-        citySelect.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                citySelectActionPerformed(evt);
-            }
-        });
-
         exames.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exame.png"))); // NOI18N
+        exames.setToolTipText("Exames");
         exames.setBorder(null);
         exames.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,42 +90,36 @@ public class Home extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Paciente, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addComponent(citySelect, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(exames, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Paciente, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(exames, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(relatorios, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(Paciente, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(citySelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(exames, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(exames, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(relatorios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Paciente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Paciente, exames, relatorios});
 
         getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    PacienteView paciente = new PacienteView();
-    Relatorios relatorio = new Relatorios(); 
-    Cidades cidades = new Cidades();
-    Exames exame = new Exames();
     
     private void PacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacienteActionPerformed
         paciente.setVisible(true);    
@@ -137,14 +129,13 @@ public class Home extends javax.swing.JFrame {
         exame.setVisible(true);
     }//GEN-LAST:event_examesActionPerformed
 
-    private void citySelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_citySelectActionPerformed
-        cidades.setVisible(true);
-    }//GEN-LAST:event_citySelectActionPerformed
-
     private void relatoriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_relatoriosActionPerformed
         relatorio.setVisible(true);
     }//GEN-LAST:event_relatoriosActionPerformed
 
+    private void setIconTop () {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/Viral.City-5.png")));
+    }    
     /**
      * @param args the command line arguments
      */
@@ -178,7 +169,6 @@ public class Home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Paciente;
-    private javax.swing.JButton citySelect;
     private javax.swing.JToggleButton exames;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton relatorios;

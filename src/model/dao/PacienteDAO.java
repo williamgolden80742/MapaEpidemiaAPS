@@ -43,11 +43,12 @@ public class PacienteDAO {
         
         try {
  
-            stmt = con.prepareStatement("INSERT INTO Pacientes (nomecompleto,dataNascimento,sexo,idCidade)VALUES(?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO Pacientes (nomecompleto,dataNascimento,sexo,idCidade,falecido)VALUES(?,?,?,?,?)");
             stmt.setString(1,p.getNome());            
             stmt.setString(2,p.getNasc());
             stmt.setString(3,String.valueOf(p.getSexo()));
             stmt.setInt(4,p.getCidadeId());
+            stmt.setInt(5,p.getFalecido());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -75,13 +76,15 @@ public class PacienteDAO {
                 Paciente paciente = new Paciente();         
                 paciente.setId(rs.getInt("Idpaciente"));  
                 try  {
-                    paciente.setCidadeNome(rs.getString("nomeCidade")); 
+                    paciente.setCidadeNome(rs.getString("nomeCidade"));
+                    paciente.setSexo( rs.getString("sexo").charAt(0) );                      
                     paciente.setCidadeId(rs.getInt("idCidade")); 
                 } catch (Exception ex) {
                 
                 }
                 paciente.setNasc(rs.getString("dataNascimento"));  
-                paciente.setNome(rs.getString("nomecompleto"));                    
+                paciente.setNome(rs.getString("nomecompleto"));        
+                paciente.setFalecido(rs.getInt("falecido"));                     
                 paciente.setData(rs.getString("datadeCriacaoP"));                 
                 pacientes.add(paciente);
             }
@@ -106,7 +109,8 @@ public class PacienteDAO {
                 paciente.setCidadeNome(p.getCidadeNome());  
                 paciente.setCidadeId(p.getCidadeId());   
                 paciente.setNasc(p.getNasc());
-                paciente.setSexo(p.getSexo());      
+                paciente.setSexo(p.getSexo());   
+                paciente.setFalecido(p.getFalecido());
         }
         return paciente;        
     }
@@ -137,12 +141,13 @@ public class PacienteDAO {
         PreparedStatement stmt = null;      
         
         try {
-            stmt = con.prepareStatement("UPDATE Pacientes SET nomecompleto = ?, dataNascimento = ?, sexo = ?, idCidade = ? WHERE Idpaciente = ?");
+            stmt = con.prepareStatement("UPDATE Pacientes SET nomecompleto = ?, dataNascimento = ?, sexo = ?, idCidade = ?, falecido = ? WHERE Idpaciente = ?");
             stmt.setString(1,p.getNome());        
             stmt.setString(2,p.getNasc());
             stmt.setString(3,String.valueOf(p.getSexo()));
-            stmt.setInt(4,p.getCidadeId());             
-            stmt.setInt(5,p.getId());              
+            stmt.setInt(4,p.getCidadeId());   
+            stmt.setInt(5,p.getFalecido());             
+            stmt.setInt(6,p.getId()); 
             stmt.executeUpdate();
             setStatus("Atualizado com sucesso!");
         } catch (SQLException ex) {
