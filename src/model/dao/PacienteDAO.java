@@ -48,8 +48,9 @@ public class PacienteDAO {
             stmt.setString(2,p.getNasc());
             stmt.setString(3,String.valueOf(p.getSexo()));
             stmt.setInt(4,p.getCidadeId());
-            stmt.setInt(5,p.getFalecido());
+            stmt.setInt(5,p.getFalecido());            
             stmt.executeUpdate();
+            setStatus("Criado com sucesso!");                
         } catch (SQLException ex) {
             System.out.println(ex);
         } finally {
@@ -75,13 +76,13 @@ public class PacienteDAO {
             while (rs.next()) {
                 Paciente paciente = new Paciente();         
                 paciente.setId(rs.getInt("Idpaciente"));  
-                try  {
-                    paciente.setCidadeNome(rs.getString("nomeCidade"));
+                try  {                   
+                    paciente.setCidadeNome(rs.getString("nomeCidade"));                       
                     paciente.setSexo( rs.getString("sexo").charAt(0) );                      
-                    paciente.setCidadeId(rs.getInt("idCidade")); 
                 } catch (Exception ex) {
                 
-                }
+                }              
+                paciente.setCidadeId(rs.getInt("idCidade")); 
                 paciente.setNasc(rs.getString("dataNascimento"));  
                 paciente.setNome(rs.getString("nomecompleto"));        
                 paciente.setFalecido(rs.getInt("falecido"));                     

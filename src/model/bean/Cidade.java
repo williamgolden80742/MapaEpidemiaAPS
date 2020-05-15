@@ -13,8 +13,8 @@ public class Cidade extends Estado {
 
     private String cidadeNome;
     private int cidadeId; 
-    private static String currentCidadeNome;
-    private static int currentCidadeId;       
+    private static String currentCidadeNome = "SELECIONE CIDADE";
+    private static int currentCidadeId = 0;       
     private int populacao;   
     
     public void setCurrentCidade (String nome, int id) {
@@ -26,7 +26,7 @@ public class Cidade extends Estado {
         return currentCidadeNome;
     }
 
-    public int getCurrentCidadeId() {
+    public static int  getCurrentCidadeId() {
         return currentCidadeId;
     }
 

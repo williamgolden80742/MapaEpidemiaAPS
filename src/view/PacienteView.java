@@ -25,6 +25,7 @@ public class PacienteView extends javax.swing.JFrame {
     private Paciente p = new Paciente();
     private PacienteDAO dao = new PacienteDAO(); 
     private int salvarStatus = 0; 
+    private final String cidadeButton = cidade.getCurrentCidadeNome(), sexoButton = "Selecione";
     
     public PacienteView() {
         initComponents();    
@@ -32,7 +33,7 @@ public class PacienteView extends javax.swing.JFrame {
         novoExame.setEnabled(false);
         elementsEnabled(false,false);
         setIconTop ();
-                    sexo.setSelectedIndex(2);
+        buscarCidade.setText(cidadeButton);        
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -180,7 +181,7 @@ public class PacienteView extends javax.swing.JFrame {
             pacienteTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        buscarCidade.setText("SELECIONE CIDADE");
+        buscarCidade.setText(" ");
         buscarCidade.setToolTipText("");
         buscarCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,29 +314,37 @@ public class PacienteView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
       
     
-    private int currentId (){
-        novo.setEnabled(true);
-        elementsEnabled(false);
-        int id = 0;   
+    private int currentId (boolean disable){
+        int id = 0;        
+        if (disable) {  
+            novo.setEnabled(true);            
+            elementsEnabled(false);
+        } 
         try {
             id = Integer.parseInt(String.valueOf(pacienteTable.getModel().getValueAt(pacienteTable.getSelectedRow(),0)));     
             nome.setEnabled(true);
         } catch (NumberFormatException ex) {
-            elementsEnabled (false,false);
+            if (disable) {
+                elementsEnabled (false,false);
+            }
             lastId.setText("");
         }
         return id;  
     }
+
+    private int currentId (){
+        return currentId(true);
+    }    
     
     private void elementsEnabled (boolean b, boolean c) {
         nome.setEditable(b);
-        nome.setEnabled(c);
         nasc.setEnabled(b);
         sexo.setEnabled(b);
-        falecido.setEnabled(b);
+        falecido.setEnabled(b); 
         buscarCidade.setEnabled(b);
         apagar.setEnabled(!b & c);
         salvar.setEnabled(b);
+        novoExame.setEnabled(!b & c);
         atualizar.setEnabled(!b & c);
     } 
     
@@ -357,15 +366,23 @@ public class PacienteView extends javax.swing.JFrame {
     }
     
     private void setCidade () {  
-      if (buscarCidade.equals("SELECIONE CIDADE") && currentId() !=0) {
-        buscarCidade.setText(cidade.getCurrentCidadeNome());
-      }
+        try {
+            if (cidade.getCurrentCidadeId() != 0 && currentId(false) !=0) {
+                buscarCidade.setText(cidade.getCurrentCidadeNome());
+            }
+        } catch (Exception ex) {
+            if (cidade.getCurrentCidadeId() != 0) {
+                buscarCidade.setText(cidade.getCurrentCidadeNome());
+            }
+        }
     }   
     
     private void setValue () {
         PacienteDAO pdao = new PacienteDAO();
         if (currentId() != 0){
-            p = pdao.readById(currentId());
+            p = pdao.readById(currentId());       
+            buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
+            cidade.setCurrentCidadeId(p.getCidadeId());            
             nome.setText(p.getNome());  
             status.setText("");
             falecido.setSelected((p.getFalecido() == 1)?true:false);
@@ -385,8 +402,6 @@ public class PacienteView extends javax.swing.JFrame {
             }
             sexo.setSelectedIndex(selecioneSexo);
             selecioneSexo=0;
-            buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
-            cidade.setCurrentCidadeId(p.getCidadeId());
             nasc.setText(p.getNasc());             
             try {
                 exdao.readLastID(currentId());
@@ -410,9 +425,10 @@ public class PacienteView extends javax.swing.JFrame {
     private void clear () {
         nome.setText("");
         nasc.setText("");
-        buscarCidade.setText("SELECIONE CIDADE");
-        cidade.setCurrentCidade("",0);
-        sexo.setSelectedItem("Selecione");
+        buscarCidade.setText(cidadeButton);
+        cidade.setCurrentCidade(cidadeButton,0);
+        sexo.setSelectedItem(sexoButton);
+        elementsEnabled (false,false);
     }
     
     private void setPaciente ()  {
@@ -430,11 +446,10 @@ public class PacienteView extends javax.swing.JFrame {
     
     private void create () {
         setPaciente ();     
-            dao.create(p);
-            status.setText(dao.getStatus());
-            readJTable(); 
-            clear ();     
-            System.out.println("in create");
+        dao.create(p);
+        status.setText(dao.getStatus());
+        readJTable(); 
+        clear ();     
     }
     
     private void update () {
@@ -444,17 +459,17 @@ public class PacienteView extends javax.swing.JFrame {
             status.setText(dao.getStatus());
             readJTable(); 
             clear (); 
-            System.out.println("in update ");
         } 
     }    
     
     private boolean getValidation () {
         boolean verdade = false;
+        System.out.println("Cidade id : "+cidade.getCurrentCidadeId());
         if (cidade.getCurrentCidadeId() == 0) {
-            JOptionPane.showMessageDialog(null,"Selecione a cidade!");
+            status.setText("Selecione a cidade!");
             verdade = false;
-        } else if ( sexo.getSelectedItem().equals("Selecione")) {
-            JOptionPane.showMessageDialog(null,"Selecione o sexo do paciente!");            
+        } else if ( sexo.getSelectedItem().equals(sexoButton)) {
+            status.setText("Selecione o sexo do paciente!");            
             verdade = false;        
         } else {
             verdade = true;        
@@ -474,7 +489,8 @@ public class PacienteView extends javax.swing.JFrame {
                 p.setId(currentId());
                 dao.delete(p);
                 status.setText(dao.getStatus());                
-                readJTable();                  
+                readJTable();     
+                clear();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null,"Selecione um paciente!");
@@ -482,16 +498,11 @@ public class PacienteView extends javax.swing.JFrame {
     }        
     
     private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        novo.setEnabled(false);
-        atualizar.setEnabled(false);
         if (getValidation () == true ) {
             if (salvarStatus == 1) {
                 create ();  
-                System.out.println("create");
             } else if (salvarStatus == 2) {
                 update();
-                System.out.println("update");  
-                System.out.println("in update : "+nasc.getText());
             } 
             this.salvarStatus = 0;
         }    
@@ -507,7 +518,6 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
         delete();
-        elementsEnabled(false,false);
     }//GEN-LAST:event_apagarActionPerformed
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
@@ -531,15 +541,12 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         setCidade(); 
-        try { 
-            setValue ();
-        } catch (Exception ex) {
-        }
     }//GEN-LAST:event_formWindowActivated
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         clear();        
         elementsEnabled(true);  
+        novo.setEnabled(false);
         pacienteTable.clearSelection();
         this.salvarStatus = 1;
     }//GEN-LAST:event_novoActionPerformed
@@ -590,6 +597,5 @@ public class PacienteView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> sexo;
     private javax.swing.JLabel status;
     // End of variables declaration//GEN-END:variables
-
 
 }

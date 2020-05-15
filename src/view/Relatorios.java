@@ -20,10 +20,8 @@ import model.dao.RelatorioDAO;
  * @author William
  */
 public class Relatorios extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Relatorios
-     */
+     
+        
     public Relatorios() {
         initComponents();
         createGrafico();  
@@ -33,7 +31,8 @@ public class Relatorios extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         relatorioTable.setRowSorter(new TableRowSorter(modelo));
     }
-     ;
+    
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,8 +46,8 @@ public class Relatorios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         relatorioTable = new javax.swing.JTable();
         graficoPicture = new javax.swing.JLabel();
+        mortesGrafic = new javax.swing.JLabel();
         data = new javax.swing.JComboBox<>();
-        analise = new javax.swing.JComboBox<>();
 
         setTitle("Relatórios");
         setResizable(false);
@@ -97,34 +96,24 @@ public class Relatorios extends javax.swing.JFrame {
         graficoPicture.setBackground(new java.awt.Color(255, 255, 255));
         graficoPicture.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         relatorio.addTab("Gráficos", graficoPicture);
+        relatorio.addTab("Mortes", mortesGrafic);
 
         data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODAS DATAS" }));
-        data.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dataActionPerformed(evt);
-            }
-        });
-
-        analise.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Casos", "Mortes", "Vacinados" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(analise, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(analise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE))
+                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -134,11 +123,6 @@ public class Relatorios extends javax.swing.JFrame {
         readJTable();
         createGrafico();  
     }//GEN-LAST:event_formWindowActivated
-
-    private void dataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataActionPerformed
-        readJTable();
-        createGrafico();
-    }//GEN-LAST:event_dataActionPerformed
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         createGrafico();  
@@ -150,6 +134,7 @@ public class Relatorios extends javax.swing.JFrame {
     private void createGrafico () {
         try {
               graficoPicture.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGrafico( currentDate() , graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+              mortesGrafic.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGraficoMorte( graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
         } catch (IOException ex) {
             Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
         }    
@@ -203,12 +188,12 @@ public class Relatorios extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-
+@SuppressWarnings("unchecked")
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> analise;
     private javax.swing.JComboBox<String> data;
     private javax.swing.JLabel graficoPicture;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel mortesGrafic;
     private javax.swing.JTabbedPane relatorio;
     private javax.swing.JTable relatorioTable;
     // End of variables declaration//GEN-END:variables

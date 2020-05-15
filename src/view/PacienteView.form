@@ -319,7 +319,7 @@
     </Container>
     <Component class="javax.swing.JButton" name="buscarCidade">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SELECIONE CIDADE"/>
+        <Property name="text" type="java.lang.String" value=" "/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
       <Events>

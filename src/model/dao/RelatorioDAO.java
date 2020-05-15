@@ -62,6 +62,37 @@ public class RelatorioDAO {
         return relatorios;
    }
    
+   public List<Relatorio> readMortes () {
+
+        Connection con = ConnectionFactory.getConnection();
+        
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<Relatorio> relatorios = new ArrayList<>();
+
+        try {
+            stmt = con.prepareStatement("SELECT cidade.nomeCidade, cidade.populacao, COUNT(DISTINCT pacientes.Idpaciente) FROM exames INNER JOIN positivos ON positivos.IdExame = exames.IdExame inner join pacientes on pacientes.Idpaciente = exames.Idpaciente inner join cidade on cidade.idCidade = pacientes.idCidade WHERE positivos.resultado = 1 and pacientes.falecido = 1 GROUP by cidade.idCidade ORDER by pacientes.idCidade, positivos.datadeCriacaoPS");
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Relatorio relatorio = new Relatorio();      
+//                relatorio.setNome(rs.getString("nomeCompleto"));                  
+                relatorio.setCidadeNome(rs.getString("nomeCidade"));                
+                relatorio.setPopulacao(rs.getInt("populacao"));  
+//                relatorio.setNomeDoenca(rs.getString("nomeDoenca"));               
+                relatorio.setCasos(rs.getInt("COUNT(DISTINCT pacientes.Idpaciente)"));    
+                relatorios.add(relatorio);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+
+        return relatorios;
+   }   
 
    public List<Relatorio> read () {
        return read ("");

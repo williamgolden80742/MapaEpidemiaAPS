@@ -23,7 +23,7 @@ public class Home extends javax.swing.JFrame {
     private Exames exame = new Exames();    
     private RandonCasos rand = new RandonCasos();
 
-    public Home() {        
+    public Home() {         
 
         initComponents();
         setIconTop ();

@@ -14,6 +14,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 
 /**
  *
@@ -41,9 +43,26 @@ public final class Grafico {
         return grafico.createBufferedImage(Width,Height);  
     }  
     
-     public Image criarGrafico(String request) throws IOException {
+    public Image criarGrafico(String request) throws IOException {
         return criarGrafico(request,600,360);
     }    
+
+    public Image criarGraficoMorte(int Width , int Height) throws IOException {
+        DefaultPieDataset  linha = new DefaultPieDataset();
+        JFreeChart grafico;
+        linha.clear();
+
+        rdao.readMortes().forEach((Relatorio r) -> {  
+            linha.setValue(r.getCidadeNome()+" ("+r.getCasos()+") ",r.getCasos());
+        });          
+        grafico = ChartFactory.createPieChart("Mortes por cidade", (PieDataset) linha); 
+        return grafico.createBufferedImage(Width,Height);  
+    }  
+    
+    public Image criarGraficoMorte() throws IOException {
+        return criarGraficoMorte(600,360);
+    }    
+        
     
     public Image criarGrafico() throws IOException {
         return criarGrafico("",600,360);
