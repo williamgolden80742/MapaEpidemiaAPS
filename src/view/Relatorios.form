@@ -122,8 +122,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Gr&#xe1;ficos">
-                <Property name="tabTitle" type="java.lang.String" value="Gr&#xe1;ficos"/>
+              <JTabbedPaneConstraints tabName="Evolu&#xe7;&#xe3;o - Gr&#xe1;fico">
+                <Property name="tabTitle" type="java.lang.String" value="Evolu&#xe7;&#xe3;o - Gr&#xe1;fico"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>

@@ -95,7 +95,7 @@ public class Relatorios extends javax.swing.JFrame {
 
         graficoPicture.setBackground(new java.awt.Color(255, 255, 255));
         graficoPicture.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        relatorio.addTab("Gráficos", graficoPicture);
+        relatorio.addTab("Evolução - Gráfico", graficoPicture);
         relatorio.addTab("Mortes", mortesGrafic);
 
         data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODAS DATAS" }));
