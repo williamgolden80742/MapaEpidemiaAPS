@@ -83,14 +83,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="salvar" alignment="0" max="32767" attributes="0"/>
           <Component id="apagar" alignment="0" max="32767" attributes="0"/>
-          <Component id="jScrollPane2" alignment="0" pref="342" max="32767" attributes="0"/>
+          <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="PacienteId" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="limpar" min="-2" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" pref="76" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Component id="PacienteId" pref="201" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="limpar" min="-2" pref="57" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
@@ -109,24 +108,24 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane4" pref="146" max="32767" attributes="0"/>
+                  <Component id="jScrollPane4" pref="174" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="negativo" max="32767" attributes="0"/>
-                  <Component id="positivo" max="32767" attributes="0"/>
+                  <Component id="negativo" min="-2" max="-2" attributes="0"/>
+                  <Component id="positivo" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="limpar" alignment="1" pref="0" max="32767" attributes="0"/>
-                  <Component id="PacienteId" alignment="1" pref="25" max="32767" attributes="0"/>
+                  <Component id="jLabel1" alignment="0" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="limpar" alignment="1" min="-2" pref="27" max="-2" attributes="0"/>
+                  <Component id="PacienteId" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="salvar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="148" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" pref="140" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Component id="apagar" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -315,7 +314,8 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Paciente ID :"/>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Paciente ID : "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="PacienteId">
