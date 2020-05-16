@@ -9,6 +9,7 @@
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/CidadeDAO.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Home.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Relatorio.java</file>
+            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Pacientes.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/Connection/ConnectionFactory.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Cidade.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/Relatorios.java</file>
@@ -16,7 +17,6 @@
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/PacienteDAO.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/dao/RelatorioDAO.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Paciente.java</file>
-            <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/view/PacienteView.java</file>
             <file>file:/C:/Users/William/OneDrive/Documentos/Estudos/APS/MapaEpidemiaAPS/src/model/bean/Exame.java</file>
         </group>
     </open-files>
