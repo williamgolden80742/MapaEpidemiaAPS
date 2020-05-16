@@ -400,6 +400,7 @@ public class Exames extends javax.swing.JFrame {
         salvar.setEnabled(b);
         positivo.setEnabled(b);
         negativo.setEnabled(b); 
+        limpar.setEnabled(b); 
         apagar.setEnabled(b);
     } 
 

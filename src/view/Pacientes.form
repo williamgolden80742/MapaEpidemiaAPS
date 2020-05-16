@@ -51,7 +51,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="nomeS" min="-2" pref="336" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="buscar" min="-2" max="-2" attributes="0"/>
+                              <Component id="backspace" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="status" min="-2" pref="193" max="-2" attributes="0"/>
@@ -149,7 +149,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="buscar" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="backspace" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="nomeS" alignment="1" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -266,14 +266,14 @@
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TypingNome"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="buscar">
+    <Component class="javax.swing.JToggleButton" name="backspace">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/images/search.png"/>
+          <Image iconType="3" name="/images/backspace.png"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backspaceActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="editar">

@@ -64,7 +64,7 @@ public class Pacientes extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         nomeS = new javax.swing.JFormattedTextField();
-        buscar = new javax.swing.JToggleButton();
+        backspace = new javax.swing.JToggleButton();
         editar = new javax.swing.JButton();
         apagar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -145,10 +145,10 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search.png"))); // NOI18N
-        buscar.addActionListener(new java.awt.event.ActionListener() {
+        backspace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backspace.png"))); // NOI18N
+        backspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarActionPerformed(evt);
+                backspaceActionPerformed(evt);
             }
         });
 
@@ -263,7 +263,7 @@ public class Pacientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buscar))
+                                .addComponent(backspace))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -336,7 +336,7 @@ public class Pacientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(buscar)
+                    .addComponent(backspace)
                     .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -589,9 +589,10 @@ public class Pacientes extends javax.swing.JFrame {
         readJTable();
     }//GEN-LAST:event_TypingNome
 
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+    private void backspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backspaceActionPerformed
+        nomeS.setText("");
         readJTable();
-    }//GEN-LAST:event_buscarActionPerformed
+    }//GEN-LAST:event_backspaceActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
         delete();
@@ -677,7 +678,7 @@ public class Pacientes extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apagar;
-    private javax.swing.JToggleButton buscar;
+    private javax.swing.JToggleButton backspace;
     private javax.swing.JButton buscarCidade;
     private javax.swing.JButton editar;
     private javax.swing.JLabel falecidoLabel;
