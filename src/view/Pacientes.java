@@ -206,6 +206,7 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        status.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         status.setForeground(new java.awt.Color(0, 153, 0));
 
         novoExame.setText("NOVO EXAME ");
@@ -215,7 +216,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        statusExame.setForeground(new java.awt.Color(255, 102, 51));
+        statusExame.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        statusExame.setForeground(new java.awt.Color(51, 51, 51));
+        statusExame.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         falecimentoCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/radio-Button-Unchecked.png"))); // NOI18N
         falecimentoCheck.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -224,7 +227,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        falecidoLabel.setBackground(new java.awt.Color(102, 102, 102));
         falecidoLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        falecidoLabel.setForeground(new java.awt.Color(102, 102, 102));
         falecidoLabel.setText("Falecido?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -442,7 +447,7 @@ public class Pacientes extends javax.swing.JFrame {
     private void setStatusExame () {
             try {
                 exdao.readLastID(currentId(false));
-                statusExame.setText("Saiu resultado do exame!");
+                statusExame.setText("Saiu resultado do exame");
                 if (updateState == false) {
                     novoExame.setEnabled(true);
                 }
@@ -450,7 +455,7 @@ public class Pacientes extends javax.swing.JFrame {
                 try {
                     if (exdao.lastExame(currentId(false)) != 0 ) {
                         novoExame.setEnabled(false);  
-                        statusExame.setText("Aguardando resultado do exame!");
+                        statusExame.setText("Aguardando resultado do exame");
                     } else {
                         statusExame.setText("");  
                         novoExame.setEnabled(true);    

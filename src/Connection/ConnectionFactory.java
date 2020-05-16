@@ -34,8 +34,9 @@ public class ConnectionFactory {
             return DriverManager.getConnection(URL, USER, PASS);
             
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro na conexão!");  
-            System.exit(0);            
+            JOptionPane.showMessageDialog(null, ex);  
+            System.out.println(ex);              
+            System.exit(0);        
             throw new RuntimeException("Erro na conexão :",ex);  
         }  
     }
