@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
@@ -43,6 +44,7 @@ public class Pacientes extends javax.swing.JFrame {
         elementsEnabled(false,false);
         setIconTop ();
         buscarCidade.setText(cidadeButton);
+        this.getContentPane().setBackground(Color.WHITE);        
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +82,7 @@ public class Pacientes extends javax.swing.JFrame {
         jRadioButton1.setText("jRadioButton1");
 
         setTitle("Pacientes");
+        setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -95,6 +98,8 @@ public class Pacientes extends javax.swing.JFrame {
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         nomeLabel.setText("Nome :  ");
 
+        salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setForeground(new java.awt.Color(102, 102, 102));
         salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         salvar.setText("SALVAR");
         salvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -129,6 +134,9 @@ public class Pacientes extends javax.swing.JFrame {
         sexoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         sexoLabel.setText("Sexo : ");
 
+        sexo.setBackground(new java.awt.Color(255, 255, 255));
+        sexo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        sexo.setForeground(new java.awt.Color(102, 102, 102));
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino", "Outro" }));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -145,6 +153,7 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        backspace.setBackground(new java.awt.Color(255, 255, 255));
         backspace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backspace.png"))); // NOI18N
         backspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,6 +161,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        editar.setBackground(new java.awt.Color(255, 255, 255));
+        editar.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        editar.setForeground(new java.awt.Color(102, 102, 102));
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edite.png"))); // NOI18N
         editar.setText(" EDITAR");
         editar.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +172,8 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        apagar.setBackground(new java.awt.Color(255, 255, 255));
+        apagar.setForeground(new java.awt.Color(102, 102, 102));
         apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         apagar.setText("APAGAR");
         apagar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -198,6 +212,8 @@ public class Pacientes extends javax.swing.JFrame {
             pacienteTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        buscarCidade.setBackground(new java.awt.Color(255, 255, 255));
+        buscarCidade.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         buscarCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cityAdd.png"))); // NOI18N
         buscarCidade.setText(" ");
         buscarCidade.setToolTipText("");
@@ -209,6 +225,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        novo.setBackground(new java.awt.Color(255, 255, 255));
+        novo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        novo.setForeground(new java.awt.Color(102, 102, 102));
         novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacienteAdd.png"))); // NOI18N
         novo.setText("NOVO");
         novo.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +239,9 @@ public class Pacientes extends javax.swing.JFrame {
         status.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         status.setForeground(new java.awt.Color(0, 153, 0));
 
+        novoExame.setBackground(new java.awt.Color(255, 255, 255));
+        novoExame.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        novoExame.setForeground(new java.awt.Color(102, 102, 102));
         novoExame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exameAdd.png"))); // NOI18N
         novoExame.setText("NOVO EXAME ");
         novoExame.addActionListener(new java.awt.event.ActionListener() {
@@ -315,13 +337,13 @@ public class Pacientes extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(sexoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
+                        .addGap(0, 2, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(buscarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(novo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(editar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))

@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
@@ -35,6 +36,7 @@ public class Exames extends javax.swing.JFrame {
         readJTableP(); 
         elementsEnabled(false);
         setIconTop ();
+        this.getContentPane().setBackground(Color.WHITE);             
     }
 
     /**
@@ -97,6 +99,7 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        positivo.setBackground(new java.awt.Color(255, 255, 255));
         positivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
         positivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +107,7 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        negativo.setBackground(new java.awt.Color(255, 255, 255));
         negativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow_right_left_back_circle-512.png"))); // NOI18N
         negativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -203,6 +207,8 @@ public class Exames extends javax.swing.JFrame {
             resultadoTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setForeground(new java.awt.Color(102, 102, 102));
         salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         salvar.setText("SALVAR");
         salvar.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +217,8 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        apagar.setBackground(new java.awt.Color(255, 255, 255));
+        apagar.setForeground(new java.awt.Color(102, 102, 102));
         apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         apagar.setText("APAGAR");
         apagar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,6 +235,7 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        limpar.setBackground(new java.awt.Color(255, 255, 255));
         limpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backspace.png"))); // NOI18N
         limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

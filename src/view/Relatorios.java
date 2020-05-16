@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -29,6 +30,7 @@ public class Relatorios extends javax.swing.JFrame {
         setIconTop ();
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         relatorioTable.setRowSorter(new TableRowSorter(modelo));
+        this.getContentPane().setBackground(Color.WHITE);             
     }
     
  
@@ -61,6 +63,9 @@ public class Relatorios extends javax.swing.JFrame {
                 formWindowActivated(evt);
             }
         });
+
+        relatorio.setBackground(new java.awt.Color(255, 255, 255));
+        relatorio.setForeground(new java.awt.Color(102, 102, 102));
 
         relatorioTable.setAutoCreateRowSorter(true);
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -97,6 +102,7 @@ public class Relatorios extends javax.swing.JFrame {
         relatorio.addTab("Evolução - Gráfico", graficoPicture);
         relatorio.addTab("Mortes", mortesGrafic);
 
+        data.setBackground(new java.awt.Color(255, 255, 255));
         data.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 dataItemStateChanged(evt);

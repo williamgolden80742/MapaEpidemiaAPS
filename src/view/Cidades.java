@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package view;
+import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Cidade;
@@ -27,6 +28,7 @@ public class Cidades extends javax.swing.JFrame {
         readJTable();
         selecionar.setEnabled(false);
         setIconTop ();
+        this.getContentPane().setBackground(Color.WHITE);             
     }
 
     /**
@@ -65,6 +67,8 @@ public class Cidades extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setText("ESTADOS : ");
 
+        uf.setBackground(new java.awt.Color(255, 255, 255));
+        uf.setForeground(new java.awt.Color(102, 102, 102));
         uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
         uf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,6 +126,8 @@ public class Cidades extends javax.swing.JFrame {
             cidadesTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
+        selecionar.setBackground(new java.awt.Color(255, 255, 255));
+        selecionar.setForeground(new java.awt.Color(102, 102, 102));
         selecionar.setText("SELECIONAR");
         selecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,7 +168,7 @@ public class Cidades extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selecionar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(selecionar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
         );
 
         pack();

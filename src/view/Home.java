@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import model.dao.RandonCasos;
 
@@ -26,6 +27,7 @@ public class Home extends javax.swing.JFrame {
 
         initComponents();
         setIconTop ();
+        this.getContentPane().setBackground(Color.WHITE);           
 //        rand.create();
     }
 
@@ -46,11 +48,12 @@ public class Home extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Viral.City-5");
         setAutoRequestFocus(false);
-        setBackground(new java.awt.Color(51, 51, 51));
+        setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
         setResizable(false);
 
+        Paciente.setBackground(new java.awt.Color(255, 255, 255));
         Paciente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Paciente.setForeground(new java.awt.Color(0, 0, 0));
         Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paciente.png"))); // NOI18N
@@ -65,6 +68,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        relatorios.setBackground(new java.awt.Color(255, 255, 255));
         relatorios.setForeground(new java.awt.Color(51, 102, 255));
         relatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/relatorio_Small.png"))); // NOI18N
         relatorios.setToolTipText("Relatorios");
@@ -75,6 +79,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        exames.setBackground(new java.awt.Color(255, 255, 255));
         exames.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exame.png"))); // NOI18N
         exames.setToolTipText("Exames");
         exames.setBorder(null);
