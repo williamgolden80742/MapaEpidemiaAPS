@@ -19,7 +19,6 @@ public class Home extends javax.swing.JFrame {
      */
     private Pacientes paciente = new Pacientes();
     private Relatorios relatorio = new Relatorios(); 
-    private Cidades cidades = new Cidades();
     private Exames exame = new Exames();    
     private RandonCasos rand = new RandonCasos();
 
