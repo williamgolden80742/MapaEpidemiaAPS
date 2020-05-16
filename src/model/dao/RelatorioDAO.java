@@ -109,7 +109,7 @@ public class RelatorioDAO {
         List<Relatorio> relatorios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT DISTINCT DATE( positivos.datadeCriacaoPS) AS dataP FROM positivos");
+            stmt = con.prepareStatement("SELECT DATE(positivos.datadeCriacaoPS) AS dataP FROM exames INNER JOIN positivos ON positivos.IdExame = exames.IdExame inner join pacientes on pacientes.Idpaciente = exames.Idpaciente inner join cidade on cidade.idCidade = pacientes.idCidade WHERE positivos.resultado = 1 GROUP by date(positivos.datadeCriacaoPS) ORDER by positivos.datadeCriacaoPS");
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Relatorio relatorio = new Relatorio();                        

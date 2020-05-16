@@ -36,7 +36,7 @@ public class ExameDAO {
         String request = "";
         Connection con = ConnectionFactory.getConnection();
         if (id != 0) {
-             request="Where pacientes.Idpaciente = '"+id+"'";
+             request="Where exames.IdExame = '"+id+"'";
         }
         PreparedStatement stmt = null;
         ResultSet rs = null;

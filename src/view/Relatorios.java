@@ -20,13 +20,12 @@ import model.dao.RelatorioDAO;
  * @author William
  */
 public class Relatorios extends javax.swing.JFrame {
-     
         
     public Relatorios() {
         initComponents();
+        setDate();        
         createGrafico();  
         readJTable();
-        setDate();
         setIconTop ();
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
         relatorioTable.setRowSorter(new TableRowSorter(modelo));
@@ -98,7 +97,11 @@ public class Relatorios extends javax.swing.JFrame {
         relatorio.addTab("Evolução - Gráfico", graficoPicture);
         relatorio.addTab("Mortes", mortesGrafic);
 
-        data.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODAS DATAS" }));
+        data.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                dataItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,25 +123,38 @@ public class Relatorios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        setDate();  
         readJTable();
         createGrafico();  
     }//GEN-LAST:event_formWindowActivated
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         createGrafico();  
+        readJTable(); 
     }//GEN-LAST:event_formMousePressed
+
+    private void dataItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_dataItemStateChanged
+        createGrafico(false);  
+        readJTable();
+    }//GEN-LAST:event_dataItemStateChanged
 
     RelatorioDAO rdao = new RelatorioDAO();
     Grafico grafic = new Grafico();
 
-    private void createGrafico () {
+    private void createGrafico (boolean recriateGrafic) {
         try {
-              graficoPicture.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGrafico( currentDate() , graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
-              mortesGrafic.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGraficoMorte( graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+            graficoPicture.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGrafico( currentDate() , graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+            if (recriateGrafic) {
+                mortesGrafic.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGraficoMorte( graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+            }
         } catch (IOException ex) {
             Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
+    
+    private void createGrafico () {
+        createGrafico (true);
+    }    
     
     public void readJTable() { 
         DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
@@ -170,13 +186,19 @@ public class Relatorios extends javax.swing.JFrame {
     
     public String currentDate() {
         String value = "";
-        if (!data.getSelectedItem().equals("TODAS DATAS")) {
+        try {
+            if (!data.getSelectedItem().equals("TODAS DATAS")) {
             value = (String) data.getSelectedItem();
+            }
+        } catch (NullPointerException ex) {
+        
         }
         return value;
     }
     
     public void setDate() {   
+        data.removeAllItems();
+        data.addItem("TODAS DATAS");
         for (Relatorio e : rdao.readDate()) {
             data.addItem(e.getDataCasos());          
         } 

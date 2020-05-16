@@ -13,6 +13,15 @@ public class Exame extends Paciente {
 
     private String datadeCriacaoE;
     private int IdExame;
+    private static String currentIdExame = "";
+
+    public String getCurrentIdExame() {
+        return currentIdExame;
+    }
+
+    public void setCurrentIdExame(String currentIdExame) {
+        Exame.currentIdExame = currentIdExame;
+    }
     
     public int getIdExame() {
         return IdExame;

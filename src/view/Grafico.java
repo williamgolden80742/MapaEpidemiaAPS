@@ -31,7 +31,6 @@ public final class Grafico {
         linha.clear();
         DecimalFormat df =  new DecimalFormat();
         df.setMaximumFractionDigits(3);  
-        String percent = "";
         rdao.read(request).forEach((Relatorio r) -> {  
             linha.addValue(Double.parseDouble(df.format(r.getPercent()).replace(",",".")),r.getCidadeNome()+" ("+r.getPopulacao()+")",r.getDataCasos());
         });          

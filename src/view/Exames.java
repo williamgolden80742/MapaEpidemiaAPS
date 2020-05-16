@@ -24,6 +24,7 @@ public class Exames extends javax.swing.JFrame {
     private ResultadoDAO rdao = new ResultadoDAO();  
     private DoencaDAO ddao = new DoencaDAO();      
     private ExameDAO exdao = new ExameDAO(); 
+    private Exame exame = new Exame(); 
     private int doencaCont = 0;
     private String resultados[][] = null;       
     
@@ -64,6 +65,7 @@ public class Exames extends javax.swing.JFrame {
         apagar = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         PacienteId = new javax.swing.JTextField();
+        limpar = new javax.swing.JToggleButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -223,6 +225,13 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        limpar.setText("Limpar");
+        limpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limparActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -242,13 +251,15 @@ public class Exames extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PacienteId))
+                .addComponent(PacienteId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(limpar))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -257,11 +268,12 @@ public class Exames extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(PacienteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PacienteId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(limpar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(apagar))
         );
@@ -271,10 +283,10 @@ public class Exames extends javax.swing.JFrame {
 
     public int currentIdExame () { 
         int id = 0;
-         try {
+        try {
             id = Integer.parseInt(String.valueOf(examesTable.getModel().getValueAt(examesTable.getSelectedRow(),0)));  
             System.out.println(examesTable.getModel().getValueAt(examesTable.getSelectedRow(),0));
-         } catch (Exception ex) {
+        } catch (Exception ex) {
              System.out.println(ex);
          }
          return id ; 
@@ -377,7 +389,7 @@ public class Exames extends javax.swing.JFrame {
         elementsEnabled(false);
         examesTable.clearSelection();
         readJTableD();
-        readJTableP();        
+        resetResultadoTable();        
     }
     
     private void elementsEnabled (boolean b) {
@@ -391,12 +403,11 @@ public class Exames extends javax.swing.JFrame {
 
     private void addDoenca () { 
         try {
-            if ( resultadoTable.getModel().getValueAt(doencasTable.getSelectedRow(),0) == null && resultadoTable.getModel().getValueAt(doencasTable.getSelectedRow(),1) == null ) {
+            if (resultadoTable.getModel().getValueAt(doencasTable.getSelectedRow(),0) == null && resultadoTable.getModel().getValueAt(doencasTable.getSelectedRow(),1) == null ) {
                 resultadoTable.getModel().setValueAt(doencasTable.getModel().getValueAt(doencasTable.getSelectedRow(),0),doencasTable.getSelectedRow(),0);
             }
 
         } catch (Exception ex) {
-            System.out.println("Wololo");
             System.out.println(ex);
         }       
     }  
@@ -406,7 +417,7 @@ public class Exames extends javax.swing.JFrame {
         try {
             nomeLinha = String.valueOf(examesTable.getModel().getValueAt(examesTable.getSelectedRow(),2));
             int question = 0;
-            if (!(String.valueOf( currentIdExame() )).equals("")) {
+            if (!(String.valueOf(currentIdExame() )).equals("")) {
                 question = JOptionPane.showConfirmDialog(null,"Deseja realmente apagar o exame \n     de id : "+currentIdExame()+"\n do paciente : "+nomeLinha+" ?");
             }
             if (question == 0) { 
@@ -440,7 +451,7 @@ public class Exames extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_negativoActionPerformed
 
-    private void initResultadoTable () {
+    private void resetResultadoTable () {
         resultadoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -460,6 +471,14 @@ public class Exames extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+    }
+    
+    private void selectLastExame () {
+        int index = examesTable.getModel().getRowCount()-1;
+        examesTable.setRowSelectionInterval(index,index);
+        readJTableD();
+        readJTableP();     
+        elementsEnabled(true);        
     }
     
     private void examesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_examesTableMousePressed
@@ -485,9 +504,15 @@ public class Exames extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         resultadoTable.removeAll(); 
         elementsEnabled(false);
-        PacienteId.setText("");
-        initResultadoTable();
-        readJTableE();
+        resetResultadoTable();
+        PacienteId.setText(" ");   
+        readJTableE();           
+        if (!exame.getCurrentIdExame().equals("") && !exame.getCurrentIdExame().equals("0")){
+            PacienteId.setText(String.valueOf(exame.getCurrentIdExame()));        
+            readJTableE();
+            selectLastExame();
+        }
+        exame.setCurrentIdExame("");
     }//GEN-LAST:event_formWindowActivated
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
@@ -496,7 +521,15 @@ public class Exames extends javax.swing.JFrame {
 
     private void PacienteIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PacienteIdKeyTyped
         readJTableE();
+        elementsEnabled(false);
     }//GEN-LAST:event_PacienteIdKeyTyped
+
+    private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
+        PacienteId.setText("");
+        readJTableE();
+        elementsEnabled(false);       
+        resetResultadoTable ();
+    }//GEN-LAST:event_limparActionPerformed
 
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/exame.png")));
@@ -521,6 +554,7 @@ public class Exames extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JToggleButton limpar;
     private javax.swing.JButton negativo;
     private javax.swing.JButton positivo;
     private javax.swing.JTable resultadoTable;

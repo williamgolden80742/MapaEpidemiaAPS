@@ -6,34 +6,43 @@
 package view;
 
 import java.awt.Toolkit;
+import javax.swing.Icon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Cidade;
+import model.bean.Exame;
 import model.bean.Paciente;
+import model.bean.Resultado;
 import model.dao.ExameDAO;
 import model.dao.PacienteDAO;
+import model.dao.ResultadoDAO;
 
 /**
  *
  * @author William
  */
-public class PacienteView extends javax.swing.JFrame {
+public class Pacientes extends javax.swing.JFrame {
 
     private Cidades cidades = new Cidades();
     private Cidade cidade = new Cidade();
     private ExameDAO exdao = new ExameDAO();
+    private Exame exame = new Exame();
     private Paciente p = new Paciente();
+    private ResultadoDAO rdao = new ResultadoDAO();
     private PacienteDAO dao = new PacienteDAO(); 
     private int salvarStatus = 0; 
     private final String cidadeButton = cidade.getCurrentCidadeNome(), sexoButton = "Selecione";
+    private boolean ckeckEditable = false;
+    private int falecidoStatus = 0;
+    private boolean updateState = false;
     
-    public PacienteView() {
+    public Pacientes() {
         initComponents();    
         readJTable();        
         novoExame.setEnabled(false);
         elementsEnabled(false,false);
         setIconTop ();
-        buscarCidade.setText(cidadeButton);        
+        buscarCidade.setText(cidadeButton);
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,8 +72,9 @@ public class PacienteView extends javax.swing.JFrame {
         novo = new javax.swing.JButton();
         status = new javax.swing.JLabel();
         novoExame = new javax.swing.JButton();
-        lastId = new javax.swing.JLabel();
-        falecido = new javax.swing.JCheckBox();
+        statusExame = new javax.swing.JLabel();
+        falecimentoCheck = new javax.swing.JLabel();
+        falecidoLabel = new javax.swing.JLabel();
 
         setTitle("Pacientes");
         setResizable(false);
@@ -205,82 +215,88 @@ public class PacienteView extends javax.swing.JFrame {
             }
         });
 
-        lastId.setForeground(new java.awt.Color(255, 102, 51));
+        statusExame.setForeground(new java.awt.Color(255, 102, 51));
 
-        falecido.setText("Falecido?");
-        falecido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                falecidoActionPerformed(evt);
+        falecimentoCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/radio-Button-Unchecked.png"))); // NOI18N
+        falecimentoCheck.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                falecimentoCheckMousePressed(evt);
             }
         });
+
+        falecidoLabel.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        falecidoLabel.setText("Falecido?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(falecimentoCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(novo, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(nome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buscarCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lastId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(novoExame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                        .addComponent(falecidoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+                        .addComponent(apagar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 447, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(falecido))
+                                .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buscar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(novo, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(atualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buscarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(novoExame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buscar)))))
+                                .addComponent(statusExame, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(falecimentoCheck, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(falecidoLabel))
                 .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(falecido))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -295,13 +311,13 @@ public class PacienteView extends javax.swing.JFrame {
                     .addComponent(novoExame))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lastId, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+                    .addComponent(statusExame, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomeS)
+                    .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, Short.MAX_VALUE))
+                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -312,7 +328,14 @@ public class PacienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-      
+ 
+    private String readJTableD() {
+        String doençasLabel = ""; 
+        for (Resultado d : rdao.read()) {
+            doençasLabel += d.getNomeDoenca()+"\n";
+        }             
+        return doençasLabel;
+    } 
     
     private int currentId (boolean disable){
         int id = 0;        
@@ -327,7 +350,7 @@ public class PacienteView extends javax.swing.JFrame {
             if (disable) {
                 elementsEnabled (false,false);
             }
-            lastId.setText("");
+            statusExame.setText("");
         }
         return id;  
     }
@@ -340,11 +363,13 @@ public class PacienteView extends javax.swing.JFrame {
         nome.setEditable(b);
         nasc.setEnabled(b);
         sexo.setEnabled(b);
-        falecido.setEnabled(b); 
+        ckeckEditable = b;
+        falecimentoCheck.setEnabled(b);
+        falecidoLabel.setEnabled(b);
         buscarCidade.setEnabled(b);
+        novoExame.setEnabled(!b & c);
         apagar.setEnabled(!b & c);
         salvar.setEnabled(b);
-        novoExame.setEnabled(!b & c);
         atualizar.setEnabled(!b & c);
     } 
     
@@ -371,8 +396,9 @@ public class PacienteView extends javax.swing.JFrame {
                 buscarCidade.setText(cidade.getCurrentCidadeNome());
             }
         } catch (Exception ex) {
-            if (cidade.getCurrentCidadeId() != 0) {
+            if (cidade.getCurrentCidadeId() != 0 ) {
                 buscarCidade.setText(cidade.getCurrentCidadeNome());
+
             }
         }
     }   
@@ -381,11 +407,14 @@ public class PacienteView extends javax.swing.JFrame {
         PacienteDAO pdao = new PacienteDAO();
         if (currentId() != 0){
             p = pdao.readById(currentId());       
-            buscarCidade.setText(String.valueOf(p.getCidadeNome()));    
-            cidade.setCurrentCidadeId(p.getCidadeId());            
+            buscarCidade.setText(String.valueOf(p.getCidadeNome())); 
+            cidade.setCurrentCidadeNome(String.valueOf(p.getCidadeNome()));   
+            cidade.setCurrentCidadeId(p.getCidadeId());         
             nome.setText(p.getNome());  
             status.setText("");
-            falecido.setSelected((p.getFalecido() == 1)?true:false);
+            updateState = false;
+            falecimentoToggle(p.getFalecido());
+            falecidoStatus = p.getFalecido();
             int selecioneSexo;
             switch(p.getSexo()) {
                 case 'F':
@@ -400,27 +429,42 @@ public class PacienteView extends javax.swing.JFrame {
                 default:
                     selecioneSexo = 0;
             }
+            setStatusExame ();
             sexo.setSelectedIndex(selecioneSexo);
             selecioneSexo=0;
-            nasc.setText(p.getNasc());             
-            try {
-                exdao.readLastID(currentId());
-                lastId.setText("Saiu resultado do exame!");
-                novoExame.setEnabled(true);
-            } catch (Exception ex) {
-                if ( exdao.lastExame(currentId()) != 0 ) {
-                    lastId.setText("Aguardando resultado do exame!");  
-                    novoExame.setEnabled(false);                    
-                } else {
-                    lastId.setText("");  
-                    novoExame.setEnabled(true);    
-                }
-            }                         
+            nasc.setText(p.getNasc());                                   
             sexo.setSelectedItem(p.getSexo());
         } else {
             clear ();
         }
     }  
+    
+    private void setStatusExame () {
+            try {
+                exdao.readLastID(currentId(false));
+                statusExame.setText("Saiu resultado do exame!");
+                if (updateState == false) {
+                    novoExame.setEnabled(true);
+                }
+            } catch (Exception ex) {
+                try {
+                    if (exdao.lastExame(currentId(false)) != 0 ) {
+                        novoExame.setEnabled(false);  
+                        statusExame.setText("Aguardando resultado do exame!");
+                    } else {
+                        statusExame.setText("");  
+                        novoExame.setEnabled(true);    
+                    }
+                } catch (Exception aex ) {
+                    
+                }
+            } 
+            try {
+               exame.setCurrentIdExame(String.valueOf(exdao.lastExame(currentId(false))));
+            } catch (Exception aex ) {
+                    
+            }   
+    }
     
     private void clear () {
         nome.setText("");
@@ -429,6 +473,8 @@ public class PacienteView extends javax.swing.JFrame {
         cidade.setCurrentCidade(cidadeButton,0);
         sexo.setSelectedItem(sexoButton);
         elementsEnabled (false,false);
+        falecimentoToggle(0);
+        exame.setCurrentIdExame(" ");
     }
     
     private void setPaciente ()  {
@@ -436,7 +482,7 @@ public class PacienteView extends javax.swing.JFrame {
             p.setId(currentId ());
         } catch (Exception ex) { 
         }
-        p.setFalecido((falecido.isSelected() == true)?1:0);        
+        p.setFalecido(falecidoStatus);        
         p.setNome(nome.getText());
         p.setNasc(nasc.getText());
         p.setCidadeId(cidade.getCurrentCidadeId());
@@ -448,8 +494,8 @@ public class PacienteView extends javax.swing.JFrame {
         setPaciente ();     
         dao.create(p);
         status.setText(dao.getStatus());
-        readJTable(); 
-        clear ();     
+        readJTable();  
+        selectLastPaciente();
     }
     
     private void update () {
@@ -459,17 +505,18 @@ public class PacienteView extends javax.swing.JFrame {
             status.setText(dao.getStatus());
             readJTable(); 
             clear (); 
-        } 
+            updateState = false;
+        }   
     }    
     
     private boolean getValidation () {
         boolean verdade = false;
         System.out.println("Cidade id : "+cidade.getCurrentCidadeId());
         if (cidade.getCurrentCidadeId() == 0) {
-            status.setText("Selecione a cidade!");
+            JOptionPane.showMessageDialog(null,"Selecione a cidade!");
             verdade = false;
         } else if ( sexo.getSelectedItem().equals(sexoButton)) {
-            status.setText("Selecione o sexo do paciente!");            
+            JOptionPane.showMessageDialog(null,"Selecione o sexo do paciente!");            
             verdade = false;        
         } else {
             verdade = true;        
@@ -508,6 +555,12 @@ public class PacienteView extends javax.swing.JFrame {
         }    
     }//GEN-LAST:event_salvarActionPerformed
 
+    private void selectLastPaciente () {
+        int index = pacienteTable.getModel().getRowCount()-1;
+        pacienteTable.setRowSelectionInterval(index,index);
+        setValue();
+    }
+    
     private void TypingNome(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingNome
         readJTable();
     }//GEN-LAST:event_TypingNome
@@ -522,7 +575,8 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
         setValue();
-        elementsEnabled(true);    
+        elementsEnabled(true); 
+        updateState = true;
         this.salvarStatus = 2;
     }//GEN-LAST:event_atualizarActionPerformed
 
@@ -541,6 +595,7 @@ public class PacienteView extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         setCidade(); 
+        setStatusExame ();        
     }//GEN-LAST:event_formWindowActivated
 
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
@@ -554,7 +609,8 @@ public class PacienteView extends javax.swing.JFrame {
     private void novoExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoExameActionPerformed
         exdao.create(currentId());
         novoExame.setEnabled(false);
-        lastId.setText("Aguardando resultado do exame!");
+        exame.setCurrentIdExame(String.valueOf(exdao.lastExame(currentId())));
+        statusExame.setText("Aguardando resultado do exame!");
         status.setText(exdao.getStatus());
     }//GEN-LAST:event_novoExameActionPerformed
 
@@ -562,13 +618,34 @@ public class PacienteView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_nascKeyTyped
 
-    private void falecidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_falecidoActionPerformed
-        System.out.println("Falecido :"+falecido.isSelected());
-    }//GEN-LAST:event_falecidoActionPerformed
+    private void falecimentoCheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_falecimentoCheckMousePressed
+        int r = 0;
+        if (ckeckEditable && falecidoStatus == 0) {
+            r = JOptionPane.showConfirmDialog(null,"Paciente faleceu por motivo de alguma \ndessas doenças? \n"+readJTableD());
+            r = (r==0)?1:0;   
+            falecimentoToggle (r);               
+        } else if (ckeckEditable) {
+            falecimentoToggle (0);                  
+        }
+    }//GEN-LAST:event_falecimentoCheckMousePressed
+    private void falecimentoToggle (int r) {
+        String check = "";
+        if (r==1) {
+            falecidoStatus=1;
+            check = "radio-Button-Checked.png";
+        } else {
+            falecidoStatus=0;            
+            check = "radio-Button-Unchecked.png";
+        }
+        falecimentoCheck.setIcon((Icon) new javax.swing.ImageIcon(getClass().getResource("../images/"+check+"")) );
+
+    }    
 
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/paciente.png")));
     }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -579,14 +656,14 @@ public class PacienteView extends javax.swing.JFrame {
     private javax.swing.JButton atualizar;
     private javax.swing.JToggleButton buscar;
     private javax.swing.JButton buscarCidade;
-    private javax.swing.JCheckBox falecido;
+    private javax.swing.JLabel falecidoLabel;
+    private javax.swing.JLabel falecimentoCheck;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lastId;
     private javax.swing.JFormattedTextField nasc;
     private javax.swing.JTextField nome;
     private javax.swing.JFormattedTextField nomeS;
@@ -596,6 +673,7 @@ public class PacienteView extends javax.swing.JFrame {
     private javax.swing.JButton salvar;
     private javax.swing.JComboBox<String> sexo;
     private javax.swing.JLabel status;
+    private javax.swing.JLabel statusExame;
     // End of variables declaration//GEN-END:variables
 
 }
