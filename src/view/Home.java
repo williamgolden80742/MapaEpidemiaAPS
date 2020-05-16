@@ -53,7 +53,7 @@ public class Home extends javax.swing.JFrame {
 
         Paciente.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         Paciente.setForeground(new java.awt.Color(0, 0, 0));
-        Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacienteAdd.png"))); // NOI18N
+        Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paciente.png"))); // NOI18N
         Paciente.setToolTipText("Pacientes");
         Paciente.setBorder(null);
         Paciente.setBorderPainted(false);

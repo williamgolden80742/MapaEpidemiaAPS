@@ -65,9 +65,9 @@
                   <Component id="uf" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="138" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="166" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="selecionar" min="-2" max="-2" attributes="0"/>
+              <Component id="selecionar" min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

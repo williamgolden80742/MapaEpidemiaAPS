@@ -35,7 +35,7 @@ public class ConnectionFactory {
             
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);  
-            System.out.println(ex);              
+            System.out.println("Erro na conexão : "+ex);              
             System.exit(0);        
             throw new RuntimeException("Erro na conexão :",ex);  
         }  
