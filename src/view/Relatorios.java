@@ -66,8 +66,11 @@ public class Relatorios extends javax.swing.JFrame {
 
         relatorio.setBackground(new java.awt.Color(255, 255, 255));
         relatorio.setForeground(new java.awt.Color(102, 102, 102));
+        relatorio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        relatorioTable.setAutoCreateRowSorter(true);
+        relatorioTable.setBackground(new java.awt.Color(255, 255, 255));
+        relatorioTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        relatorioTable.setForeground(new java.awt.Color(52, 52, 52));
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -103,6 +106,8 @@ public class Relatorios extends javax.swing.JFrame {
         relatorio.addTab("Mortes", mortesGrafic);
 
         data.setBackground(new java.awt.Color(255, 255, 255));
+        data.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        data.setForeground(new java.awt.Color(52, 52, 52));
         data.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 dataItemStateChanged(evt);
@@ -113,16 +118,16 @@ public class Relatorios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+            .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
             .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(data, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();

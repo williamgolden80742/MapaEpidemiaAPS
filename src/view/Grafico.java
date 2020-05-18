@@ -4,14 +4,16 @@
  * and open the template in the editor.
  */
 package view;
-
+import java.awt.Color;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import model.bean.Relatorio;
 import model.dao.RelatorioDAO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -33,11 +35,13 @@ public final class Grafico {
         df.setMaximumFractionDigits(3);  
         rdao.read(request).forEach((Relatorio r) -> {  
             linha.addValue(Double.parseDouble(df.format(r.getPercent()).replace(",",".")),r.getCidadeNome()+" ("+r.getPopulacao()+")",r.getDataCasos());
-        });          
+        });   
         if (request.equals("")) {
-            grafico = ChartFactory.createLineChart("Evolução do Casos","Dias","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);   
+            grafico = ChartFactory.createLineChart("Evolução do Casos \n","Dias","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);   
+            grafico.getPlot().setBackgroundPaint(Color.darkGray);
         } else {
-            grafico = ChartFactory.createBarChart3D("Casos","Dia","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);   
+            grafico = ChartFactory.createBarChart3D("Casos","Dia","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);    
+            grafico.getPlot().setBackgroundPaint(Color.lightGray);
         }
         return grafico.createBufferedImage(Width,Height);  
     }  
@@ -55,6 +59,7 @@ public final class Grafico {
             linha.setValue(r.getCidadeNome()+" ("+r.getCasos()+") ",r.getCasos());
         });          
         grafico = ChartFactory.createPieChart("Mortes por cidade", (PieDataset) linha); 
+        grafico.getPlot().setBackgroundPaint(Color.white);  
         return grafico.createBufferedImage(Width,Height);  
     }  
     

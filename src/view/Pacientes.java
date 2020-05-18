@@ -8,6 +8,10 @@ package view;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.Icon;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Cidade;
@@ -40,11 +44,11 @@ public class Pacientes extends javax.swing.JFrame {
     public Pacientes() {
         initComponents();    
         readJTable();        
-        novoExame.setEnabled(false);
+        toggleElements(novoExame,false);
         elementsEnabled(false,false);
         setIconTop ();
         buscarCidade.setText(cidadeButton);
-        this.getContentPane().setBackground(Color.WHITE);        
+        this.getContentPane().setBackground(Color.WHITE);    
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +68,7 @@ public class Pacientes extends javax.swing.JFrame {
         sexoLabel = new javax.swing.JLabel();
         sexo = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        nomeSLabel = new javax.swing.JLabel();
         nomeS = new javax.swing.JFormattedTextField();
         backspace = new javax.swing.JToggleButton();
         editar = new javax.swing.JButton();
@@ -96,9 +100,11 @@ public class Pacientes extends javax.swing.JFrame {
         });
 
         nomeLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        nomeLabel.setForeground(new java.awt.Color(102, 102, 102));
         nomeLabel.setText("Nome :  ");
 
         salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         salvar.setForeground(new java.awt.Color(102, 102, 102));
         salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         salvar.setText("SALVAR");
@@ -110,8 +116,13 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        nome.setBackground(new java.awt.Color(255, 255, 255));
+        nome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        nome.setForeground(new java.awt.Color(102, 102, 102));
         nome.setMaximumSize(new java.awt.Dimension(4, 19));
 
+        nasc.setBackground(new java.awt.Color(255, 255, 255));
+        nasc.setForeground(new java.awt.Color(102, 102, 102));
         try {
             nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -120,6 +131,7 @@ public class Pacientes extends javax.swing.JFrame {
         nasc.setToolTipText("");
         nasc.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         nasc.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        nasc.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         nasc.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 nascKeyTyped(evt);
@@ -127,26 +139,38 @@ public class Pacientes extends javax.swing.JFrame {
         });
 
         nascLabel.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        nascLabel.setForeground(new java.awt.Color(102, 102, 102));
         nascLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         nascLabel.setText("Nasc : ");
 
         sexoLabel.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        sexoLabel.setForeground(new java.awt.Color(102, 102, 102));
         sexoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         sexoLabel.setText("Sexo : ");
 
         sexo.setBackground(new java.awt.Color(255, 255, 255));
-        sexo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        sexo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         sexo.setForeground(new java.awt.Color(102, 102, 102));
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino", "Outro" }));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("PACIENTES");
 
-        jLabel12.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel12.setText("Nome : ");
+        nomeSLabel.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        nomeSLabel.setForeground(new java.awt.Color(102, 102, 102));
+        nomeSLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        nomeSLabel.setText("Nome : ");
 
+        nomeS.setBackground(new java.awt.Color(255, 255, 255));
+        nomeS.setForeground(new java.awt.Color(0, 0, 0));
+        nomeS.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        nomeS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeSActionPerformed(evt);
+            }
+        });
         nomeS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TypingNome(evt);
@@ -154,7 +178,9 @@ public class Pacientes extends javax.swing.JFrame {
         });
 
         backspace.setBackground(new java.awt.Color(255, 255, 255));
+        backspace.setForeground(new java.awt.Color(0, 0, 0));
         backspace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backspace.png"))); // NOI18N
+        backspace.setToolTipText("");
         backspace.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backspaceActionPerformed(evt);
@@ -173,6 +199,7 @@ public class Pacientes extends javax.swing.JFrame {
         });
 
         apagar.setBackground(new java.awt.Color(255, 255, 255));
+        apagar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         apagar.setForeground(new java.awt.Color(102, 102, 102));
         apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         apagar.setText("APAGAR");
@@ -184,6 +211,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
+        pacienteTable.setBackground(new java.awt.Color(255, 255, 255));
+        pacienteTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        pacienteTable.setForeground(new java.awt.Color(102, 102, 102));
         pacienteTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -213,7 +243,8 @@ public class Pacientes extends javax.swing.JFrame {
         }
 
         buscarCidade.setBackground(new java.awt.Color(255, 255, 255));
-        buscarCidade.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        buscarCidade.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        buscarCidade.setForeground(new java.awt.Color(0, 0, 0));
         buscarCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cityAdd.png"))); // NOI18N
         buscarCidade.setText(" ");
         buscarCidade.setToolTipText("");
@@ -279,7 +310,7 @@ public class Pacientes extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(apagar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel12)
+                        .addComponent(nomeSLabel)
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -327,20 +358,23 @@ public class Pacientes extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(falecimentoCheck, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(falecidoLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)))
-                .addGap(6, 6, 6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nascLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nasc, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sexoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 2, Short.MAX_VALUE)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(buscarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(sexoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 4, Short.MAX_VALUE)
+                                .addComponent(sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buscarCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -356,10 +390,10 @@ public class Pacientes extends javax.swing.JFrame {
                     .addComponent(statusExame, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                     .addComponent(status, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(backspace)
-                    .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(nomeS, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(nomeSLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(backspace, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -383,7 +417,7 @@ public class Pacientes extends javax.swing.JFrame {
     private int currentId (boolean disable){
         int id = 0;        
         if (disable) {  
-            novo.setEnabled(true);            
+            toggleElements(novo,true);            
             elementsEnabled(false);
         } 
         try {
@@ -404,24 +438,59 @@ public class Pacientes extends javax.swing.JFrame {
     
     private void elementsEnabled (boolean b, boolean c) {
         nome.setEditable(b);
-        nomeLabel.setEnabled(b);
-        nasc.setEnabled(b);
-        nascLabel.setEnabled(b);        
-        sexo.setEnabled(b);
-        sexoLabel.setEnabled(b);        
+        toggleElements(nomeLabel,b);
+        toggleElements(nasc,b);
+        toggleElements(nascLabel,b);        
+        toggleElements(sexo,b);
+        toggleElements(sexoLabel,b);        
         ckeckEditable = b;
-        falecimentoCheck.setEnabled(b);
-        falecidoLabel.setEnabled(b);
-        buscarCidade.setEnabled(b);
-        novoExame.setEnabled(!b & c);
-        apagar.setEnabled(!b & c);
-        salvar.setEnabled(b);
-        editar.setEnabled(!b & c);
-    } 
-    
-    private void elementsEnabled (boolean b) {
+        toggleElements(falecimentoCheck,b);
+        toggleElements(falecidoLabel,b);
+        toggleElements(buscarCidade,b);
+        toggleElements(novoExame,!b & c);
+        toggleElements(apagar,!b & c);
+        toggleElements(salvar,b);
+        toggleElements(editar,!b & c);
+    }
+     private void elementsEnabled (boolean b) {
         elementsEnabled (b,true);
-    } 
+    }
+
+   private void toggleElements (JButton l, boolean toggle) {
+        if(toggle){
+            l.setForeground(Color.GRAY);  
+        } else {
+            l.setForeground(Color.LIGHT_GRAY);   
+        }   
+        l.setEnabled(toggle);        
+    }  
+
+    private void toggleElements (JComboBox l, boolean toggle) {
+         if(toggle){
+            l.setForeground(Color.GRAY);  
+        } else {
+            l.setForeground(Color.LIGHT_GRAY);   
+        }   
+        l.setEnabled(toggle);        
+    }  
+  
+    private void toggleElements (JLabel l, boolean toggle) {
+        if(toggle){
+            l.setForeground(Color.GRAY);  
+        } else {
+            l.setForeground(Color.LIGHT_GRAY);   
+        }   
+        l.setEnabled(toggle);        
+    }    
+
+    private void toggleElements (JFormattedTextField l, boolean toggle) {
+        if(toggle){
+            l.setForeground(Color.GRAY);  
+        } else {
+            l.setForeground(Color.LIGHT_GRAY);   
+        }   
+        l.setEnabled(toggle);        
+    }   
     
     private void readJTable() {
         DefaultTableModel modelo = (DefaultTableModel) pacienteTable.getModel();
@@ -452,7 +521,8 @@ public class Pacientes extends javax.swing.JFrame {
     private void setValue () {
         PacienteDAO pdao = new PacienteDAO();
         if (currentId() != 0){
-            p = pdao.readById(currentId());       
+            p = pdao.readById(currentId());      
+            cidades.setVisible(false);
             buscarCidade.setText(String.valueOf(p.getCidadeNome())); 
             cidade.setCurrentCidadeNome(String.valueOf(p.getCidadeNome()));   
             cidade.setCurrentCidadeId(p.getCidadeId());         
@@ -490,16 +560,16 @@ public class Pacientes extends javax.swing.JFrame {
                 exdao.readLastID(currentId(false));
                 statusExame.setText("Saiu resultado do exame");
                 if (updateState == false) {
-                    novoExame.setEnabled(true);
+                    toggleElements(novoExame,true);
                 }
             } catch (Exception ex) {
                 try {
                     if (exdao.lastExame(currentId(false)) != 0 ) {
-                        novoExame.setEnabled(false);  
+                        toggleElements(novoExame,false);  
                         statusExame.setText("Aguardando resultado do exame");
                     } else {
                         statusExame.setText("");  
-                        novoExame.setEnabled(true);    
+                        toggleElements(novoExame,true);    
                     }
                 } catch (Exception aex ) {
                     
@@ -609,11 +679,13 @@ public class Pacientes extends javax.swing.JFrame {
     
     private void TypingNome(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingNome
         readJTable();
+        clear();
     }//GEN-LAST:event_TypingNome
 
     private void backspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backspaceActionPerformed
         nomeS.setText("");
         readJTable();
+        clear(); 
     }//GEN-LAST:event_backspaceActionPerformed
 
     private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
@@ -648,7 +720,7 @@ public class Pacientes extends javax.swing.JFrame {
     private void novoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_novoActionPerformed
         clear();        
         elementsEnabled(true);  
-        novo.setEnabled(false);
+        toggleElements(novo,false);
         pacienteTable.clearSelection();
         this.salvarStatus = 1;
     }//GEN-LAST:event_novoActionPerformed
@@ -658,7 +730,7 @@ public class Pacientes extends javax.swing.JFrame {
         exame.setCurrentIdExame(String.valueOf(exdao.lastExame(currentId())));
         statusExame.setText("Aguardando resultado do exame!");
         status.setText(exdao.getStatus());
-        novoExame.setEnabled(false);        
+        toggleElements(novoExame,false);        
     }//GEN-LAST:event_novoExameActionPerformed
 
     private void nascKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nascKeyTyped
@@ -675,6 +747,10 @@ public class Pacientes extends javax.swing.JFrame {
             falecimentoToggle (0);                  
         }
     }//GEN-LAST:event_falecimentoCheckMousePressed
+
+    private void nomeSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeSActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeSActionPerformed
     private void falecimentoToggle (int r) {
         String check = "";
         if (r==1) {
@@ -705,7 +781,6 @@ public class Pacientes extends javax.swing.JFrame {
     private javax.swing.JButton editar;
     private javax.swing.JLabel falecidoLabel;
     private javax.swing.JLabel falecimentoCheck;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JScrollPane jScrollPane3;
@@ -714,6 +789,7 @@ public class Pacientes extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JLabel nomeLabel;
     private javax.swing.JFormattedTextField nomeS;
+    private javax.swing.JLabel nomeSLabel;
     private javax.swing.JButton novo;
     private javax.swing.JButton novoExame;
     private javax.swing.JTable pacienteTable;

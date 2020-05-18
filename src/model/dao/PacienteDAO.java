@@ -78,15 +78,15 @@ public class PacienteDAO {
                 paciente.setId(rs.getInt("Idpaciente"));  
                 try  {                   
                     paciente.setCidadeNome(rs.getString("nomeCidade"));                       
-                    paciente.setSexo( rs.getString("sexo").charAt(0) );                      
+                    paciente.setSexo( rs.getString("sexo").charAt(0) );                   
                 } catch (Exception ex) {
                 
                 }              
                 paciente.setCidadeId(rs.getInt("idCidade")); 
                 paciente.setNasc(rs.getString("dataNascimento"));  
                 paciente.setNome(rs.getString("nomecompleto"));        
-                paciente.setFalecido(rs.getInt("falecido"));                     
-                paciente.setData(rs.getString("datadeCriacaoP"));                 
+                paciente.setFalecido(rs.getInt("falecido"));    
+                paciente.setData(rs.getString("dateP"));                    
                 pacientes.add(paciente);
             }
         } catch (SQLException ex) {
@@ -99,13 +99,13 @@ public class PacienteDAO {
     }
 
     public List<Paciente> read (String nome,boolean b) {    
-        return read("SELECT * FROM Pacientes WHERE nomecompleto like '"+nome+"%'");
+        return read("SELECT *, DATE_FORMAT(Pacientes.datadeCriacaoP, '%d/%m/%Y %H:%i') AS dateP FROM Pacientes WHERE nomecompleto like '"+nome+"%'");
     }
     
     public Paciente readById(int id) {  
         Paciente paciente = new Paciente();
 
-        for(Paciente p : read("SELECT * FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '"+id+"'")){
+        for(Paciente p : read("SELECT *, DATE_FORMAT(Pacientes.datadeCriacaoP, '%d/%m/%Y %H:%i') AS dateP  FROM Pacientes Inner Join cidade ON cidade.idCidade = Pacientes.idCidade WHERE Idpaciente like '"+id+"'")){
                 paciente.setNome(p.getNome());
                 paciente.setCidadeNome(p.getCidadeNome());  
                 paciente.setCidadeId(p.getCidadeId());   

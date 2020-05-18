@@ -8,7 +8,12 @@ package view;
 import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Resultado;
 import model.bean.Exame;
@@ -63,11 +68,11 @@ public class Exames extends javax.swing.JFrame {
         doencasTable = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         resultadoTable = new javax.swing.JTable();
-        salvar = new javax.swing.JToggleButton();
-        apagar = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         PacienteId = new javax.swing.JTextField();
         limpar = new javax.swing.JToggleButton();
+        apagar = new javax.swing.JButton();
+        salvar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -115,6 +120,9 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        examesTable.setBackground(new java.awt.Color(255, 255, 255));
+        examesTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        examesTable.setForeground(new java.awt.Color(102, 102, 102));
         examesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -134,6 +142,7 @@ public class Exames extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        examesTable.setToolTipText("");
         examesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 examesTableMousePressed(evt);
@@ -146,6 +155,8 @@ public class Exames extends javax.swing.JFrame {
             examesTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        doencasTable.setBackground(new java.awt.Color(255, 255, 255));
+        doencasTable.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         doencasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -166,6 +177,7 @@ public class Exames extends javax.swing.JFrame {
             }
         });
         doencasTable.setToolTipText("Exames");
+        doencasTable.getTableHeader().setReorderingAllowed(false);
         doencasTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 doencasTableMousePressed(evt);
@@ -176,6 +188,9 @@ public class Exames extends javax.swing.JFrame {
             doencasTable.getColumnModel().getColumn(0).setResizable(false);
         }
 
+        resultadoTable.setBackground(new java.awt.Color(255, 255, 255));
+        resultadoTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        resultadoTable.setForeground(new java.awt.Color(102, 102, 102));
         resultadoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -196,6 +211,7 @@ public class Exames extends javax.swing.JFrame {
             }
         });
         resultadoTable.setToolTipText("");
+        resultadoTable.getTableHeader().setReorderingAllowed(false);
         resultadoTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 resultadoTableMousePressed(evt);
@@ -207,29 +223,13 @@ public class Exames extends javax.swing.JFrame {
             resultadoTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        salvar.setBackground(new java.awt.Color(255, 255, 255));
-        salvar.setForeground(new java.awt.Color(102, 102, 102));
-        salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
-        salvar.setText("SALVAR");
-        salvar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                salvarActionPerformed(evt);
-            }
-        });
-
-        apagar.setBackground(new java.awt.Color(255, 255, 255));
-        apagar.setForeground(new java.awt.Color(102, 102, 102));
-        apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        apagar.setText("APAGAR");
-        apagar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                apagarActionPerformed(evt);
-            }
-        });
-
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Paciente ID : ");
 
+        PacienteId.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        PacienteId.setForeground(new java.awt.Color(102, 102, 102));
         PacienteId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 PacienteIdKeyTyped(evt);
@@ -244,12 +244,32 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
+        apagar.setBackground(new java.awt.Color(255, 255, 255));
+        apagar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        apagar.setForeground(new java.awt.Color(102, 102, 102));
+        apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        apagar.setText("APAGAR");
+        apagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                apagarActionPerformed(evt);
+            }
+        });
+
+        salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        salvar.setForeground(new java.awt.Color(102, 102, 102));
+        salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
+        salvar.setText("SALVAR");
+        salvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salvarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(salvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -265,28 +285,30 @@ public class Exames extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(positivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(apagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(salvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(negativo)
                     .addComponent(positivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(limpar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PacienteId, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
-                .addComponent(salvar)
+                    .addComponent(PacienteId, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
-                .addGap(1, 1, 1)
-                .addComponent(apagar))
+                .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(apagar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -406,12 +428,22 @@ public class Exames extends javax.swing.JFrame {
     private void elementsEnabled (boolean b) {
         resultadoTable.clearSelection();   
         doencasTable.clearSelection();        
-        salvar.setEnabled(b);
-        positivo.setEnabled(b);
-        negativo.setEnabled(b); 
-        limpar.setEnabled(b); 
-        apagar.setEnabled(b);
+        toggleElements(salvar,b);
+        toggleElements(positivo,b);
+        toggleElements(negativo,b); 
+        toggleElements(apagar,b);
     } 
+    
+
+   private void toggleElements (JButton l, boolean toggle) {
+        if(toggle){
+            l.setForeground(Color.GRAY);  
+        } else {
+            l.setForeground(Color.LIGHT_GRAY);   
+        }   
+        l.setEnabled(toggle);        
+    }  
+     
 
     private void addDoenca () { 
         try {
@@ -509,10 +541,6 @@ public class Exames extends javax.swing.JFrame {
         resultadoTable.setRowSelectionInterval(doencasTable.getSelectedRow(),doencasTable.getSelectedRow());
     }//GEN-LAST:event_doencasTableMousePressed
 
-    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
-        salvar ();
-    }//GEN-LAST:event_salvarActionPerformed
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         resultadoTable.removeAll(); 
         elementsEnabled(false);
@@ -527,13 +555,8 @@ public class Exames extends javax.swing.JFrame {
         exame.setCurrentIdExame("");
     }//GEN-LAST:event_formWindowActivated
 
-    private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
-        delete ();
-    }//GEN-LAST:event_apagarActionPerformed
-
     private void PacienteIdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PacienteIdKeyTyped
         readJTableE();
-        elementsEnabled(false);
     }//GEN-LAST:event_PacienteIdKeyTyped
 
     private void limparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limparActionPerformed
@@ -542,6 +565,19 @@ public class Exames extends javax.swing.JFrame {
         elementsEnabled(false);       
         resetResultadoTable ();
     }//GEN-LAST:event_limparActionPerformed
+
+    private void apagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apagarActionPerformed
+        delete();
+    }//GEN-LAST:event_apagarActionPerformed
+
+    private void salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salvarActionPerformed
+        salvar ();
+        if (!exame.getCurrentIdExame().equals("") && !exame.getCurrentIdExame().equals("0")){
+            PacienteId.setText(String.valueOf(exame.getCurrentIdExame()));        
+            readJTableE();
+            selectLastExame();
+        }        
+    }//GEN-LAST:event_salvarActionPerformed
 
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/exame.png")));
@@ -552,7 +588,7 @@ public class Exames extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PacienteId;
-    private javax.swing.JToggleButton apagar;
+    private javax.swing.JButton apagar;
     private javax.swing.JTable doencasTable;
     private javax.swing.JTable examesTable;
     private javax.swing.JFrame jFrame1;
@@ -570,6 +606,7 @@ public class Exames extends javax.swing.JFrame {
     private javax.swing.JButton negativo;
     private javax.swing.JButton positivo;
     private javax.swing.JTable resultadoTable;
-    private javax.swing.JToggleButton salvar;
+    private javax.swing.JButton salvar;
     // End of variables declaration//GEN-END:variables
+
 }
