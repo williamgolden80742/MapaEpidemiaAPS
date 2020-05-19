@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import model.bean.Relatorio;
 import model.dao.RelatorioDAO;
 
@@ -28,8 +27,6 @@ public class Relatorios extends javax.swing.JFrame {
         createGrafico();  
         readJTable();
         setIconTop ();
-        DefaultTableModel modelo = (DefaultTableModel) relatorioTable.getModel();
-        relatorioTable.setRowSorter(new TableRowSorter(modelo));
         this.getContentPane().setBackground(Color.WHITE);             
     }
     
@@ -48,7 +45,7 @@ public class Relatorios extends javax.swing.JFrame {
         relatorioTable = new javax.swing.JTable();
         graficoPicture = new javax.swing.JLabel();
         mortesGrafic = new javax.swing.JLabel();
-        data = new javax.swing.JComboBox<>();
+        data = new javax.swing.JComboBox<String>();
 
         setTitle("Relatórios");
         setResizable(false);

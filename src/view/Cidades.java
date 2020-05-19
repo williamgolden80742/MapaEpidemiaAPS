@@ -95,11 +95,6 @@ public class Cidades extends javax.swing.JFrame {
                 ufActionPerformed(evt);
             }
         });
-        uf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                ufKeyTyped(evt);
-            }
-        });
 
         cidadeS.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         cidadeS.setForeground(new java.awt.Color(51, 51, 51));
@@ -201,10 +196,6 @@ public class Cidades extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ufKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ufKeyTyped
-
-    }//GEN-LAST:event_ufKeyTyped
 
     private void ufActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ufActionPerformed
         readJTable();

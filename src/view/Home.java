@@ -23,7 +23,8 @@ public class Home extends javax.swing.JFrame {
     private Exames exame = new Exames();    
     private RandonCasos rand = new RandonCasos();
 
-    public Home() {         
+    public Home() {       
+
         initComponents();
         setIconTop ();
         this.getContentPane().setBackground(Color.WHITE); 
@@ -55,7 +56,7 @@ public class Home extends javax.swing.JFrame {
         exames.setBackground(new java.awt.Color(255, 255, 255));
         exames.setForeground(new java.awt.Color(51, 102, 255));
         exames.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exame.png"))); // NOI18N
-        exames.setToolTipText("Relatorios");
+        exames.setToolTipText("Exames");
         exames.setBorder(null);
         exames.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +70,7 @@ public class Home extends javax.swing.JFrame {
         pacientes.setBackground(new java.awt.Color(255, 255, 255));
         pacientes.setForeground(new java.awt.Color(51, 102, 255));
         pacientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/paciente.png"))); // NOI18N
-        pacientes.setToolTipText("Relatorios");
+        pacientes.setToolTipText("Paciente");
         pacientes.setBorder(null);
         pacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,12 +110,12 @@ public class Home extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(exames, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(relatorios, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {exames, pacientes, relatorios});

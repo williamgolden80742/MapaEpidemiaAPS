@@ -54,13 +54,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="jLabel1" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="exames" linkSize="2" min="-2" pref="94" max="-2" attributes="0"/>
                   <Component id="pacientes" linkSize="2" min="-2" pref="94" max="-2" attributes="0"/>
                   <Component id="relatorios" linkSize="2" min="-2" pref="94" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -77,7 +77,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/exame.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Relatorios"/>
+        <Property name="toolTipText" type="java.lang.String" value="Exames"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>
@@ -105,7 +105,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/images/paciente.png"/>
         </Property>
-        <Property name="toolTipText" type="java.lang.String" value="Relatorios"/>
+        <Property name="toolTipText" type="java.lang.String" value="Paciente"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="null"/>
         </Property>

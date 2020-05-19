@@ -6,14 +6,12 @@
 package view;
 import java.awt.Color;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import model.bean.Relatorio;
 import model.dao.RelatorioDAO;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;

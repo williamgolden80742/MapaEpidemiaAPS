@@ -5,6 +5,7 @@
  */
 package Connection;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -34,9 +35,9 @@ public class ConnectionFactory {
             return DriverManager.getConnection(URL, USER, PASS);
             
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Erro de conexão");  
+            JOptionPane.showMessageDialog(null,"Erro de conexão");                
             System.out.println("Erro de conexão");               
-            System.exit(0);        
+            System.exit(0);           
             throw new RuntimeException("Erro de conexão :",ex);  
         }  
     }

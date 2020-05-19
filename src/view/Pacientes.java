@@ -166,11 +166,6 @@ public class Pacientes extends javax.swing.JFrame {
         nomeS.setBackground(new java.awt.Color(255, 255, 255));
         nomeS.setForeground(new java.awt.Color(0, 0, 0));
         nomeS.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        nomeS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomeSActionPerformed(evt);
-            }
-        });
         nomeS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 TypingNome(evt);
@@ -680,11 +675,13 @@ public class Pacientes extends javax.swing.JFrame {
     private void TypingNome(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TypingNome
         readJTable();
         clear();
+        statusExame.setText("");
     }//GEN-LAST:event_TypingNome
 
     private void backspaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backspaceActionPerformed
         nomeS.setText("");
         readJTable();
+        statusExame.setText("");
         clear(); 
     }//GEN-LAST:event_backspaceActionPerformed
 
@@ -747,10 +744,6 @@ public class Pacientes extends javax.swing.JFrame {
             falecimentoToggle (0);                  
         }
     }//GEN-LAST:event_falecimentoCheckMousePressed
-
-    private void nomeSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeSActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeSActionPerformed
     private void falecimentoToggle (int r) {
         String check = "";
         if (r==1) {
