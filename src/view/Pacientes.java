@@ -151,7 +151,7 @@ public class Pacientes extends javax.swing.JFrame {
         sexo.setBackground(new java.awt.Color(255, 255, 255));
         sexo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         sexo.setForeground(new java.awt.Color(102, 102, 102));
-        sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino", "Outro" }));
+        sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino", "Outros" }));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
@@ -719,6 +719,7 @@ public class Pacientes extends javax.swing.JFrame {
         elementsEnabled(true);  
         toggleElements(novo,false);
         pacienteTable.clearSelection();
+        statusExame.setText("");
         this.salvarStatus = 1;
     }//GEN-LAST:event_novoActionPerformed
 
@@ -737,7 +738,7 @@ public class Pacientes extends javax.swing.JFrame {
     private void falecimentoCheckMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_falecimentoCheckMousePressed
         int r = 0;
         if (ckeckEditable && falecidoStatus == 0) {
-            r = JOptionPane.showConfirmDialog(null,"Paciente faleceu por motivo de alguma \ndessas doenças? \n"+readJTableD());
+            r = JOptionPane.showConfirmDialog(null,"Paciente faleceu por motivo de alguma \ndessas variações? \n"+readJTableD(),"Falecimento",JOptionPane.YES_NO_OPTION);
             r = (r==0)?1:0;   
             falecimentoToggle (r);               
         } else if (ckeckEditable) {

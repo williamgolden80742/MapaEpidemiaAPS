@@ -288,7 +288,7 @@
             <StringItem index="0" value="Selecione"/>
             <StringItem index="1" value="Masculino"/>
             <StringItem index="2" value="Feminino"/>
-            <StringItem index="3" value="Outro"/>
+            <StringItem index="3" value="Outros"/>
           </StringArray>
         </Property>
       </Properties>
