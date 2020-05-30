@@ -31,8 +31,8 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="relatorio" pref="453" max="32767" attributes="0"/>
           <Component id="data" alignment="0" max="32767" attributes="0"/>
+          <Component id="relatorio" min="-2" pref="494" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">

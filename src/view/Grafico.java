@@ -15,7 +15,6 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 
 /**
  *
@@ -56,7 +55,7 @@ public final class Grafico {
         rdao.readMortes().forEach((Relatorio r) -> {  
             linha.setValue(r.getCidadeNome()+" ("+r.getCasos()+") ",r.getCasos());
         });          
-        grafico = ChartFactory.createPieChart("Mortes por cidade", (PieDataset) linha); 
+        grafico = ChartFactory.createPieChart("Mortes por cidade", linha); 
         grafico.getPlot().setBackgroundPaint(Color.white);  
         return grafico.createBufferedImage(Width,Height);  
     }  

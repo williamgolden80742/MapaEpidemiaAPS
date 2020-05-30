@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Relatorio;
 import model.dao.RelatorioDAO;
@@ -20,7 +19,10 @@ import model.dao.RelatorioDAO;
  * @author William
  */
 public class Relatorios extends javax.swing.JFrame {
-        
+ 
+    private RelatorioDAO rdao = new RelatorioDAO();
+    private Grafico grafic = new Grafico();    
+    
     public Relatorios() {
         initComponents();
         setDate();        
@@ -115,8 +117,8 @@ public class Relatorios extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(relatorio, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
             .addComponent(data, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(relatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,14 +148,11 @@ public class Relatorios extends javax.swing.JFrame {
         readJTable();
     }//GEN-LAST:event_dataItemStateChanged
 
-    RelatorioDAO rdao = new RelatorioDAO();
-    Grafico grafic = new Grafico();
-
     private void createGrafico (boolean recriateGrafic) {
         try {
-            graficoPicture.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGrafico( currentDate() , graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+            graficoPicture.setIcon(new javax.swing.ImageIcon(   grafic.criarGrafico( currentDate() , graficoPicture.getWidth() , graficoPicture.getHeight()  )  ));
             if (recriateGrafic) {
-                mortesGrafic.setIcon(  (Icon) new javax.swing.ImageIcon(   grafic.criarGraficoMorte( graficoPicture.getWidth() , graficoPicture.getHeight()  )  )   );
+                mortesGrafic.setIcon(new javax.swing.ImageIcon(   grafic.criarGraficoMorte( graficoPicture.getWidth() , graficoPicture.getHeight()  )  ));
             }
         } catch (IOException ex) {
             Logger.getLogger(Relatorios.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,9 +214,7 @@ public class Relatorios extends javax.swing.JFrame {
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/relatorio.png")));
     }    
-    /**
-     * @param args the command line arguments
-     */
+
 @SuppressWarnings("unchecked")
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> data;

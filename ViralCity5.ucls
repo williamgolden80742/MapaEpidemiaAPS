@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="model.bean.Resultado" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Resultado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1959" y="666"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="model.dao.DoencaDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/DoencaDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1027" y="-361"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="model.dao.EstadoDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/EstadoDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="915" y="-128"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="view.Exames" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/view/Exames.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1175" y="357"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="view.Cidades" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/view/Cidades.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1701" y="291"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="model.dao.ResultadoDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/ResultadoDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1390" y="-319"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="model.dao.CidadeDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/CidadeDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="589" y="-284"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="model.dao.RandonCasos" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/RandonCasos.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="942" y="57"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="model.bean.Exame" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Exame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1947" y="153"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="model.bean.Paciente" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Paciente.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2021" y="-219"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="model.dao.PacienteDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/PacienteDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2232" y="-286"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="view.Grafico" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/view/Grafico.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1673" y="1005"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="model.bean.Cidade" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Cidade.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1834" y="-223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="model.bean.Doenca" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Doenca.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1955" y="407"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="model.bean.Estado" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Estado.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1609" y="-271"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="Connection.ConnectionFactory" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/Connection/ConnectionFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="546" y="22"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="view.Relatorios" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/view/Relatorios.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1363" y="1006"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="model.dao.RelatorioDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/RelatorioDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="885" y="-315"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="view.Pacientes" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/view/Pacientes.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2226" y="587"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="model.bean.Relatorio" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/bean/Relatorio.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1980" y="890"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="model.dao.ExameDAO" project="MapaEpidemiaAPS" 
+    file="/MapaEpidemiaAPS/src/model/dao/ExameDAO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1193" y="-283"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <generalization id="22">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
+  </generalization>  
+  <association id="23">    
+    <bendpoint x="1630" y="-94"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="24" name="edao"/>      
+      <multiplicity id="25" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
+    <bendpoint x="2045" y="250"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="27" name="exame"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <bendpoint x="2078" y="154"/>    
+    <bendpoint x="2056" y="154"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="30" name="p"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="33" name="grafic"/>      
+      <multiplicity id="34" minimum="0" maximum="1">        
+        <position height="16" width="23" x="1548" y="1002"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <bendpoint x="1604" y="-82"/>    
+    <bendpoint x="1044" y="-103"/>    
+    <bendpoint x="1043" y="-196"/>    
+    <bendpoint x="735" y="-197"/>    
+    <bendpoint x="736" y="-284"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="36" name="cdao"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="38">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="14"/>  
+  </generalization>  
+  <generalization id="39">    
+    <bendpoint x="590" y="-127"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="40">    
+    <bendpoint x="2081" y="22"/>    
+    <bendpoint x="1391" y="22"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="41" name="rdao"/>      
+      <multiplicity id="42" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="43">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="44">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="45" name="dao"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="48" name="exdao"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <bendpoint x="1070" y="-238"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="51" name="ddao"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="53">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <generalization id="54">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="55">    
+    <bendpoint x="1701" y="-42"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="56" name="c"/>      
+      <multiplicity id="57" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="1354" y="576"/>    
+    <bendpoint x="1856" y="576"/>    
+    <bendpoint x="1854" y="319"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="59" name="exame"/>      
+      <multiplicity id="60" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <bendpoint x="1678" y="1206"/>    
+    <bendpoint x="844" y="1206"/>    
+    <bendpoint x="754" y="-314"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="62" name="rdao"/>      
+      <multiplicity id="63" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <bendpoint x="2076" y="1018"/>    
+    <bendpoint x="1839" y="1018"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="65" name="cidade"/>      
+      <multiplicity id="66" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="68" name="rdao"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <bendpoint x="2072" y="756"/>    
+    <bendpoint x="1702" y="756"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="71" name="cidades"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="73">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <association id="74">    
+    <bendpoint x="952" y="994"/>    
+    <bendpoint x="786" y="-142"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="75" name="rdao"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <bendpoint x="1342" y="588"/>    
+    <bendpoint x="1340" y="-108"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="78" name="exdao"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

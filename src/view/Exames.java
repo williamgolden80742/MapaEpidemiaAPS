@@ -9,11 +9,7 @@ import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Resultado;
 import model.bean.Exame;
@@ -582,9 +578,6 @@ public class Exames extends javax.swing.JFrame {
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/exame.png")));
     }
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField PacienteId;

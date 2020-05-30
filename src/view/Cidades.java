@@ -108,6 +108,7 @@ public class Cidades extends javax.swing.JFrame {
         city.setForeground(new java.awt.Color(51, 51, 51));
         city.setText("CIDADE :");
 
+        cidadesTable.setBackground(new java.awt.Color(255, 255, 255));
         cidadesTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         cidadesTable.setForeground(new java.awt.Color(51, 51, 51));
         cidadesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -129,14 +130,6 @@ public class Cidades extends javax.swing.JFrame {
         cidadesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 cidadesTableMousePressed(evt);
-            }
-        });
-        cidadesTable.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cidadesTableKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                cidadesTableKeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(cidadesTable);
@@ -211,14 +204,6 @@ public class Cidades extends javax.swing.JFrame {
         toggleElements(selecionar,true);
     }//GEN-LAST:event_cidadesTableMousePressed
 
-    private void cidadesTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadesTableKeyReleased
-
-    }//GEN-LAST:event_cidadesTableKeyReleased
-
-    private void cidadesTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cidadesTableKeyPressed
-
-    }//GEN-LAST:event_cidadesTableKeyPressed
-
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         c.setCurrentCidade("",0);  
         cidadeS.setText("");
@@ -278,7 +263,6 @@ public class Cidades extends javax.swing.JFrame {
         }
     }
     
-
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/city.png")));
     }

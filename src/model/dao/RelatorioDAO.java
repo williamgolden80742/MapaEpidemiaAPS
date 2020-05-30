@@ -38,7 +38,7 @@ public class RelatorioDAO {
         List<Relatorio> relatorios = new ArrayList<>();
 
         try {
-            stmt = con.prepareStatement("SELECT cidade.nomeCidade, cidade.populacao, COUNT(DISTINCT pacientes.Idpaciente), DATE_FORMAT(positivos.datadeCriacaoPS, '%d/%m/%Y') FROM exames INNER JOIN positivos ON positivos.IdExame = exames.IdExame inner join pacientes on pacientes.Idpaciente = exames.Idpaciente inner join cidade on cidade.idCidade = pacientes.idCidade WHERE positivos.resultado = 1 "+date+" GROUP by date(positivos.datadeCriacaoPS), cidade.idCidade ORDER by pacientes.idCidade, positivos.datadeCriacaoPS");
+            stmt = con.prepareStatement("SELECT cidade.nomeCidade, cidade.populacao, COUNT(DISTINCT pacientes.Idpaciente), DATE_FORMAT(positivos.datadeCriacaoPS, '%d/%m/%Y') FROM exames INNER JOIN positivos ON positivos.IdExame = exames.IdExame inner join pacientes on pacientes.Idpaciente = exames.Idpaciente inner join cidade on cidade.idCidade = pacientes.idCidade WHERE positivos.resultado = 1 "+date+" GROUP by date(positivos.datadeCriacaoPS), cidade.idCidade ORDER by positivos.datadeCriacaoPS ASC");
             rs = stmt.executeQuery();
 
             while (rs.next()) {

@@ -506,9 +506,8 @@ public class Pacientes extends javax.swing.JFrame {
                 buscarCidade.setText(cidade.getCurrentCidadeNome());
             }
         } catch (Exception ex) {
-            if (cidade.getCurrentCidadeId() != 0 ) {
+            if (cidade.getCurrentCidadeId() != 0) {
                 buscarCidade.setText(cidade.getCurrentCidadeNome());
-
             }
         }
     }   
@@ -604,9 +603,9 @@ public class Pacientes extends javax.swing.JFrame {
     private void create () {
         setPaciente ();     
         dao.create(p);
-        status.setText(dao.getStatus());
         readJTable();  
         selectLastPaciente();
+        status.setText(dao.getStatus());        
     }
     
     private void update () {
@@ -617,6 +616,7 @@ public class Pacientes extends javax.swing.JFrame {
             readJTable(); 
             clear (); 
             updateState = false;
+            statusExame.setText("");   
         }   
     }    
     
@@ -693,6 +693,7 @@ public class Pacientes extends javax.swing.JFrame {
         setValue();
         elementsEnabled(true); 
         updateState = true;
+        statusExame.setText("");        
         this.salvarStatus = 2;
     }//GEN-LAST:event_editarActionPerformed
 
@@ -754,19 +755,13 @@ public class Pacientes extends javax.swing.JFrame {
             falecidoStatus=0;            
             check = "radio-Button-Unchecked.png";
         }
-        falecimentoCheck.setIcon((Icon) new javax.swing.ImageIcon(getClass().getResource("../images/"+check+"")) );
-
+        falecimentoCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/"+check+"")));
     }    
 
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/paciente.png")));
     }
     
-    
-    /**
-     * @param args the command line arguments
-     */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton apagar;
