@@ -33,6 +33,7 @@ public class ExameDAO {
     }    
     
     public List<Exame> read (int id) {
+        
         String request = "";
         Connection con = ConnectionFactory.getConnection();
         if (id != 0) {

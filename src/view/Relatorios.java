@@ -212,7 +212,7 @@ public class Relatorios extends javax.swing.JFrame {
     }  
     
     private void setIconTop () {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/relatorio.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/relatorio.png")));
     }    
 
 @SuppressWarnings("unchecked")

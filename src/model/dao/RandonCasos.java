@@ -17,8 +17,9 @@ import java.util.Random;
  */
 public class RandonCasos {
     
+    
    public void create() {
-        
+       
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;      

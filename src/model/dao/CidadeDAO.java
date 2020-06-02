@@ -19,11 +19,10 @@ import model.bean.Cidade;
  *
  * @author William
  */
-public class CidadeDAO extends EstadoDAO {
-        
+public class CidadeDAO extends EstadoDAO { 
+ 
     public List<Cidade> readCidade (String uf, String nome) {
         
-
        // SELECT nome FROM cidade ;                 
         String request = "";
         

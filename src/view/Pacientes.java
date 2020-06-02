@@ -7,7 +7,6 @@ package view;
 
 import java.awt.Color;
 import java.awt.Toolkit;
-import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
@@ -558,9 +557,9 @@ public class Pacientes extends javax.swing.JFrame {
                 }
             } catch (Exception ex) {
                 try {
-                    if (exdao.lastExame(currentId(false)) != 0 ) {
-                        toggleElements(novoExame,false);  
+                    if (exdao.lastExame(currentId(false)) != 0 ) { 
                         statusExame.setText("Aguardando resultado do exame");
+                        toggleElements(novoExame,false);                         
                     } else {
                         statusExame.setText("");  
                         toggleElements(novoExame,true);    
@@ -755,11 +754,11 @@ public class Pacientes extends javax.swing.JFrame {
             falecidoStatus=0;            
             check = "radio-Button-Unchecked.png";
         }
-        falecimentoCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("../images/"+check+"")));
+        falecimentoCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/"+check+"")));
     }    
 
     private void setIconTop () {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/paciente.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/paciente.png")));
     }
     
 

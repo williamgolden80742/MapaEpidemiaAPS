@@ -23,7 +23,7 @@ import model.bean.Relatorio;
 public class RelatorioDAO {
     
    public List<Relatorio> read (String request) {
-
+       
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;

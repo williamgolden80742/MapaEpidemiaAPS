@@ -20,8 +20,9 @@ import model.bean.Doenca;
  */
 public class DoencaDAO {
     
+    
     public int readId (String nome) {
-
+        
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;

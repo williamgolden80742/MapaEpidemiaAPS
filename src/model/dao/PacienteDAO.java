@@ -61,7 +61,7 @@ public class PacienteDAO {
     
  
     public List<Paciente> read (String request) {
-
+        
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;

@@ -20,9 +20,10 @@ import model.bean.Estado;
  * @author William
  */
 public class EstadoDAO {
+
     
     public List<Estado> readUF () {
-
+        
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;

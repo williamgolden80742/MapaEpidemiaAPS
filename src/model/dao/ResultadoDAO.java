@@ -21,9 +21,9 @@ import model.bean.Resultado;
  * @author William
  */
 public class ResultadoDAO {
-    
-    private List<Resultado> read (String request) {
 
+    private List<Resultado> read (String request) {
+        
         Connection con = ConnectionFactory.getConnection();
         
         PreparedStatement stmt = null;

@@ -576,7 +576,7 @@ public class Exames extends javax.swing.JFrame {
     }//GEN-LAST:event_salvarActionPerformed
 
     private void setIconTop () {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/exame.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/exame.png")));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

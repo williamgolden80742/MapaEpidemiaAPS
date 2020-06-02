@@ -264,7 +264,7 @@ public class Cidades extends javax.swing.JFrame {
     }
     
     private void setIconTop () {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/city.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/city.png")));
     }
           
     

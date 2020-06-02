@@ -139,7 +139,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_relatoriosActionPerformed
 
     private void setIconTop () {
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("../images/Viral.City-5.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/Viral.City-5.png")));
     }    
     /**
      * @param args the command line arguments
