@@ -35,10 +35,10 @@ public final class Grafico {
         });   
         if (request.equals("")) {
             grafico = ChartFactory.createLineChart("Evolução do Casos \n","Dias","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);   
-            grafico.getPlot().setBackgroundPaint(Color.darkGray);
+            grafico.getPlot().setBackgroundPaint(Color.DARK_GRAY);
         } else {
             grafico = ChartFactory.createBarChart3D("Casos","Dia","Porcentagem da população",linha,PlotOrientation.VERTICAL,true,true,true);    
-            grafico.getPlot().setBackgroundPaint(Color.lightGray);
+            grafico.getPlot().setBackgroundPaint(Color.DARK_GRAY);
         }
         return grafico.createBufferedImage(Width,Height);  
     }  
@@ -56,7 +56,7 @@ public final class Grafico {
             linha.setValue(r.getCidadeNome()+" ("+r.getCasos()+") ",r.getCasos());
         });          
         grafico = ChartFactory.createPieChart("Mortes por cidade", linha); 
-        grafico.getPlot().setBackgroundPaint(Color.white);  
+        grafico.getPlot().setBackgroundPaint(Color.DARK_GRAY);  
         return grafico.createBufferedImage(Width,Height);  
     }  
     

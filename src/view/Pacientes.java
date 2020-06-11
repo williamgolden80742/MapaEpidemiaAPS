@@ -46,8 +46,7 @@ public class Pacientes extends javax.swing.JFrame {
         toggleElements(novoExame,false);
         elementsEnabled(false,false);
         setIconTop ();
-        buscarCidade.setText(cidadeButton);
-        this.getContentPane().setBackground(Color.WHITE);    
+        buscarCidade.setText(cidadeButton);  
     }    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,9 +101,9 @@ public class Pacientes extends javax.swing.JFrame {
         nomeLabel.setForeground(new java.awt.Color(102, 102, 102));
         nomeLabel.setText("Nome :  ");
 
-        salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setBackground(new java.awt.Color(51, 51, 51));
         salvar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        salvar.setForeground(new java.awt.Color(102, 102, 102));
+        salvar.setForeground(new java.awt.Color(255, 255, 255));
         salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         salvar.setText("SALVAR");
         salvar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -115,13 +114,13 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        nome.setBackground(new java.awt.Color(255, 255, 255));
+        nome.setBackground(new java.awt.Color(51, 51, 51));
         nome.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        nome.setForeground(new java.awt.Color(102, 102, 102));
+        nome.setForeground(new java.awt.Color(255, 255, 255));
         nome.setMaximumSize(new java.awt.Dimension(4, 19));
 
-        nasc.setBackground(new java.awt.Color(255, 255, 255));
-        nasc.setForeground(new java.awt.Color(102, 102, 102));
+        nasc.setBackground(new java.awt.Color(51, 51, 51));
+        nasc.setForeground(new java.awt.Color(255, 255, 255));
         try {
             nasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -147,9 +146,9 @@ public class Pacientes extends javax.swing.JFrame {
         sexoLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         sexoLabel.setText("Sexo : ");
 
-        sexo.setBackground(new java.awt.Color(255, 255, 255));
+        sexo.setBackground(new java.awt.Color(51, 51, 51));
         sexo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        sexo.setForeground(new java.awt.Color(102, 102, 102));
+        sexo.setForeground(new java.awt.Color(255, 255, 255));
         sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Masculino", "Feminino", "Outros" }));
 
         jLabel9.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -162,8 +161,8 @@ public class Pacientes extends javax.swing.JFrame {
         nomeSLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         nomeSLabel.setText("Nome : ");
 
-        nomeS.setBackground(new java.awt.Color(255, 255, 255));
-        nomeS.setForeground(new java.awt.Color(0, 0, 0));
+        nomeS.setBackground(new java.awt.Color(51, 51, 51));
+        nomeS.setForeground(new java.awt.Color(255, 255, 255));
         nomeS.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         nomeS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -171,8 +170,8 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        backspace.setBackground(new java.awt.Color(255, 255, 255));
-        backspace.setForeground(new java.awt.Color(0, 0, 0));
+        backspace.setBackground(new java.awt.Color(51, 51, 51));
+        backspace.setForeground(new java.awt.Color(255, 255, 255));
         backspace.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backspace.png"))); // NOI18N
         backspace.setToolTipText("");
         backspace.addActionListener(new java.awt.event.ActionListener() {
@@ -181,9 +180,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        editar.setBackground(new java.awt.Color(255, 255, 255));
+        editar.setBackground(new java.awt.Color(51, 51, 51));
         editar.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        editar.setForeground(new java.awt.Color(102, 102, 102));
+        editar.setForeground(new java.awt.Color(255, 255, 255));
         editar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edite.png"))); // NOI18N
         editar.setText(" EDITAR");
         editar.addActionListener(new java.awt.event.ActionListener() {
@@ -192,9 +191,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        apagar.setBackground(new java.awt.Color(255, 255, 255));
+        apagar.setBackground(new java.awt.Color(51, 51, 51));
         apagar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        apagar.setForeground(new java.awt.Color(102, 102, 102));
+        apagar.setForeground(new java.awt.Color(255, 255, 255));
         apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         apagar.setText("APAGAR");
         apagar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -205,7 +204,7 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        pacienteTable.setBackground(new java.awt.Color(255, 255, 255));
+        pacienteTable.setBackground(new java.awt.Color(51, 51, 51));
         pacienteTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         pacienteTable.setForeground(new java.awt.Color(102, 102, 102));
         pacienteTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -236,9 +235,9 @@ public class Pacientes extends javax.swing.JFrame {
             pacienteTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        buscarCidade.setBackground(new java.awt.Color(255, 255, 255));
+        buscarCidade.setBackground(new java.awt.Color(51, 51, 51));
         buscarCidade.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        buscarCidade.setForeground(new java.awt.Color(0, 0, 0));
+        buscarCidade.setForeground(new java.awt.Color(255, 255, 255));
         buscarCidade.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cityAdd.png"))); // NOI18N
         buscarCidade.setText(" ");
         buscarCidade.setToolTipText("");
@@ -250,9 +249,9 @@ public class Pacientes extends javax.swing.JFrame {
             }
         });
 
-        novo.setBackground(new java.awt.Color(255, 255, 255));
+        novo.setBackground(new java.awt.Color(51, 51, 51));
         novo.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        novo.setForeground(new java.awt.Color(102, 102, 102));
+        novo.setForeground(new java.awt.Color(255, 255, 255));
         novo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pacienteAdd.png"))); // NOI18N
         novo.setText("NOVO");
         novo.addActionListener(new java.awt.event.ActionListener() {
@@ -264,9 +263,9 @@ public class Pacientes extends javax.swing.JFrame {
         status.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         status.setForeground(new java.awt.Color(0, 153, 0));
 
-        novoExame.setBackground(new java.awt.Color(255, 255, 255));
+        novoExame.setBackground(new java.awt.Color(51, 51, 51));
         novoExame.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        novoExame.setForeground(new java.awt.Color(102, 102, 102));
+        novoExame.setForeground(new java.awt.Color(255, 255, 255));
         novoExame.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exameAdd.png"))); // NOI18N
         novoExame.setText("NOVO EXAME ");
         novoExame.addActionListener(new java.awt.event.ActionListener() {
@@ -276,7 +275,7 @@ public class Pacientes extends javax.swing.JFrame {
         });
 
         statusExame.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        statusExame.setForeground(new java.awt.Color(51, 51, 51));
+        statusExame.setForeground(new java.awt.Color(204, 204, 204));
         statusExame.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         falecimentoCheck.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/radio-Button-Unchecked.png"))); // NOI18N
@@ -310,7 +309,7 @@ public class Pacientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(nomeS, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(backspace))
+                                .addComponent(backspace, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(status, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -452,34 +451,34 @@ public class Pacientes extends javax.swing.JFrame {
 
    private void toggleElements (JButton l, boolean toggle) {
         if(toggle){
-            l.setForeground(Color.GRAY);  
+            l.setForeground(Color.WHITE);  
         } else {
             l.setForeground(Color.LIGHT_GRAY);   
-        }   
+        }  
         l.setEnabled(toggle);        
     }  
 
     private void toggleElements (JComboBox l, boolean toggle) {
          if(toggle){
-            l.setForeground(Color.GRAY);  
+            l.setForeground(Color.WHITE);  
         } else {
             l.setForeground(Color.LIGHT_GRAY);   
-        }   
+        }  
         l.setEnabled(toggle);        
     }  
   
     private void toggleElements (JLabel l, boolean toggle) {
         if(toggle){
-            l.setForeground(Color.GRAY);  
+            l.setForeground(Color.WHITE);  
         } else {
             l.setForeground(Color.LIGHT_GRAY);   
-        }   
+        }  
         l.setEnabled(toggle);        
     }    
 
     private void toggleElements (JFormattedTextField l, boolean toggle) {
         if(toggle){
-            l.setForeground(Color.GRAY);  
+            l.setForeground(Color.WHITE);  
         } else {
             l.setForeground(Color.LIGHT_GRAY);   
         }   

@@ -28,8 +28,7 @@ public class Relatorios extends javax.swing.JFrame {
         setDate();        
         createGrafico();  
         readJTable();
-        setIconTop ();
-        this.getContentPane().setBackground(Color.WHITE);             
+        setIconTop ();            
     }
     
  
@@ -63,13 +62,13 @@ public class Relatorios extends javax.swing.JFrame {
             }
         });
 
-        relatorio.setBackground(new java.awt.Color(255, 255, 255));
-        relatorio.setForeground(new java.awt.Color(102, 102, 102));
+        relatorio.setBackground(new java.awt.Color(51, 51, 51));
+        relatorio.setForeground(new java.awt.Color(255, 255, 255));
         relatorio.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        relatorioTable.setBackground(new java.awt.Color(255, 255, 255));
+        relatorioTable.setBackground(new java.awt.Color(51, 51, 51));
         relatorioTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        relatorioTable.setForeground(new java.awt.Color(52, 52, 52));
+        relatorioTable.setForeground(new java.awt.Color(255, 255, 255));
         relatorioTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -104,9 +103,9 @@ public class Relatorios extends javax.swing.JFrame {
         relatorio.addTab("Evolução - Gráfico", graficoPicture);
         relatorio.addTab("Mortes", mortesGrafic);
 
-        data.setBackground(new java.awt.Color(255, 255, 255));
+        data.setBackground(new java.awt.Color(51, 51, 51));
         data.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        data.setForeground(new java.awt.Color(52, 52, 52));
+        data.setForeground(new java.awt.Color(255, 255, 255));
         data.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 dataItemStateChanged(evt);

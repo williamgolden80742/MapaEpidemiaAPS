@@ -36,8 +36,7 @@ public class Exames extends javax.swing.JFrame {
         readJTableD();     
         readJTableP(); 
         elementsEnabled(false);
-        setIconTop ();
-        this.getContentPane().setBackground(Color.WHITE);             
+        setIconTop ();            
     }
 
     /**
@@ -100,7 +99,8 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
-        positivo.setBackground(new java.awt.Color(255, 255, 255));
+        positivo.setBackground(new java.awt.Color(51, 51, 51));
+        positivo.setForeground(new java.awt.Color(255, 255, 255));
         positivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/right.png"))); // NOI18N
         positivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +108,8 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
-        negativo.setBackground(new java.awt.Color(255, 255, 255));
+        negativo.setBackground(new java.awt.Color(51, 51, 51));
+        negativo.setForeground(new java.awt.Color(255, 255, 255));
         negativo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/arrow_right_left_back_circle-512.png"))); // NOI18N
         negativo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,9 +117,9 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
-        examesTable.setBackground(new java.awt.Color(255, 255, 255));
+        examesTable.setBackground(new java.awt.Color(51, 51, 51));
         examesTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        examesTable.setForeground(new java.awt.Color(102, 102, 102));
+        examesTable.setForeground(new java.awt.Color(255, 255, 255));
         examesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -151,8 +152,9 @@ public class Exames extends javax.swing.JFrame {
             examesTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        doencasTable.setBackground(new java.awt.Color(255, 255, 255));
+        doencasTable.setBackground(new java.awt.Color(51, 51, 51));
         doencasTable.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        doencasTable.setForeground(new java.awt.Color(255, 255, 255));
         doencasTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null},
@@ -184,9 +186,9 @@ public class Exames extends javax.swing.JFrame {
             doencasTable.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        resultadoTable.setBackground(new java.awt.Color(255, 255, 255));
+        resultadoTable.setBackground(new java.awt.Color(51, 51, 51));
         resultadoTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        resultadoTable.setForeground(new java.awt.Color(102, 102, 102));
+        resultadoTable.setForeground(new java.awt.Color(255, 255, 255));
         resultadoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -224,15 +226,17 @@ public class Exames extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Paciente ID : ");
 
+        PacienteId.setBackground(new java.awt.Color(51, 51, 51));
         PacienteId.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        PacienteId.setForeground(new java.awt.Color(102, 102, 102));
+        PacienteId.setForeground(new java.awt.Color(255, 255, 255));
         PacienteId.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 PacienteIdKeyTyped(evt);
             }
         });
 
-        limpar.setBackground(new java.awt.Color(255, 255, 255));
+        limpar.setBackground(new java.awt.Color(51, 51, 51));
+        limpar.setForeground(new java.awt.Color(255, 255, 255));
         limpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/backspace.png"))); // NOI18N
         limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,9 +244,9 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
-        apagar.setBackground(new java.awt.Color(255, 255, 255));
+        apagar.setBackground(new java.awt.Color(51, 51, 51));
         apagar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        apagar.setForeground(new java.awt.Color(102, 102, 102));
+        apagar.setForeground(new java.awt.Color(255, 255, 255));
         apagar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
         apagar.setText("APAGAR");
         apagar.addActionListener(new java.awt.event.ActionListener() {
@@ -251,9 +255,9 @@ public class Exames extends javax.swing.JFrame {
             }
         });
 
-        salvar.setBackground(new java.awt.Color(255, 255, 255));
+        salvar.setBackground(new java.awt.Color(51, 51, 51));
         salvar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        salvar.setForeground(new java.awt.Color(102, 102, 102));
+        salvar.setForeground(new java.awt.Color(255, 255, 255));
         salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/save.png"))); // NOI18N
         salvar.setText("SALVAR");
         salvar.addActionListener(new java.awt.event.ActionListener() {
@@ -287,9 +291,9 @@ public class Exames extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(negativo)
@@ -302,7 +306,7 @@ public class Exames extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(salvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(apagar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
