@@ -145,6 +145,11 @@ public class Exames extends javax.swing.JFrame {
                 examesTableMousePressed(evt);
             }
         });
+        examesTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                examesTableKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(examesTable);
         if (examesTable.getColumnModel().getColumnCount() > 0) {
             examesTable.getColumnModel().getColumn(0).setResizable(false);
@@ -578,6 +583,12 @@ public class Exames extends javax.swing.JFrame {
             selectLastExame();
         }        
     }//GEN-LAST:event_salvarActionPerformed
+
+    private void examesTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_examesTableKeyReleased
+        readJTableD();
+        readJTableP();     
+        elementsEnabled(true);
+    }//GEN-LAST:event_examesTableKeyReleased
 
     private void setIconTop () {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/images/exame.png")));

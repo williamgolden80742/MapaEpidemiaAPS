@@ -228,6 +228,11 @@ public class Pacientes extends javax.swing.JFrame {
                 pacienteTableMousePressed(evt);
             }
         });
+        pacienteTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                pacienteTableKeyReleased(evt);
+            }
+        });
         jScrollPane3.setViewportView(pacienteTable);
         if (pacienteTable.getColumnModel().getColumnCount() > 0) {
             pacienteTable.getColumnModel().getColumn(0).setResizable(false);
@@ -744,6 +749,10 @@ public class Pacientes extends javax.swing.JFrame {
             falecimentoToggle (0);                  
         }
     }//GEN-LAST:event_falecimentoCheckMousePressed
+
+    private void pacienteTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pacienteTableKeyReleased
+        setValue();
+    }//GEN-LAST:event_pacienteTableKeyReleased
     private void falecimentoToggle (int r) {
         String check = "";
         if (r==1) {
