@@ -28,15 +28,14 @@ public class Cidades extends javax.swing.JFrame {
         readUF() ;
         readJTable();
         toggleElements(selecionar,false);
-        setIconTop ();
-        this.getContentPane().setBackground(Color.WHITE);             
+        setIconTop ();            
     }
     
     private void toggleElements (JButton l, boolean toggle) {
         if(toggle){
-            l.setForeground(Color.DARK_GRAY);  
+            l.setForeground(Color.LIGHT_GRAY);  
         } else {
-            l.setForeground(Color.LIGHT_GRAY);   
+            l.setForeground(Color.DARK_GRAY);   
         }   
         l.setEnabled(toggle);        
     }  
@@ -83,12 +82,12 @@ public class Cidades extends javax.swing.JFrame {
         jLabel2.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("ESTADOS : ");
 
-        uf.setBackground(new java.awt.Color(255, 255, 255));
+        uf.setBackground(new java.awt.Color(51, 51, 51));
         uf.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        uf.setForeground(new java.awt.Color(51, 51, 51));
+        uf.setForeground(new java.awt.Color(255, 255, 255));
         uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE" }));
         uf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +96,7 @@ public class Cidades extends javax.swing.JFrame {
         });
 
         cidadeS.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        cidadeS.setForeground(new java.awt.Color(51, 51, 51));
+        cidadeS.setForeground(new java.awt.Color(255, 255, 255));
         cidadeS.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 cidadeSKeyTyped(evt);
@@ -105,12 +104,12 @@ public class Cidades extends javax.swing.JFrame {
         });
 
         city.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        city.setForeground(new java.awt.Color(51, 51, 51));
+        city.setForeground(new java.awt.Color(153, 153, 153));
         city.setText("CIDADE :");
 
-        cidadesTable.setBackground(new java.awt.Color(255, 255, 255));
+        cidadesTable.setBackground(new java.awt.Color(51, 51, 51));
         cidadesTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cidadesTable.setForeground(new java.awt.Color(51, 51, 51));
+        cidadesTable.setForeground(new java.awt.Color(255, 255, 255));
         cidadesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -139,9 +138,9 @@ public class Cidades extends javax.swing.JFrame {
             cidadesTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        selecionar.setBackground(new java.awt.Color(255, 255, 255));
+        selecionar.setBackground(new java.awt.Color(51, 51, 51));
         selecionar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        selecionar.setForeground(new java.awt.Color(51, 51, 51));
+        selecionar.setForeground(new java.awt.Color(255, 255, 255));
         selecionar.setText("SELECIONAR");
         selecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
