@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package view;
-import java.awt.Color;
 import java.awt.Toolkit;
-import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 import model.bean.Cidade;
 import model.bean.Estado;
@@ -27,20 +25,9 @@ public class Cidades extends javax.swing.JFrame {
         initComponents();
         readUF() ;
         readJTable();
-        toggleElements(selecionar,false);
-        setIconTop ();
-        this.getContentPane().setBackground(Color.WHITE);             
+        setIconTop ();           
     }
     
-    private void toggleElements (JButton l, boolean toggle) {
-        if(toggle){
-            l.setForeground(Color.DARK_GRAY);  
-        } else {
-            l.setForeground(Color.LIGHT_GRAY);   
-        }   
-        l.setEnabled(toggle);        
-    }  
-     
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,12 +70,9 @@ public class Cidades extends javax.swing.JFrame {
         jLabel2.setToolTipText("");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("ESTADOS : ");
 
-        uf.setBackground(new java.awt.Color(255, 255, 255));
         uf.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        uf.setForeground(new java.awt.Color(51, 51, 51));
         uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECIONE" }));
         uf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,12 +89,9 @@ public class Cidades extends javax.swing.JFrame {
         });
 
         city.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        city.setForeground(new java.awt.Color(51, 51, 51));
         city.setText("CIDADE :");
 
-        cidadesTable.setBackground(new java.awt.Color(255, 255, 255));
         cidadesTable.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cidadesTable.setForeground(new java.awt.Color(51, 51, 51));
         cidadesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -139,9 +120,7 @@ public class Cidades extends javax.swing.JFrame {
             cidadesTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        selecionar.setBackground(new java.awt.Color(255, 255, 255));
         selecionar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        selecionar.setForeground(new java.awt.Color(51, 51, 51));
         selecionar.setText("SELECIONAR");
         selecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,14 +180,12 @@ public class Cidades extends javax.swing.JFrame {
     private void cidadesTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cidadesTableMousePressed
         c = cdao.readCurrentCidade(edao.readIdByUF((String) cidadesTable.getModel().getValueAt(cidadesTable.getSelectedRow(),0)).getEstadoId(), (String) cidadesTable.getModel().getValueAt(cidadesTable.getSelectedRow(),1));
         c.setCurrentCidade(c.getCidadeNome(),c.getCidadeId());  
-        toggleElements(selecionar,true);
     }//GEN-LAST:event_cidadesTableMousePressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         c.setCurrentCidade("",0);  
         cidadeS.setText("");
-        uf.setSelectedItem("Selecione");
-        toggleElements(selecionar,false);         
+        uf.setSelectedItem("Selecione");      
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
