@@ -1,12 +1,3 @@
-CREATE DATABASE APS;
--- phpMyAdmin SQL Dump
--- version 5.0.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 17-Abr-2021 às 16:20
--- Versão do servidor: 10.4.17-MariaDB
--- versão do PHP: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
